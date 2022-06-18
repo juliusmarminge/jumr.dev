@@ -1,6 +1,5 @@
 import type { NextPage } from "next";
 import Head from "next/head";
-import { Hero } from "../components/Hero";
 
 const HomePage: NextPage = () => {
   return (
@@ -8,7 +7,9 @@ const HomePage: NextPage = () => {
       <Head key="home">
         <title>Julius Marminge - SWE</title>
       </Head>
-      <Hero />
+      <div className="card roundex-box bg-base-200 p-8">
+        <h1>Hello!</h1>
+      </div>
     </>
   );
 };
