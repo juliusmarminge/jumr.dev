@@ -23,7 +23,7 @@ class MyDocument extends Document {
             content="Hi, I'm Julius! A Software Engineer from Sweden passionate about tech."
           />
           <meta
-            name="description"
+            name="og:description"
             content="Hi, I'm Julius! A Software Engineer from Sweden passionate about tech."
           />
           <meta property="og:url" content="https://jumr.dev/" />
