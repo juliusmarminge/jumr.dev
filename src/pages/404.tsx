@@ -1,7 +1,5 @@
 import { type NextPage } from "next";
-import Image from "next/image";
 import Link from "next/link";
-import { Hero } from "../components/Hero";
 
 const PageNotFound: NextPage = () => {
   return (
