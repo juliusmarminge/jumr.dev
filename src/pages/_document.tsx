@@ -17,7 +17,8 @@ class MyDocument extends Document {
     return (
       <Html lang="en">
         <Head>
-          <meta property="og:title" content="jumr.dev - Meet Julius" />
+          <meta property="title" content="Julius Marminge - SWE" />
+          <meta property="og:title" content="Julius Marminge - SWE" />
           <meta
             name="description"
             content="Hi, I'm Julius! A Software Engineer from Sweden passionate about tech."
@@ -49,6 +50,7 @@ class MyDocument extends Document {
           <meta name="twitter:image" content="/images/profile.png" />
           <meta name="twitter:card" content="summary_large_image" />
           <meta name="twitter:creator" content="@jullerino" />
+          <meta name="og:image" content="/seo/profile.png" />
           <link rel="manifest" href="/seo/site.webmanifest" />
           <link
             rel="mask-icon"
