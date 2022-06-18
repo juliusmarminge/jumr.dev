@@ -1,14 +1,10 @@
 import React, { type Dispatch, type SetStateAction } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { useRouter } from "next/router";
+import { SunIcon, MoonIcon } from "@heroicons/react/outline";
 
-import {
-  CurrencyDollarIcon,
-  UserIcon,
-  SunIcon,
-  MoonIcon,
-} from "@heroicons/react/outline";
+const DARK_THEME = "night";
+const LIGHT_THEME = "emerald";
 
 const tabs = [
   {
@@ -49,10 +45,10 @@ export const Navbar = () => {
   const setTheme = (e: React.ChangeEvent<HTMLInputElement>) => {
     setDarkMode(e.target.checked);
     if (e.target.checked) {
-      window.document.documentElement.setAttribute("data-theme", "dark");
+      window.document.documentElement.setAttribute("data-theme", DARK_THEME);
       localStorage.removeItem("prefersLightTheme");
     } else {
-      window.document.documentElement.setAttribute("data-theme", "light");
+      window.document.documentElement.setAttribute("data-theme", LIGHT_THEME);
       localStorage.setItem("prefersLightTheme", "true");
     }
   };
@@ -62,7 +58,7 @@ export const Navbar = () => {
     const prefersLight = localStorage.getItem("prefersLightTheme");
     if (prefersLight !== null) {
       setDarkMode(false);
-      window.document.documentElement.setAttribute("data-theme", "light");
+      window.document.documentElement.setAttribute("data-theme", LIGHT_THEME);
     }
   }, []);
 
