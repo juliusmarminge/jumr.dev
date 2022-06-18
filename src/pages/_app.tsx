@@ -10,7 +10,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <div className="flex flex-col flex-1">
         <Component {...pageProps} />
       </div>
-
+      <div className="divider"></div>
       <Footer />
     </div>
   );
