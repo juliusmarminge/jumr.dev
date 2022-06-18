@@ -1,6 +1,5 @@
 import type { NextPage } from "next";
 import Image from "next/image";
-import profilePic from "../../public/profile.png";
 
 const HomePage: NextPage = () => {
   return (
@@ -8,10 +7,9 @@ const HomePage: NextPage = () => {
       <div className="hero-content flex-col lg:flex-row-reverse">
         <div className="relative h-sm w-sm">
           <Image
-            src={profilePic}
+            src="/images/profile.png"
             layout="fill"
-            objectFit="cover"
-            placeholder="blur"
+            alt="profile picture"
           />
         </div>
         <div>
