@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="footer pb-10">
+    <footer className="pb-10 footer">
       <div>
         <span className="footer-title">Learn More</span>
         <Link href="/about">

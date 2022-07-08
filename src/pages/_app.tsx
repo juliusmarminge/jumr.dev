@@ -5,7 +5,7 @@ import { Footer } from "../components/Footer";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <div className="w-[95%] lg:w-4/5 max-w-[2000px] mx-auto min-h-screen flex flex-col justify-between">
+    <div className="flex flex-col justify-between min-h-screen mx-auto w-[95%] lg:w-4/5">
       <Navbar />
       <div className="flex flex-col flex-1">
         <Component {...pageProps} />

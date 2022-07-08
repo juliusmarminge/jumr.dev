@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const PageNotFound: NextPage = () => {
   return (
-    <div className="flex flex-col flex-1 justify-center">
+    <div className="flex flex-col justify-center flex-1">
       <div className="max-w-md">
         <h1 className="py-4 text-5xl font-bold text-primary">404</h1>
         <p className="py-2 font-semibold">
@@ -14,7 +14,7 @@ const PageNotFound: NextPage = () => {
           other cool stuff available!
         </p>
         <Link href="/">
-          <div className="btn btn-primary w-40 text-xs">Go back to home</div>
+          <div className="w-40 text-xs btn btn-primary">Go back to home</div>
         </Link>
       </div>
     </div>

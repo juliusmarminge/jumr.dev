@@ -33,7 +33,7 @@ const TabLink: React.FC<{
   const isActive = router.route === href;
   return (
     <Link href={href}>
-      <a className={`tab tab-bordered ${isActive && "tab-active"}`}>
+      <a className={`tab tab-bordered ${isActive && "tab-active px-2"}`}>
         {tabName}
       </a>
     </Link>
@@ -63,9 +63,9 @@ export const Navbar = () => {
   }, []);
 
   return (
-    <div className="w-full flex items-center justify-between">
+    <div className="flex items-center justify-between w-full">
       {/* LEFT SECTION WITH NAVIGATION-TABS */}
-      <div className="tabs w-max justify-center gap-5 my-4">
+      <div className="justify-center gap-2 my-4 tabs w-max">
         {tabs.map((tab) => (
           <TabLink key={tab.name} href={tab.href} tabName={tab.name} />
         ))}
@@ -73,11 +73,11 @@ export const Navbar = () => {
 
       {/* RIGHT SECTION WITH LIGHT/DARK TOGGLE */}
       <div className={"flex justify-end items-center gap-4"}>
-        <label className="swap swap-rotate items-center">
+        <label className="items-center swap swap-rotate">
           <input type="checkbox" checked={isDarkMode} onChange={setTheme} />
 
-          <SunIcon className="swap-off stroke-current w-8 h-8" />
-          <MoonIcon className="swap-on stroke-current w-8 h-8" />
+          <SunIcon className="w-8 h-8 stroke-current swap-off" />
+          <MoonIcon className="w-8 h-8 stroke-current swap-on" />
         </label>
       </div>
     </div>
