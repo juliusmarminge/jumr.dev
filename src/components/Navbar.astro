@@ -25,8 +25,8 @@ const tabs = [
 ];
 ---
 
-<div class="w-full flex items-center justify-between">
-  <div class="tabs w-max justify-center gap-5 my-4">
+<div class="flex items-center justify-between w-full">
+  <div class="justify-center my-4 tabs w-max gap-5">
     <a href="/" class="tab tab-bordered">
       Home
     </a>
@@ -42,11 +42,11 @@ const tabs = [
   </div>
 
   <div class={"flex justify-end items-center gap-4"}>
-    <label class="swap swap-rotate items-center">
+    <label class="items-center swap swap-rotate">
       <input id="theme-checkbox" type="checkbox" />
 
-      <SunIcon class="swap-off stroke-current w-8 h-8" />
-      <MoonIcon class="swap-on stroke-current w-8 h-8" />
+      <SunIcon class="w-8 h-8 stroke-current swap-off" />
+      <MoonIcon class="w-8 h-8 stroke-current swap-on" />
     </label>
   </div>
 </div>
