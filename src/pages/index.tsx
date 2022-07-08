@@ -16,6 +16,7 @@ const HomePage: NextPage = () => {
                 src="/images/profile.png"
                 className="max-w-sm rounded-lg shadow-2xl"
                 layout="fill"
+                alt="profile pic"
               />
             </div>
           </div>
