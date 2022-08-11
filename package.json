@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@tanstack/react-query": "^4.1.0",
     "@trpc/client": "^10.0.0-alpha.45",
     "@trpc/next": "^10.0.0-alpha.45",
     "@trpc/react": "^10.0.0-alpha.45",
@@ -18,7 +19,7 @@
     "next": "12.2.4",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "@tanstack/react-query": "^4.1.0",
+    "react-icons": "^4.4.0",
     "superjson": "^1.9.1",
     "zod": "^3.17.3"
   },

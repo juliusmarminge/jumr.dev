@@ -1,4 +1,4 @@
-import { Tweet, TwitterProfile } from "../server/router/twitter/d/types";
+import type { Tweet, TwitterProfile } from "../server/trpc/router/twitter";
 import { trpc } from "../utils/trpc";
 import { Loader } from "./loader";
 
@@ -14,8 +14,8 @@ export const TweetComponent: React.FC<{
 };
 
 export const TwitterFeed: React.FC = () => {
-  const { data: tweets, isLoading, isError } = trpc.useQuery(["twitter.getFeed"]);
-  const { data: user } = trpc.useQuery(["twitter.getProfile"], {
+  const { data: tweets, isLoading, isError } = trpc.proxy.twitter.feed.useQuery();
+  const { data: user } = trpc.proxy.twitter.profile.useQuery(undefined, {
     refetchOnWindowFocus: false,
     refetchOnMount: false,
   });

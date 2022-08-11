@@ -1,6 +1,9 @@
 import { t } from "../utils";
 import { z } from "zod";
-import { feedUrl, profileUrl } from "../../../constants";
+
+const twitterId = "3557533403";
+const feedUrl = `https://api.twitter.com/2/users/${twitterId}/tweets`;
+const profileUrl = `https://api.twitter.com/2/users/${twitterId}`;
 
 export const TweetValidator = z.array(
   z.object({

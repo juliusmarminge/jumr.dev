@@ -1,7 +1,9 @@
 import React from "react";
 import { NextLink } from "./next-link";
 import { useRouter } from "next/router";
-import { SunIcon, MoonIcon, MenuIcon } from "@heroicons/react/outline";
+import { TiWeatherSunny } from "react-icons/ti";
+import { BsMoonStars } from "react-icons/bs";
+import { BiMenu } from "react-icons/bi";
 import clsx from "clsx";
 
 const tabs = [
@@ -39,7 +41,7 @@ export const Navbar = () => {
         {/** Mobile Dropdown Menu */}
         <div className="dropdown">
           <label tabIndex={0} className="p-2 btn btn-ghost lg:hidden">
-            <MenuIcon className="w-8 aspect-square" />
+            <BiMenu className="w-8 aspect-square" />
           </label>
           <ul
             tabIndex={0}
@@ -69,8 +71,8 @@ export const Navbar = () => {
         <label className="items-center swap swap-rotate">
           <input type="checkbox" checked={isDarkMode} onChange={toggleDarkMode} />
 
-          <SunIcon className="w-10 h-10 stroke-current swap-off" />
-          <MoonIcon className="w-10 h-10 stroke-current swap-on" />
+          <TiWeatherSunny className="w-10 h-10 stroke-current swap-off" />
+          <BsMoonStars className="w-10 h-10 stroke-current swap-on" />
         </label>
 
         {/** End Theme Toggle */}
