@@ -3,6 +3,7 @@ import { z } from "zod";
 import Head from "next/head";
 import React from "react";
 import { AiOutlineStar } from "react-icons/ai";
+import { SiTypescript } from "react-icons/si";
 import Image from "next/future/image";
 import { NextLink } from "../components/next-link";
 
@@ -14,6 +15,15 @@ const REPOS = {
   ],
   oss: ["t3-oss/create-t3-app", "trpc/trpc"],
 } as const;
+
+// FIXME: Generate them, currently the generator is too large to run on lambda
+const PREVIEW_IMAGES: Record<string, string> = {
+  "juliusmarminge/stocks": "/images/stocks.png",
+  "juliusmarminge/pathfinding-visualizer": "/images/pfv.gif",
+  "juliusmarminge/sorting-visualizer": "/images/sv.gif",
+  "t3-oss/create-t3-app": "/images/ct3a.png",
+  "trpc/trpc": "/images/trpc.svg",
+};
 
 const ProjectSection: React.FC<{
   title: string;
@@ -29,6 +39,14 @@ const ProjectSection: React.FC<{
   );
 };
 
+const LanguageIcon: React.FC<{ language: string }> = ({ language }) => {
+  if (language.toLowerCase() === "typescript") {
+    return <SiTypescript className="text-blue-500 text-lg" />;
+  }
+  // TODO: Add more languages
+  return null;
+};
+
 const ProjectCard: React.FC<{ repo: Repo }> = ({ repo }) => {
   return (
     <div className="p-4 bg-base-300 hover:bg-base-200 rounded-lg ">
@@ -37,7 +55,7 @@ const ProjectCard: React.FC<{ repo: Repo }> = ({ repo }) => {
       <NextLink href={repo.homepage}>
         <h4>Check it out!</h4>
         <Image
-          src={`/api/generate-preview?url=${repo.homepage}`}
+          src={PREVIEW_IMAGES[repo.full_name]!}
           alt="Preview"
           height={500}
           width={500}
@@ -45,9 +63,15 @@ const ProjectCard: React.FC<{ repo: Repo }> = ({ repo }) => {
       </NextLink>
 
       <div className="flex justify-between">
-        <div className="flex items-center">
-          <AiOutlineStar className="text-base text-yellow-500" />
-          <span className="text-sm ml-1">{repo.stargazers_count}</span>
+        <div className="flex py-4 items-center gap-4">
+          <div className="flex items-center gap-1">
+            <AiOutlineStar className="text-yellow-500 text-lg" />
+            <span>{repo.stargazers_count}</span>
+          </div>
+          <div className="flex items-center gap-1">
+            <LanguageIcon language={repo.language} />
+            <span>{repo.language}</span>
+          </div>
         </div>
         <a
           href={repo.html_url}
@@ -96,6 +120,7 @@ export default ProjectsPage;
 
 const RepoValidator = z.object({
   name: z.string(),
+  full_name: z.string(),
   description: z.string(),
   html_url: z.string().url(),
   homepage: z.string().url(),
@@ -112,6 +137,7 @@ export const getStaticProps = async () => {
     repos.personal.push(
       {
         name: "stocks",
+        full_name: "juliusmarminge/stocks",
         description: "A stock market simulator",
         html_url: "https://github.com/juliusmarminge/stocks",
         homepage: "https://stocks.jumr.dev",
@@ -120,6 +146,7 @@ export const getStaticProps = async () => {
       },
       {
         name: "pathfinding-visualizer",
+        full_name: "juliusmarminge/pathfinding-visualizer",
         description: "A pathfinding visualizer",
         html_url: "https://github.com/juliusmarminge/pathfinding-visualizer",
         homepage: "https://pfv.jumr.dev",
@@ -128,6 +155,7 @@ export const getStaticProps = async () => {
       },
       {
         name: "sorting-visualizer",
+        full_name: "juliusmarminge/sorting-visualizer",
         description: "A sorting visualizer",
         html_url: "https://github.com/juliusmarminge/sorting-visualizer",
         homepage: "https://sv.jumr.dev",
