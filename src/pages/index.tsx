@@ -12,7 +12,7 @@ import { appRouter } from "../server/trpc/router";
 export const getStaticProps = async () => {
   const caller = appRouter.createCaller({});
   const twitterFeed = await caller.twitter.feed();
-  return { props: { twitterFeed }, revalidate: 3600 };
+  return { props: { twitterFeed }, revalidate: 86400 };
 };
 
 const HomePage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
