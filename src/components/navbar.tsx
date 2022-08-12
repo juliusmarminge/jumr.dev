@@ -84,7 +84,7 @@ export const Navbar = () => {
 const useDarkMode = () => {
   const [usingDarkMode, setUsingDarkMode] = React.useState(true);
 
-  const darkTheme = "night";
+  const darkTheme = "black";
   const lightTheme = "emerald";
 
   React.useEffect(() => {

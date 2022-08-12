@@ -19,6 +19,7 @@ export default defineNextConfig({
   experimental: {
     images: {
       allowFutureImage: true,
+      remotePatterns: [{ hostname: "pbs.twimg.com" }],
     },
   },
 });

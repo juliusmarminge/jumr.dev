@@ -21,6 +21,7 @@
     "react-dom": "18.2.0",
     "react-icons": "^4.4.0",
     "superjson": "^1.9.1",
+    "twitter-api-sdk": "^1.1.0",
     "zod": "^3.17.3"
   },
   "devDependencies": {

@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export const NextLink: React.FC<{
   href: string;
-  className: string;
+  className?: string;
   children: React.ReactNode;
 }> = ({ href, children, className }) => {
   return (
