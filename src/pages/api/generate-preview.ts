@@ -3,7 +3,7 @@
 
 import chromium from "chrome-aws-lambda";
 import { NextApiRequest, NextApiResponse } from "next";
-import puppeteer from "puppeteer-core";
+import { launch } from "puppeteer-core";
 import { z } from "zod";
 
 const imageGenHandler = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -14,7 +14,7 @@ const imageGenHandler = async (req: NextApiRequest, res: NextApiResponse) => {
   const url = validated.data;
 
   // Setup and go to requested page
-  const browser = await puppeteer.launch(
+  const browser = await launch(
     process.env.AWS_EXECUTION_ENV
       ? {
           args: chromium.args,
