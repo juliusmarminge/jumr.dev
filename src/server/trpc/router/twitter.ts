@@ -44,6 +44,8 @@ export const twitterRouter = t.router({
       });
 
       const referencedTweet = tweet.data?.referenced_tweets?.shift();
+      if (referencedTweet?.type === "quoted") continue;
+
       const originalTweet = tweet.includes?.tweets?.find(
         (t) => t.id === referencedTweet?.id
       );
@@ -67,8 +69,10 @@ export const twitterRouter = t.router({
       const parsedFormatted = FormattedFeedValidator.array().parse(formattedFeed);
       return parsedFormatted;
     } catch (e) {
-      if (e instanceof ZodError) throw e;
-      throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
+      throw new TRPCError({
+        code: "INTERNAL_SERVER_ERROR",
+        message: "Failed to retrieve twitter feed",
+      });
     }
   }),
 });
