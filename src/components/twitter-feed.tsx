@@ -22,9 +22,7 @@ export const TweetComponent: React.FC<{
       return (
         <div className="flex items-center gap-2 py-2">
           <BsReply className="text-lg" />
-          <span className="text-sm font-semibold">
-            Julius replied to {tweet.author.handle}
-          </span>
+          <span className="text-sm font-semibold">Julius replied</span>
         </div>
       );
     return null;

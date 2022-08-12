@@ -44,19 +44,29 @@ export const twitterRouter = t.router({
       });
 
       const referencedTweet = tweet.data?.referenced_tweets?.shift();
-      if (referencedTweet?.type === "quoted") continue;
 
-      const originalTweet = tweet.includes?.tweets?.find(
-        (t) => t.id === referencedTweet?.id
-      );
-      const author = tweet.includes?.users?.find(
-        (u) => u.id === originalTweet?.author_id
-      );
+      let author: any;
+      let originalTweet: any;
+      if (referencedTweet?.type === "replied_to") {
+        // the reply
+        author = tweet.includes?.users?.find((u) => u.id === tweet.data?.author_id);
+        originalTweet = tweet.data;
+      } else if (referencedTweet?.type === "retweeted") {
+        // the original tweet
+        originalTweet = tweet.includes?.tweets?.find(
+          (t) => t.id === referencedTweet?.id
+        );
+        author = tweet.includes?.users?.find(
+          (u) => u.id === originalTweet?.author_id
+        );
+      } else {
+        continue;
+      }
 
       formattedFeed.push({
         id,
         body: originalTweet?.text,
-        createdAt: tweet.data?.created_at,
+        createdAt: originalTweet?.created_at,
         type: referencedTweet?.type,
         author: {
           profileImg: author?.profile_image_url,
