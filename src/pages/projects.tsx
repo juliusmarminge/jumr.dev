@@ -3,6 +3,8 @@ import { z } from "zod";
 import Head from "next/head";
 import React from "react";
 import { AiOutlineStar } from "react-icons/ai";
+import Image from "next/future/image";
+import { NextLink } from "../components/next-link";
 
 const REPOS = {
   personal: [
@@ -22,9 +24,7 @@ const ProjectSection: React.FC<{
     <div className="py-4">
       <h2 className="text-2xl font-bold py-1">{title}</h2>
       <p className="text-md pb-4">{description}</p>
-      <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4">
-        {children}
-      </div>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">{children}</div>
     </div>
   );
 };
@@ -34,6 +34,16 @@ const ProjectCard: React.FC<{ repo: Repo }> = ({ repo }) => {
     <div className="p-4 bg-base-300 hover:bg-base-200 rounded-lg ">
       <h3 className="text-xl font-bold">{repo.name}</h3>
       <p className="text-md">{repo.description}</p>
+      <NextLink href={repo.homepage}>
+        <h4>Check it out!</h4>
+        <Image
+          src={`/api/generate-preview?url=${repo.homepage}`}
+          alt="Preview"
+          height={500}
+          width={500}
+        />
+      </NextLink>
+
       <div className="flex justify-between">
         <div className="flex items-center">
           <AiOutlineStar className="text-base text-yellow-500" />
