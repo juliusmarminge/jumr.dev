@@ -24,8 +24,8 @@ const HomePage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
         <title>Julius Marminge - SWE</title>
       </Head>
       <div className="flex flex-col lg:flex-row gap-4 lg:max-h-[80vh]">
-        <div className="bg-base-200 rounded-box lg:w-1/2">
-          <div className="flex-col max-w-3xl hero-content">
+        <div className="bg-base-200 rounded-box lg:w-1/2 flex lg:items-center justify-center">
+          <div className="flex-col max-w-3xl hero-content lg:items-center">
             <div className="avatar">
               <div className="w-48 aspect-square mask mask-squircle">
                 <Image
