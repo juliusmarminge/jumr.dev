@@ -3,7 +3,6 @@ import type { AppType } from "next/dist/shared/lib/utils";
 import { trpc } from "../utils/trpc";
 
 import { Navbar } from "../components/navbar";
-import { Footer } from "../components/footer";
 
 const MyApp: AppType = ({ Component, pageProps }) => {
   return (
@@ -12,8 +11,6 @@ const MyApp: AppType = ({ Component, pageProps }) => {
       <div className="flex flex-col flex-1">
         <Component {...pageProps} />
       </div>
-      <div className="divider"></div>
-      <Footer />
     </div>
   );
 };
