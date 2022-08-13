@@ -1,8 +1,7 @@
 import React from "react";
 import { NextLink } from "./next-link";
 import { useRouter } from "next/router";
-import { TiWeatherSunny } from "react-icons/ti";
-import { BsMoonStars } from "react-icons/bs";
+import { HiOutlineSun, HiOutlineMoon } from "react-icons/hi";
 import { BiMenu } from "react-icons/bi";
 import clsx from "clsx";
 
@@ -36,7 +35,7 @@ export const Navbar = () => {
   const [isDarkMode, toggleDarkMode] = useDarkMode();
 
   return (
-    <div className="navbar bg-base-100">
+    <div className="navbar bg-base-100 pb-8">
       <div className="navbar-start">
         {/** Mobile Dropdown Menu */}
         <div className="dropdown">
@@ -71,8 +70,8 @@ export const Navbar = () => {
         <label className="items-center swap swap-rotate">
           <input type="checkbox" checked={isDarkMode} onChange={toggleDarkMode} />
 
-          <TiWeatherSunny className="w-10 h-10 stroke-current swap-off" />
-          <BsMoonStars className="w-10 h-10 stroke-current swap-on" />
+          <HiOutlineSun className="w-10 h-10 stroke-current swap-off" />
+          <HiOutlineMoon className="w-10 h-10 stroke-current swap-on" />
         </label>
 
         {/** End Theme Toggle */}
