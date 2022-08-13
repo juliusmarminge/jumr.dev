@@ -4,18 +4,24 @@ import Head from "next/head";
 import React from "react";
 import { AiOutlineStar, AiOutlineGithub } from "react-icons/ai";
 import { SiTypescript } from "react-icons/si";
-import Image from "next/future/image";
+import Image, { StaticImageData } from "next/future/image";
 import { NextLink } from "../components/next-link";
+
+import StocksPreview from "../assets/stocks.png";
+import PfvPreview from "../assets/pfv.png";
+import SvPreview from "../assets/sv.png";
+import CT3APreview from "../assets/ct3a.png";
+import TRPCPreview from "../assets/trpc.png";
 
 const REPOS = {
   personal: [
-    { name: "juliusmarminge/stocks", img: "stocks.png" },
-    { name: "juliusmarminge/pathfinding-visualizer", img: "pfv.png" },
-    { name: "juliusmarminge/sorting-visualizer", img: "sv.png" },
+    { name: "juliusmarminge/stocks", img: StocksPreview },
+    { name: "juliusmarminge/pathfinding-visualizer", img: PfvPreview },
+    { name: "juliusmarminge/sorting-visualizer", img: SvPreview },
   ],
   oss: [
-    { name: "t3-oss/create-t3-app", img: "ct3a.png" },
-    { name: "trpc/trpc", img: "trpc.png" },
+    { name: "t3-oss/create-t3-app", img: CT3APreview },
+    { name: "trpc/trpc", img: TRPCPreview },
   ],
 } as const;
 
@@ -42,6 +48,19 @@ const LanguageIcon: React.FC<{ language: string }> = ({ language }) => {
 };
 
 const ProjectCard: React.FC<{ repo: Repo }> = ({ repo }) => {
+  // FIXME: Smell. Doesn't seem to work to use the object's one
+  const img =
+    repo.full_name === "juliusmarminge/stocks"
+      ? StocksPreview
+      : repo.full_name === "juliusmarminge/pathfinding-visualizer"
+      ? PfvPreview
+      : repo.full_name === "juliusmarminge/sorting-visualizer"
+      ? SvPreview
+      : repo.full_name === "t3-oss/create-t3-app"
+      ? CT3APreview
+      : repo.full_name === "trpc/trpc"
+      ? TRPCPreview
+      : null;
   return (
     <div className="p-4 bg-base-300 hover:bg-base-200 rounded-lg ">
       <h3 className="text-xl font-bold">{repo.name}</h3>
@@ -49,10 +68,9 @@ const ProjectCard: React.FC<{ repo: Repo }> = ({ repo }) => {
       <NextLink href={repo.homepage}>
         <h4>Check it out!</h4>
         <Image
-          src={`/images/previews/${repo.img}`}
+          src={img!}
           alt="Preview"
-          height={720}
-          width={1280}
+          placeholder="blur"
           className="w-full aspect-video"
         />
       </NextLink>
@@ -123,7 +141,7 @@ const RepoValidator = z.object({
   stargazers_count: z.number(),
 });
 // then we add the preview image to that shape
-type Repo = z.infer<typeof RepoValidator> & { img: string };
+type Repo = z.infer<typeof RepoValidator> & { img: StaticImageData };
 
 export const getStaticProps = async () => {
   let repos: Record<keyof typeof REPOS, Repo[]> = { personal: [], oss: [] };
@@ -139,7 +157,7 @@ export const getStaticProps = async () => {
         homepage: "https://stocks.jumr.dev",
         language: "TypeScript",
         stargazers_count: 42069,
-        img: "stocks.png",
+        img: StocksPreview,
       },
       {
         name: "pathfinding-visualizer",
@@ -149,7 +167,7 @@ export const getStaticProps = async () => {
         homepage: "https://pfv.jumr.dev",
         language: "TypeScript",
         stargazers_count: 19,
-        img: "pfv.png",
+        img: PfvPreview,
       },
       {
         name: "sorting-visualizer",
@@ -159,7 +177,7 @@ export const getStaticProps = async () => {
         homepage: "https://sv.jumr.dev",
         language: "TypeScript",
         stargazers_count: 0,
-        img: "sv.png",
+        img: SvPreview,
       }
     );
     return { props: { repos } };
