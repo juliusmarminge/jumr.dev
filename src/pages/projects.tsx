@@ -51,7 +51,8 @@ const ProjectCard: React.FC<{ repo: Repo }> = ({ repo }) => {
         <Image
           src={`/images/previews/${repo.img}`}
           alt="Preview"
-          fill
+          height={720}
+          width={1280}
           className="w-full aspect-video"
         />
       </NextLink>
