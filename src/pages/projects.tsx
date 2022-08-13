@@ -9,21 +9,15 @@ import { NextLink } from "../components/next-link";
 
 const REPOS = {
   personal: [
-    "juliusmarminge/stocks",
-    "juliusmarminge/pathfinding-visualizer",
-    "juliusmarminge/sorting-visualizer",
+    { name: "juliusmarminge/stocks", img: "stocks.png" },
+    { name: "juliusmarminge/pathfinding-visualizer", img: "pfv.png" },
+    { name: "juliusmarminge/sorting-visualizer", img: "sv.png" },
   ],
-  oss: ["t3-oss/create-t3-app", "trpc/trpc"],
+  oss: [
+    { name: "t3-oss/create-t3-app", img: "ct3a.png" },
+    { name: "trpc/trpc", img: "trpc.png" },
+  ],
 } as const;
-
-// FIXME: Generate them, currently the generator is too large to run on lambda
-const PREVIEW_IMAGES: Record<string, string> = {
-  "juliusmarminge/stocks": "/images/stocks.png",
-  "juliusmarminge/pathfinding-visualizer": "/images/pfv.gif",
-  "juliusmarminge/sorting-visualizer": "/images/sv.gif",
-  "t3-oss/create-t3-app": "/images/ct3a.png",
-  "trpc/trpc": "/images/trpc.svg",
-};
 
 const ProjectSection: React.FC<{
   title: string;
@@ -55,10 +49,11 @@ const ProjectCard: React.FC<{ repo: Repo }> = ({ repo }) => {
       <NextLink href={repo.homepage}>
         <h4>Check it out!</h4>
         <Image
-          src={PREVIEW_IMAGES[repo.full_name]!}
+          src={`/images/previews/${repo.img}`}
           alt="Preview"
-          height={500}
-          width={500}
+          height={720}
+          width={1280}
+          className="w-full aspect-video"
         />
       </NextLink>
 
@@ -118,6 +113,7 @@ const ProjectsPage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = (
 
 export default ProjectsPage;
 
+// This is the shape from the Github API
 const RepoValidator = z.object({
   name: z.string(),
   full_name: z.string(),
@@ -127,7 +123,8 @@ const RepoValidator = z.object({
   language: z.string(),
   stargazers_count: z.number(),
 });
-type Repo = z.infer<typeof RepoValidator>;
+// then we add the preview image to that shape
+type Repo = z.infer<typeof RepoValidator> & { img: string };
 
 export const getStaticProps = async () => {
   let repos: Record<keyof typeof REPOS, Repo[]> = { personal: [], oss: [] };
@@ -143,6 +140,7 @@ export const getStaticProps = async () => {
         homepage: "https://stocks.jumr.dev",
         language: "TypeScript",
         stargazers_count: 42069,
+        img: "stocks.png",
       },
       {
         name: "pathfinding-visualizer",
@@ -152,6 +150,7 @@ export const getStaticProps = async () => {
         homepage: "https://pfv.jumr.dev",
         language: "TypeScript",
         stargazers_count: 19,
+        img: "pfv.png",
       },
       {
         name: "sorting-visualizer",
@@ -161,6 +160,7 @@ export const getStaticProps = async () => {
         homepage: "https://sv.jumr.dev",
         language: "TypeScript",
         stargazers_count: 0,
+        img: "sv.png",
       }
     );
     return { props: { repos } };
@@ -168,22 +168,21 @@ export const getStaticProps = async () => {
 
   for (const repo of REPOS.personal) {
     const repoRes = await (
-      await fetch(`https://api.github.com/repos/${repo}`)
+      await fetch(`https://api.github.com/repos/${repo.name}`)
     ).json();
     const validated = RepoValidator.safeParse(repoRes);
-    console.log(repoRes);
     if (validated.success) {
-      repos.personal.push(validated.data);
+      repos.personal.push({ ...validated.data, img: repo.img });
     }
   }
 
   for (const repo of REPOS.oss) {
     const repoRes = await (
-      await fetch(`https://api.github.com/repos/${repo}`)
+      await fetch(`https://api.github.com/repos/${repo.name}`)
     ).json();
     const validated = RepoValidator.safeParse(repoRes);
     if (validated.success) {
-      repos.oss.push(validated.data);
+      repos.oss.push({ ...validated.data, img: repo.img });
     }
   }
 
