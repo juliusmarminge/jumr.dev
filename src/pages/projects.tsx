@@ -2,7 +2,7 @@ import { InferGetStaticPropsType, type NextPage } from "next";
 import { z } from "zod";
 import Head from "next/head";
 import React from "react";
-import { AiOutlineStar } from "react-icons/ai";
+import { AiOutlineStar, AiOutlineGithub } from "react-icons/ai";
 import { SiTypescript } from "react-icons/si";
 import Image from "next/future/image";
 import { NextLink } from "../components/next-link";
@@ -68,12 +68,11 @@ const ProjectCard: React.FC<{ repo: Repo }> = ({ repo }) => {
             <span>{repo.language}</span>
           </div>
         </div>
-        <a
-          href={repo.html_url}
-          className="text-base text-blue-500 hover:text-blue-700"
-        >
-          View
-        </a>
+        <div className="flex items-center">
+          <NextLink href={repo.html_url} className="btn btn-ghost">
+            <AiOutlineGithub className="text-3xl" />
+          </NextLink>
+        </div>
       </div>
     </div>
   );
