@@ -7,11 +7,11 @@ import { SiTypescript } from "react-icons/si";
 import Image, { StaticImageData } from "next/future/image";
 import { NextLink } from "../components/next-link";
 
-import StocksPreview from "../assets/stocks.png";
-import PfvPreview from "../assets/pfv.png";
-import SvPreview from "../assets/sv.png";
-import CT3APreview from "../assets/ct3a.png";
-import TRPCPreview from "../assets/trpc.png";
+import StocksPreview from "../../public/images/stocks.png";
+import PfvPreview from "../../public/images/pfv.png";
+import SvPreview from "../../public/images/sv.png";
+import CT3APreview from "../../public/images/ct3a.png";
+import TRPCPreview from "../../public/images/trpc.png";
 
 const REPOS = {
   personal: [

@@ -2,6 +2,7 @@ import type { InferGetStaticPropsType, NextPage } from "next";
 import Head from "next/head";
 import Image from "next/future/image";
 import dynamic from "next/dynamic";
+import ProfilePic from "../../public/images/profile.png";
 
 const TwitterFeed = dynamic(
   async () => (await import("../components/twitter-feed")).TwitterFeed,
@@ -28,12 +29,7 @@ const HomePage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
           <div className="flex-col max-w-3xl hero-content lg:items-center">
             <div className="avatar">
               <div className="w-48 aspect-square mask mask-squircle">
-                <Image
-                  src="/images/profile.png"
-                  alt="profile pic"
-                  width={200}
-                  height={200}
-                />
+                <Image src={ProfilePic} alt="profile pic" placeholder="blur" />
               </div>
             </div>
 
