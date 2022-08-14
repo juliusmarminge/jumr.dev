@@ -1,30 +1,34 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { NextLink } from "./next-link";
 import { useRouter } from "next/router";
-import { HiOutlineSun, HiOutlineMoon } from "react-icons/hi";
-import { BiMenu } from "react-icons/bi";
+import { HiOutlineSun, HiOutlineMoon, HiMenuAlt2 } from "react-icons/hi";
 import clsx from "clsx";
 
 const tabs = [
   { name: "Home", href: "/" },
   { name: "About", href: "/about" },
   { name: "Blog", href: "/blog" },
-  { name: "Projects", href: "/projects" },
+  { name: "Projectsdfvsdfsdvsdvsdfsf", href: "/projects" },
 ];
 
 const TabLink: React.FC<{
   href: string;
   name: string;
-}> = ({ href, name }) => {
+  hide?: boolean;
+}> = ({ href, name, hide }) => {
   const router = useRouter();
   const isActive = router.route === href;
 
   return (
     <NextLink
       href={href}
-      className={clsx("py-1, px-2 lg:tab lg:tab-bordered", {
-        "opacity-80 tab-active": isActive,
-      })}
+      className={clsx(
+        "p-4 bg-base-100 opacity-100 lg:tab lg:tab-bordered lg:py-1 lg:px-2",
+        {
+          "opacity-80 tab-active": isActive,
+          hidden: hide,
+        }
+      )}
     >
       {name}
     </NextLink>
@@ -33,21 +37,30 @@ const TabLink: React.FC<{
 
 export const Navbar = () => {
   const [isDarkMode, toggleDarkMode] = useDarkMode();
-
+  const [isDropDownOpen, setIsDropDownOpen] = React.useState(false);
+  const router = useRouter();
+  useEffect(() => {
+    setIsDropDownOpen(false);
+  }, [router]);
   return (
     <div className="navbar bg-base-100 pb-8">
       <div className="navbar-start">
         {/** Mobile Dropdown Menu */}
-        <div className="dropdown">
-          <label tabIndex={0} className="p-2 btn btn-ghost lg:hidden">
-            <BiMenu className="w-8 aspect-square" />
-          </label>
-          <ul
-            tabIndex={0}
-            className="p-2 mt-3 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52"
+        <div>
+          <button
+            className="btn btn-ghost lg:hidden"
+            onClick={() => setIsDropDownOpen(!isDropDownOpen)}
           >
+            <HiMenuAlt2
+              className={clsx("inline-block h-10 w-10 transition-transform", {
+                "rotate-90": isDropDownOpen,
+              })}
+            />
+          </button>
+
+          <ul className="absolute z-10 flex flex-col lg:hidden">
             {tabs.map((tab) => (
-              <TabLink key={tab.href} {...tab} />
+              <TabLink key={tab.href} {...tab} hide={!isDropDownOpen} />
             ))}
           </ul>
         </div>
