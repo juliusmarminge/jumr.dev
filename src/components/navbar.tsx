@@ -25,7 +25,7 @@ const TabLink: React.FC<{
       className={clsx(
         "p-4 bg-base-100 opacity-100 lg:tab lg:tab-bordered lg:py-1 lg:px-2",
         {
-          "opacity-80 tab-active": isActive,
+          "lg:opacity-80 tab-active": isActive,
           hidden: hide,
         }
       )}
