@@ -1,4 +1,4 @@
-// FIXME:
+// FIXME: proper type definitions for twitter
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { t } from "../utils";
 import { z } from "zod";
