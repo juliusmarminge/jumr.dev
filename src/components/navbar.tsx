@@ -8,7 +8,7 @@ const tabs = [
   { name: "Home", href: "/" },
   { name: "About", href: "/about" },
   { name: "Blog", href: "/blog" },
-  { name: "Projectsdfvsdfsdvsdvsdfsf", href: "/projects" },
+  { name: "Projects", href: "/projects" },
 ];
 
 const TabLink: React.FC<{
