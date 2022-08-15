@@ -1,5 +1,7 @@
+// FIXME:
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { t } from "../utils";
-import { z, ZodError } from "zod";
+import { z } from "zod";
 import Client from "twitter-api-sdk";
 import { env } from "../../../env/server.mjs";
 import { TRPCError } from "@trpc/server";
@@ -15,7 +17,7 @@ const FormattedFeedValidator = z.object({
     new Intl.DateTimeFormat("en-US", {
       month: "short",
       day: "2-digit",
-    }).format(new Date(str))
+    }).format(new Date(str)),
   ),
   type: z
     .enum(["retweeted", "quoted", "replied_to"])
@@ -32,7 +34,10 @@ export type Tweet = z.infer<typeof FormattedFeedValidator>;
 export const twitterRouter = t.router({
   feed: t.procedure.query(async () => {
     const feed = await client.tweets.usersIdTweets(twitterId);
-    const parsedFeed = z.object({ id: z.string() }).array().safeParse(feed.data);
+    const parsedFeed = z
+      .object({ id: z.string() })
+      .array()
+      .safeParse(feed.data);
     if (!parsedFeed.success) return console.log("failed");
 
     const formattedFeed: any[] = [];
@@ -49,15 +54,17 @@ export const twitterRouter = t.router({
       let originalTweet: any;
       if (referencedTweet?.type === "replied_to") {
         // the reply
-        author = tweet.includes?.users?.find((u) => u.id === tweet.data?.author_id);
+        author = tweet.includes?.users?.find(
+          (u) => u.id === tweet.data?.author_id,
+        );
         originalTweet = tweet.data;
       } else if (referencedTweet?.type === "retweeted") {
         // the original tweet
         originalTweet = tweet.includes?.tweets?.find(
-          (t) => t.id === referencedTweet?.id
+          (t) => t.id === referencedTweet?.id,
         );
         author = tweet.includes?.users?.find(
-          (u) => u.id === originalTweet?.author_id
+          (u) => u.id === originalTweet?.author_id,
         );
       } else {
         continue;
@@ -76,7 +83,8 @@ export const twitterRouter = t.router({
       });
     }
     try {
-      const parsedFormatted = FormattedFeedValidator.array().parse(formattedFeed);
+      const parsedFormatted =
+        FormattedFeedValidator.array().parse(formattedFeed);
       return parsedFormatted;
     } catch (e) {
       throw new TRPCError({

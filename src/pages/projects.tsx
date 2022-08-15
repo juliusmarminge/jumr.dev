@@ -32,16 +32,16 @@ const ProjectSection: React.FC<{
 }> = ({ title, description, children }) => {
   return (
     <div className="py-4">
-      <h2 className="text-2xl font-bold py-1">{title}</h2>
+      <h2 className="py-1 text-2xl font-bold">{title}</h2>
       <p className="text-md pb-4">{description}</p>
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">{children}</div>
+      <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">{children}</div>
     </div>
   );
 };
 
 const LanguageIcon: React.FC<{ language: string }> = ({ language }) => {
   if (language.toLowerCase() === "typescript") {
-    return <SiTypescript className="text-blue-500 text-lg" />;
+    return <SiTypescript className="text-lg text-blue-500" />;
   }
   // TODO: Add more languages
   return null;
@@ -62,7 +62,7 @@ const ProjectCard: React.FC<{ repo: Repo }> = ({ repo }) => {
       ? TRPCPreview
       : null;
   return (
-    <div className="p-4 bg-base-300 hover:bg-base-200 rounded-lg ">
+    <div className="rounded-lg bg-base-300 p-4 hover:bg-base-200 ">
       <h3 className="text-xl font-bold">{repo.name}</h3>
       <p className="text-md">{repo.description}</p>
       <NextLink href={repo.homepage}>
@@ -71,14 +71,14 @@ const ProjectCard: React.FC<{ repo: Repo }> = ({ repo }) => {
           src={img!}
           alt="Preview"
           placeholder="blur"
-          className="w-full aspect-video"
+          className="aspect-video w-full"
         />
       </NextLink>
 
       <div className="flex justify-between">
-        <div className="flex py-4 items-center gap-4">
+        <div className="flex items-center gap-4 py-4">
           <div className="flex items-center gap-1">
-            <AiOutlineStar className="text-yellow-500 text-lg" />
+            <AiOutlineStar className="text-lg text-yellow-500" />
             <span>{repo.stargazers_count}</span>
           </div>
           <div className="flex items-center gap-1">
@@ -96,9 +96,9 @@ const ProjectCard: React.FC<{ repo: Repo }> = ({ repo }) => {
   );
 };
 
-const ProjectsPage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
-  repos,
-}) => {
+const ProjectsPage: NextPage<
+  InferGetStaticPropsType<typeof getStaticProps>
+> = ({ repos }) => {
   return (
     <>
       <Head key="projects">
@@ -140,11 +140,11 @@ const RepoValidator = z.object({
   language: z.string(),
   stargazers_count: z.number(),
 });
-// then we add the preview image to that shape
+// then w e add the preview image to that shape
 type Repo = z.infer<typeof RepoValidator> & { img: StaticImageData };
 
 export const getStaticProps = async () => {
-  let repos: Record<keyof typeof REPOS, Repo[]> = { personal: [], oss: [] };
+  const repos: Record<keyof typeof REPOS, Repo[]> = { personal: [], oss: [] };
 
   if (process.env.NODE_ENV === "development") {
     // to prevent rate-limiting during dev
@@ -178,7 +178,7 @@ export const getStaticProps = async () => {
         language: "TypeScript",
         stargazers_count: 0,
         img: SvPreview,
-      }
+      },
     );
     return { props: { repos } };
   }

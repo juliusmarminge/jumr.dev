@@ -23,11 +23,11 @@ const TabLink: React.FC<{
     <NextLink
       href={href}
       className={clsx(
-        "p-4 bg-base-100 opacity-100 lg:tab lg:tab-bordered lg:py-1 lg:px-2 w-72 lg:w-max",
+        "w-72 bg-base-100 p-4 opacity-100 lg:tab lg:tab-bordered lg:w-max lg:py-1 lg:px-2",
         {
-          "lg:opacity-80 tab-active": isActive,
+          "tab-active lg:opacity-80": isActive,
           hidden: hide,
-        }
+        },
       )}
     >
       {name}
@@ -68,7 +68,7 @@ export const Navbar = () => {
 
         {/** Desktop Tab Menu */}
         <div className="hidden lg:flex">
-          <ul className="flex gap-4 p-0 menu menu-horizontal">
+          <ul className="menu menu-horizontal flex gap-4 p-0">
             {tabs.map((tab) => (
               <TabLink key={tab.href} {...tab} />
             ))}
@@ -77,14 +77,18 @@ export const Navbar = () => {
         {/** End Desktop Tab Menu */}
       </div>
 
-      <div className="gap-4 navbar-end">
+      <div className="navbar-end gap-4">
         {/** Theme Toggle */}
 
-        <label className="items-center swap swap-rotate">
-          <input type="checkbox" checked={isDarkMode} onChange={toggleDarkMode} />
+        <label className="swap swap-rotate items-center">
+          <input
+            type="checkbox"
+            checked={isDarkMode}
+            onChange={toggleDarkMode}
+          />
 
-          <HiOutlineSun className="w-10 h-10 stroke-current swap-off" />
-          <HiOutlineMoon className="w-10 h-10 stroke-current swap-on" />
+          <HiOutlineSun className="swap-off h-10 w-10 stroke-current" />
+          <HiOutlineMoon className="swap-on h-10 w-10 stroke-current" />
         </label>
 
         {/** End Theme Toggle */}

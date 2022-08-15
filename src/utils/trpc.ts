@@ -1,6 +1,5 @@
 // src/utils/trpc.ts
 import { setupTRPC } from "@trpc/next";
-import type { inferProcedureInput, inferProcedureOutput } from "@trpc/server";
 import type { AppRouter } from "../server/trpc/router";
 import superjson from "superjson";
 

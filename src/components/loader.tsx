@@ -1,5 +1,9 @@
 export const Loader = () => (
-  <svg className="w-8 h-8" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <svg
+    className="h-8 w-8"
+    viewBox="0 0 24 24"
+    xmlns="http://www.w3.org/2000/svg"
+  >
     <circle cx="4" cy="12" r="3">
       <animate
         id="a"

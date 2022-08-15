@@ -6,7 +6,7 @@ import ProfilePic from "../../public/images/profile.png";
 
 const TwitterFeed = dynamic(
   async () => (await import("../components/twitter-feed")).TwitterFeed,
-  { ssr: false }
+  { ssr: false },
 );
 import { appRouter } from "../server/trpc/router";
 
@@ -24,11 +24,11 @@ const HomePage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
       <Head key="home">
         <title>Julius Marminge - SWE</title>
       </Head>
-      <div className="flex flex-col lg:flex-row gap-4 lg:max-h-[80vh]">
-        <div className="bg-base-200 rounded-box lg:w-1/2 flex lg:items-center justify-center">
-          <div className="flex-col max-w-3xl hero-content lg:items-center">
+      <div className="flex flex-col gap-4 lg:max-h-[80vh] lg:flex-row">
+        <div className="rounded-box flex justify-center bg-base-200 lg:w-1/2 lg:items-center">
+          <div className="hero-content max-w-3xl flex-col lg:items-center">
             <div className="avatar">
-              <div className="w-48 aspect-square mask mask-squircle">
+              <div className="mask mask-squircle aspect-square w-48">
                 <Image src={ProfilePic} alt="profile pic" placeholder="blur" />
               </div>
             </div>
@@ -50,7 +50,7 @@ const HomePage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
         </div>
         <div className="divider lg:divider-horizontal" />
         <div className="flex-1 overflow-y-hidden">
-          <h1 className="text-2xl font-bold py-4">My Twitter Feed</h1>
+          <h1 className="py-4 text-2xl font-bold">My Twitter Feed</h1>
           <TwitterFeed feed={twitterFeed} />
         </div>
       </div>

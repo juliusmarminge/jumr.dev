@@ -6,9 +6,9 @@ import { Navbar } from "../components/navbar";
 
 const MyApp: AppType = ({ Component, pageProps }) => {
   return (
-    <div className="flex flex-col justify-between min-h-screen mx-auto w-[95%] lg:w-4/5">
+    <div className="mx-auto flex min-h-screen w-[95%] flex-col justify-between lg:w-4/5">
       <Navbar />
-      <div className="flex flex-col flex-1">
+      <div className="flex flex-1 flex-col">
         <Component {...pageProps} />
       </div>
     </div>

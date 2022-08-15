@@ -29,24 +29,26 @@ export const TweetComponent: React.FC<{
   };
 
   return (
-    <NextLink href={`https://twitter.com/${tweet.author.handle}/status/${tweet.id}`}>
-      <div className="p-6 rounded-lg bg-base-300 hover:bg-base-200">
+    <NextLink
+      href={`https://twitter.com/${tweet.author.handle}/status/${tweet.id}`}
+    >
+      <div className="rounded-lg bg-base-300 p-6 hover:bg-base-200">
         <TweetTypeView />
         <div className="flex items-center justify-between">
           <a
             href={`https://twitter.com/${tweet.author.handle}`}
             className="cursor-pointer"
           >
-            <div className="flex items-center gap-3 group">
+            <div className="group flex items-center gap-3">
               <Image
                 src={tweet.author.profileImg}
                 alt={tweet.author.name}
                 width={100}
                 height={100}
-                className="w-12 h-12 rounded-full"
+                className="h-12 w-12 rounded-full"
               />
               <div className="group-hover:underline">
-                <p className="font-bold text-sm">{tweet.author.name}</p>
+                <p className="text-sm font-bold">{tweet.author.name}</p>
                 <p className="text-xs ">@{tweet.author.handle}</p>
               </div>
             </div>
@@ -55,7 +57,7 @@ export const TweetComponent: React.FC<{
             <p>{tweet.createdAt}</p>
           </div>
         </div>
-        <p className="pt-4 whitespace-pre-wrap text-sm">{tweet.body}</p>
+        <p className="whitespace-pre-wrap pt-4 text-sm">{tweet.body}</p>
       </div>
     </NextLink>
   );
