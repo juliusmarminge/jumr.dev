@@ -1,5 +1,6 @@
 // @ts-check
 import { env } from "./src/env/server.mjs";
+import { withContentlayer } from "next-contentlayer";
 
 /**
  * Don't be scared of the generics here.
@@ -13,7 +14,7 @@ function defineNextConfig(config) {
   return config;
 }
 
-export default defineNextConfig({
+const config = defineNextConfig({
   reactStrictMode: true,
   swcMinify: true,
   experimental: {
@@ -23,3 +24,5 @@ export default defineNextConfig({
     },
   },
 });
+
+export default withContentlayer(config);
