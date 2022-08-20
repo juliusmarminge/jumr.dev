@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const { withContentlayer } = require("next-contentlayer");
 
-export default withContentlayer({
+module.exports = withContentlayer({
   reactStrictMode: true,
   swcMinify: true,
   experimental: {
