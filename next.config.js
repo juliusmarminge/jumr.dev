@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 // @ts-check
-import { env } from "./src/env/server.mjs";
-import { withContentlayer } from "next-contentlayer";
+const { env } = require("./src/env/server.mjs");
+const { withContentlayer } = require("next-contentlayer");
 
 /**
  * Don't be scared of the generics here.
