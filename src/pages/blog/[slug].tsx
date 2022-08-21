@@ -29,17 +29,16 @@ const PostLayout: React.FC<{ post: Post }> = ({ post }) => {
       <Head>
         <title>{post.title}</title>
       </Head>
-      <article className="mx-auto max-w-2xl py-16">
+      <article className="py-8">
         <div className="mb-6 text-center">
           <h1 className="mb-1 text-3xl font-bold">{post.title}</h1>
           <p className="text-sm text-slate-600">
             {format(parseISO(post.date), "LLLL d, yyyy")}
           </p>
         </div>
-        <div
-          className="cl-post-body"
-          dangerouslySetInnerHTML={{ __html: post.body.html }}
-        />
+        <main className="prose-lg prose-invert prose-indigo prose-a:text-indigo-400 prose-a:opacity-90 prose-a:transition-opacity hover:prose-a:opacity-100">
+          <div dangerouslySetInnerHTML={{ __html: post.body.html }} />
+        </main>
       </article>
     </>
   );

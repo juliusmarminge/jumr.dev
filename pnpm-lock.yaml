@@ -1,6 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@tailwindcss/typography': ^0.5.4
   '@tanstack/react-query': ^4.1.0
   '@trpc/client': ^10.0.0-alpha.45
   '@trpc/next': ^10.0.0-alpha.45
@@ -53,6 +54,7 @@ dependencies:
   zod: 3.18.0
 
 devDependencies:
+  '@tailwindcss/typography': 0.5.4_tailwindcss@3.1.8
   '@types/node': 18.0.0
   '@types/react': 18.0.14
   '@types/react-dom': 18.0.5
@@ -691,6 +693,17 @@ packages:
     dependencies:
       tslib: 2.4.0
     dev: false
+
+  /@tailwindcss/typography/0.5.4_tailwindcss@3.1.8:
+    resolution: {integrity: sha512-QEdg40EmGvE7kKoDei8zr5sf4D1pIayHj4R31bH3lX8x2BtTiR+jNejYPOkhbmy3DXgkMF9jC8xqNiGFAuL9Sg==}
+    peerDependencies:
+      tailwindcss: '>=3.0.0 || insiders'
+    dependencies:
+      lodash.castarray: 4.4.0
+      lodash.isplainobject: 4.0.6
+      lodash.merge: 4.6.2
+      tailwindcss: 3.1.8_postcss@8.4.16
+    dev: true
 
   /@tanstack/query-core/4.2.1:
     resolution: {integrity: sha512-UOyOhHKLS/5i9qG2iUnZNVV3R9riJJmG9eG+hnMFIPT/oRh5UzAfjxCtBneNgPQZLDuP8y6YtRYs/n4qVAD5Ng==}
@@ -2723,6 +2736,14 @@ packages:
   /lodash.camelcase/4.3.0:
     resolution: {integrity: sha512-TwuEnCnxbc3rAvhf/LbG7tJUDzhqXyFnv3dtzLOPgCG/hODL7WFnsbwktkD7yUV0RrreP/l1PALq/YSg6VvjlA==}
     dev: false
+
+  /lodash.castarray/4.4.0:
+    resolution: {integrity: sha512-aVx8ztPv7/2ULbArGJ2Y42bG1mEQ5mGjpdvrbJcJFU3TbYybe+QlLS4pst9zV52ymy2in1KpFPiZnAOATxD4+Q==}
+    dev: true
+
+  /lodash.isplainobject/4.0.6:
+    resolution: {integrity: sha512-oSXzaWypCMHkPC3NvBEaPHf0KsA5mvPrOPgQWDsbg8n7orZ290M0BmC/jgRZ4vcJ6DTAhjrsSYgdsW/F+MFOBA==}
+    dev: true
 
   /lodash.merge/4.6.2:
     resolution: {integrity: sha512-0KpjqXRVvrYyCsX1swR/XTK0va6VQkQM6MNo7PqW77ByjAhoARA8EfrP1N4+KlKj8YS0ZUCtRT/YUuhyYDujIQ==}
