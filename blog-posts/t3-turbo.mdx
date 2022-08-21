@@ -15,7 +15,7 @@ Apologies in advance, this post is going to be a bit long, so for everyone who j
 
 ## Initializing your T3 App
 
-For demonstration purposes, I'll start by creating a new T3 app, but you can of course use your existing one. I am going to be using tRPC v10, so we'll use the `next` version of `create-t3-app`. Since we're going to be turning this into a monorepo, I'll also showcase the ability to enter a scoped appname when using the CLI. Lastly, if you haven't already tried out the `next` version of the CLI, it is... BLAZINGLY FAST! I'll assume you are already in a git repository and I'll hold off on installing the dependencies until we have setup turborepo:
+For demonstration purposes, I'll start by creating a new T3 app, but you can of course use your existing one. I am going to be using tRPC v10, so we'll use the `next` version of `create-t3-app`. Since we're going to be turning this into a monorepo, I'll also showcase the ability to enter a scoped appname when using the CLI. I'll assume you are already in a git repository and I'll hold off on installing the dependencies until we have setup turborepo. Lastly, if you haven't already tried out the `next` version of the CLI, try it out. It is... BLAZINGLY FAST!:
 
 ```bash
 npx create-t3-app@next apps/@acme/nextjs --noGit --noInstall
@@ -29,7 +29,7 @@ _Your repo should look something like [this](https://github.com/juliusmarminge/c
 
 ## Initializing turbo
 
-Now we'll install turbo and create some basic configuration files for it. Add the following configuration files into your project root, these are basic configuration files inspired by the turbo example apps.
+Now we'll install turbo and create some basic configuration files for it. Add the following configuration files into your project root, these are basic configuration files inspired by the turbo example apps:
 
 - [package.json](https://github.com/juliusmarminge/create-t3-turbo/blob/main/package.json)
 - [turbo.json](https://github.com/juliusmarminge/create-t3-turbo/blob/main/turbo.json)
@@ -440,9 +440,9 @@ And we're done! You should see your posts appearing on both applications, and if
 
 ## Final Words
 
-Thank you for reading this post. This was my first ever post, so if you enjoyed it, go give the repo a [star](https://github.com/juliusmarminge/turbo-tutorial/stargazers).
+Thank you for reading this post. This was my first ever post, so if you enjoyed it, go give the repo a [star](https://github.com/juliusmarminge/turbo-tutorial/stargazers). If it helped you out, consider [buying me a coffee](https://github.com/sponsors/juliusmarminge), I would truly appreciate it!
 
-This blog is also not finished yet, but I wanted to get this post up as soon as possible to satisfy the community demands. If you have any suggestions for how to improve it, feel free to get in touch!
+Also, this blog is not finished yet, but I wanted to get this post up as soon as possible to satisfy the community demands. If you have any suggestions for how to improve it, feel free to get in touch!
 
 > Note: I will go over the code once tRPC v10 is properly released to make sure it all still works. There might be API changes until then so there might be slight changes required depending on the time you're reading this.
 
