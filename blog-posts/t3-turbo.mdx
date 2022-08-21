@@ -340,7 +340,7 @@ You can most likely skip this step, in that case you can skip to the [final word
 
 I'll make a blog-ish example here. Since this is highly personal, I'll just go over this briefly. I'll first modify my prisma model to include some basic data for a post:
 
-```prisma:schema.prisma
+```js:schema.prisma
 model Post {
     id      String @id @default(cuid())
     title   String
