@@ -2,6 +2,8 @@ import { allPosts, Post } from "contentlayer/generated";
 import { format, parseISO } from "date-fns";
 import { GetStaticProps } from "next";
 import Head from "next/head";
+import { useMDXComponent } from "next-contentlayer/hooks";
+import { components } from "~/components/MDX";
 
 export async function getStaticPaths() {
   const paths = allPosts.map((post) => post.url);
@@ -24,6 +26,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 };
 
 const PostLayout: React.FC<{ post: Post }> = ({ post }) => {
+  const MDXContent = useMDXComponent(post.body.code);
   return (
     <>
       <Head>
@@ -36,8 +39,8 @@ const PostLayout: React.FC<{ post: Post }> = ({ post }) => {
             {format(parseISO(post.date), "LLLL d, yyyy")}
           </p>
         </div>
-        <main className="prose-lg prose-invert prose-indigo prose-a:text-indigo-400 prose-a:opacity-90 prose-a:transition-opacity hover:prose-a:opacity-100">
-          <div dangerouslySetInnerHTML={{ __html: post.body.html }} />
+        <main className="prose mx-auto max-w-6xl">
+          <MDXContent components={components} />
         </main>
       </article>
     </>

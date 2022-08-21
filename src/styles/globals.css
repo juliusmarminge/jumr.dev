@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url("markdown.css");
+
 /* Hide scrollbar for Chrome, Safari and Opera */
 body::-webkit-scrollbar {
   display: none;
@@ -11,4 +13,44 @@ body::-webkit-scrollbar {
 body {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
+}
+
+.markdown h1,
+.markdown h2,
+.markdown h3,
+.markdown h4 {
+  @apply mt-4 font-bold;
+}
+
+.markdown h1 {
+  @apply text-3xl;
+}
+
+.markdown h2 {
+  @apply text-2xl;
+}
+
+.markdown h3 {
+  @apply text-xl;
+}
+
+.markdown h4 {
+  @apply text-lg;
+}
+
+.markdown p {
+  @apply my-2;
+}
+
+.markdown a {
+  @apply font-semibold text-blue-500 hover:text-blue-600 hover:underline;
+}
+
+.markdown ul {
+  @apply list-inside px-4 py-1;
+}
+
+.markdown li:before {
+  content: "- ";
+  @apply pr-1 font-semibold;
 }
