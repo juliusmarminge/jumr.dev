@@ -87,8 +87,8 @@ export const Navbar = () => {
             onChange={toggleDarkMode}
           />
 
-          <HiOutlineSun className="swap-off h-10 w-10 stroke-current" />
-          <HiOutlineMoon className="swap-on h-10 w-10 stroke-current" />
+          <HiOutlineSun className="swap-on h-10 w-10 stroke-current" />
+          <HiOutlineMoon className="swap-off h-10 w-10 stroke-current" />
         </label>
 
         {/** End Theme Toggle */}
