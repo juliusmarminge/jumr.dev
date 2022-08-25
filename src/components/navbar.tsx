@@ -1,8 +1,8 @@
-import React, { useEffect } from "react";
-import { NextLink } from "./next-link";
-import { useRouter } from "next/router";
-import { HiOutlineSun, HiOutlineMoon, HiMenuAlt2 } from "react-icons/hi";
 import clsx from "clsx";
+import { useRouter } from "next/router";
+import React, { useEffect } from "react";
+import { HiMenuAlt2, HiOutlineMoon, HiOutlineSun } from "react-icons/hi";
+import { NextLink } from "./next-link";
 
 const tabs = [
   { name: "Home", href: "/" },
@@ -87,8 +87,8 @@ export const Navbar = () => {
             onChange={toggleDarkMode}
           />
 
-          <HiOutlineSun className="swap-off h-10 w-10 stroke-current" />
-          <HiOutlineMoon className="swap-on h-10 w-10 stroke-current" />
+          <HiOutlineSun className="swap-on h-10 w-10 stroke-current" />
+          <HiOutlineMoon className="swap-off h-10 w-10 stroke-current" />
         </label>
 
         {/** End Theme Toggle */}
@@ -107,7 +107,7 @@ const useDarkMode = () => {
     const mediaMatch = window.matchMedia("(prefers-color-scheme: dark)");
 
     const colorSchemeChangeListener = (e: MediaQueryListEvent) => {
-      setUsingDarkMode(e.matches);
+      setUsingDarkMode(!e.matches);
       const newTheme = e.matches ? darkTheme : lightTheme;
       window.document.documentElement.setAttribute("data-theme", newTheme);
     };
@@ -115,6 +115,7 @@ const useDarkMode = () => {
     mediaMatch.addEventListener("change", colorSchemeChangeListener);
 
     setUsingDarkMode(mediaMatch.matches);
+    toggleDarkMode();
 
     return () => {
       mediaMatch.removeEventListener("change", colorSchemeChangeListener);
@@ -123,7 +124,7 @@ const useDarkMode = () => {
 
   const toggleDarkMode = () => {
     setUsingDarkMode(!usingDarkMode);
-    const newTheme = usingDarkMode ? lightTheme : darkTheme;
+    const newTheme = usingDarkMode ? darkTheme : lightTheme;
     window.document.documentElement.setAttribute("data-theme", newTheme);
   };
 
