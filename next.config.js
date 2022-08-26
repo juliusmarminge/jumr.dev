@@ -7,4 +7,10 @@ module.exports = withContentlayer({
   images: {
     domains: ["pbs.twimg.com"],
   },
+  experimental: {
+    images: {
+      allowFutureImage: true,
+      remotePatterns: [{ hostname: "pbs.twimg.com" }],
+    },
+  },
 });

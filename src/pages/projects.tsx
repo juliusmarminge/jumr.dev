@@ -4,7 +4,7 @@ import Head from "next/head";
 import React from "react";
 import { AiOutlineStar, AiOutlineGithub } from "react-icons/ai";
 import { SiTypescript } from "react-icons/si";
-import Image, { StaticImageData } from "next/image";
+import Image, { StaticImageData } from "next/future/image";
 
 import { NextLink } from "~/components/next-link";
 import StocksPreview from "../../public/images/stocks.png";
