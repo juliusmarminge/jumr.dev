@@ -4,7 +4,7 @@ import Head from "next/head";
 import React from "react";
 import { AiOutlineStar, AiOutlineGithub } from "react-icons/ai";
 import { SiTypescript } from "react-icons/si";
-import Image, { StaticImageData } from "next/future/image";
+import Image, { StaticImageData } from "next/image";
 
 import { NextLink } from "~/components/next-link";
 import StocksPreview from "../../public/images/stocks.png";
@@ -63,6 +63,7 @@ const ProjectCard: React.FC<{ repo: Repo }> = ({ repo }) => {
       : repo.full_name === "trpc/trpc"
       ? TRPCPreview
       : null;
+  if (!img) throw new Error("Add a preview img for repo " + repo.full_name);
   return (
     <div className="rounded-lg bg-base-300 p-4 hover:bg-base-200 ">
       <h3 className="text-xl font-bold">{repo.name}</h3>
@@ -70,7 +71,7 @@ const ProjectCard: React.FC<{ repo: Repo }> = ({ repo }) => {
       <NextLink href={repo.homepage || repo.html_url}>
         <h4>Check it out!</h4>
         <Image
-          src={img!}
+          src={img}
           alt="Preview"
           placeholder="blur"
           className="aspect-video w-full"

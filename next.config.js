@@ -4,10 +4,7 @@ const { withContentlayer } = require("next-contentlayer");
 module.exports = withContentlayer({
   reactStrictMode: true,
   swcMinify: true,
-  experimental: {
-    images: {
-      allowFutureImage: true,
-      remotePatterns: [{ hostname: "pbs.twimg.com" }],
-    },
+  images: {
+    domains: ["pbs.twimg.com"],
   },
 });
