@@ -19,7 +19,7 @@ const REPOS = {
     { name: "juliusmarminge/stocks", img: StocksPreview },
     { name: "juliusmarminge/pathfinding-visualizer", img: PfvPreview },
     { name: "juliusmarminge/sorting-visualizer", img: SvPreview },
-    { name: "juliusmarminge/create-t3-turbo", img: CT3TPreview },
+    { name: "t3-oss/create-t3-turbo", img: CT3TPreview },
   ],
   oss: [
     { name: "t3-oss/create-t3-app", img: CT3APreview },
@@ -62,7 +62,7 @@ const ProjectCard: React.FC<{ repo: Repo }> = ({ repo }) => {
       ? CT3APreview
       : repo.full_name === "trpc/trpc"
       ? TRPCPreview
-      : repo.full_name === "juliusmarminge/create-t3-turbo"
+      : repo.full_name === "t3-oss/create-t3-turbo"
       ? CT3TPreview
       : null;
   if (!img) throw new Error("Add a preview img for repo " + repo.full_name);
@@ -195,6 +195,9 @@ export const getStaticProps = async () => {
     const validated = RepoValidator.safeParse(repoRes);
     if (validated.success) {
       repos.personal.push({ ...validated.data, img: repo.img });
+    } else {
+      console.log(repoRes);
+      console.log(validated.error);
     }
   }
 
@@ -205,6 +208,9 @@ export const getStaticProps = async () => {
     const validated = RepoValidator.safeParse(repoRes);
     if (validated.success) {
       repos.oss.push({ ...validated.data, img: repo.img });
+    } else {
+      console.log(repoRes);
+      console.log(validated.error);
     }
   }
 
