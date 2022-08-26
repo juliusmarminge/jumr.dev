@@ -5,19 +5,21 @@ import React from "react";
 import { AiOutlineStar, AiOutlineGithub } from "react-icons/ai";
 import { SiTypescript } from "react-icons/si";
 import Image, { StaticImageData } from "next/future/image";
-import { NextLink } from "../components/next-link";
 
+import { NextLink } from "~/components/next-link";
 import StocksPreview from "../../public/images/stocks.png";
 import PfvPreview from "../../public/images/pfv.png";
 import SvPreview from "../../public/images/sv.png";
 import CT3APreview from "../../public/images/ct3a.png";
 import TRPCPreview from "../../public/images/trpc.png";
+import CT3TPreview from "../../public/images/ct3t.png";
 
 const REPOS = {
   personal: [
     { name: "juliusmarminge/stocks", img: StocksPreview },
     { name: "juliusmarminge/pathfinding-visualizer", img: PfvPreview },
     { name: "juliusmarminge/sorting-visualizer", img: SvPreview },
+    { name: "juliusmarminge/create-t3-turbo", img: CT3TPreview },
   ],
   oss: [
     { name: "t3-oss/create-t3-app", img: CT3APreview },
@@ -65,7 +67,7 @@ const ProjectCard: React.FC<{ repo: Repo }> = ({ repo }) => {
     <div className="rounded-lg bg-base-300 p-4 hover:bg-base-200 ">
       <h3 className="text-xl font-bold">{repo.name}</h3>
       <p className="text-md">{repo.description}</p>
-      <NextLink href={repo.homepage}>
+      <NextLink href={repo.homepage || repo.html_url}>
         <h4>Check it out!</h4>
         <Image
           src={img!}
@@ -136,7 +138,7 @@ const RepoValidator = z.object({
   full_name: z.string(),
   description: z.string(),
   html_url: z.string().url(),
-  homepage: z.string().url(),
+  homepage: z.string(),
   language: z.string(),
   stargazers_count: z.number(),
 });
