@@ -18,7 +18,7 @@ const CodeBlock: React.FC<{
       <code>{children}</code>
 
       <button
-        className="border-1 absolute top-1 right-1 hidden aspect-square items-center justify-center rounded-md p-2 hover:opacity-80 group-hover:flex"
+        className="border-1 absolute top-1 right-1 hidden aspect-square items-center justify-center rounded-md bg-inherit p-2 hover:text-gray-400 group-hover:flex"
         onClick={() => {
           navigator.clipboard.writeText(inputRef.current?.textContent ?? "");
           setCopied(true);
