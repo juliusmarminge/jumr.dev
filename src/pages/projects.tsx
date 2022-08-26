@@ -62,6 +62,8 @@ const ProjectCard: React.FC<{ repo: Repo }> = ({ repo }) => {
       ? CT3APreview
       : repo.full_name === "trpc/trpc"
       ? TRPCPreview
+      : repo.full_name === "juliusmarminge/create-t3-turbo"
+      ? CT3TPreview
       : null;
   if (!img) throw new Error("Add a preview img for repo " + repo.full_name);
   return (
