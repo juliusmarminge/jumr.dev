@@ -15,7 +15,7 @@ import TRPCPreview from "../../public/images/trpc.png";
 import CT3TPreview from "../../public/images/ct3t.png";
 import clsx from "clsx";
 
-type RepoStatus = "In Progress";
+type RepoStatus = "In Progress" | null;
 const REPOS: Record<
   "personal" | "oss",
   {
@@ -60,7 +60,7 @@ const ProjectSection: React.FC<{
   );
 };
 
-const StatusCard: React.FC<{ status?: RepoStatus }> = ({ status }) => {
+const StatusCard: React.FC<{ status: RepoStatus }> = ({ status }) => {
   return (
     <div
       className={clsx(
@@ -181,10 +181,10 @@ const RepoValidator = z.object({
   language: z.string(),
   stargazers_count: z.number(),
 });
-// then w e add the preview image to that shape
+// then we add the preview image to that shape
 type Repo = z.infer<typeof RepoValidator> & {
   img: StaticImageData;
-  status?: RepoStatus;
+  status: RepoStatus;
 };
 
 export const getStaticProps = async () => {
@@ -213,6 +213,7 @@ export const getStaticProps = async () => {
         language: "TypeScript",
         stargazers_count: 19,
         img: PfvPreview,
+        status: null,
       },
       {
         name: "sorting-visualizer",
@@ -223,6 +224,7 @@ export const getStaticProps = async () => {
         language: "TypeScript",
         stargazers_count: 0,
         img: SvPreview,
+        status: null,
       },
     );
     return { props: { repos } };
@@ -237,7 +239,7 @@ export const getStaticProps = async () => {
       repos.personal.push({
         ...validated.data,
         img: repo.img,
-        status: repo.status,
+        status: repo.status ?? null,
       });
     } else {
       console.log(repoRes);
@@ -251,7 +253,11 @@ export const getStaticProps = async () => {
     ).json();
     const validated = RepoValidator.safeParse(repoRes);
     if (validated.success) {
-      repos.oss.push({ ...validated.data, img: repo.img, status: repo.status });
+      repos.oss.push({
+        ...validated.data,
+        img: repo.img,
+        status: repo.status ?? null,
+      });
     } else {
       console.log(repoRes);
       console.log(validated.error);
