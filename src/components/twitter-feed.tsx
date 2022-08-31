@@ -1,11 +1,11 @@
+import { inferProcedureOutput } from "@trpc/server";
 import Image from "next/future/image";
-import type { Tweet } from "../server/trpc/router/twitter";
-import { NextLink } from "./next-link";
-
 import { AiOutlineRetweet } from "react-icons/ai";
 import { BsReply } from "react-icons/bs";
-import { inferProcedureOutput } from "@trpc/server";
+
 import { AppRouter } from "../server/trpc/router";
+import type { Tweet } from "../server/trpc/router/twitter";
+import { NextLink } from "./next-link";
 
 export const TweetComponent: React.FC<{
   tweet: Tweet;
@@ -68,7 +68,7 @@ export const TwitterFeed: React.FC<{
 }> = ({ feed }) => {
   return (
     <div className="flex flex-col gap-2">
-      {feed?.map((tweet) => (
+      {feed.map((tweet) => (
         <TweetComponent key={tweet.id} tweet={tweet} />
       ))}
     </div>

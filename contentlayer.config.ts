@@ -1,9 +1,9 @@
 import { defineDocumentType, makeSource } from "contentlayer/source-files";
-import remarkGfm from "remark-gfm";
-import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
-import rehypePrism from "rehype-prism-plus";
 import rehypeCodeTitles from "rehype-code-titles";
+import rehypePrism from "rehype-prism-plus";
+import rehypeSlug from "rehype-slug";
+import remarkGfm from "remark-gfm";
 
 const Post = defineDocumentType(() => ({
   name: "Post",

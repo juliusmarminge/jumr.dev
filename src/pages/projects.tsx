@@ -1,19 +1,20 @@
-import { InferGetStaticPropsType, type NextPage } from "next";
-import { z } from "zod";
+import clsx from "clsx";
+import { type NextPage, InferGetStaticPropsType } from "next";
+import Image, { StaticImageData } from "next/future/image";
 import Head from "next/head";
 import React from "react";
-import { AiOutlineStar, AiOutlineGithub } from "react-icons/ai";
+import { AiOutlineGithub, AiOutlineStar } from "react-icons/ai";
 import { SiTypescript } from "react-icons/si";
-import Image, { StaticImageData } from "next/future/image";
+import { z } from "zod";
 
 import { NextLink } from "~/components/next-link";
-import StocksPreview from "../../public/images/stocks.png";
-import PfvPreview from "../../public/images/pfv.png";
-import SvPreview from "../../public/images/sv.png";
+
 import CT3APreview from "../../public/images/ct3a.png";
-import TRPCPreview from "../../public/images/trpc.png";
 import CT3TPreview from "../../public/images/ct3t.png";
-import clsx from "clsx";
+import PfvPreview from "../../public/images/pfv.png";
+import StocksPreview from "../../public/images/stocks.png";
+import SvPreview from "../../public/images/sv.png";
+import TRPCPreview from "../../public/images/trpc.png";
 
 type RepoStatus = "In Progress" | null;
 const REPOS: Record<

@@ -3,9 +3,10 @@ import { format, parseISO } from "date-fns";
 import { GetStaticProps } from "next";
 import Head from "next/head";
 import { useMDXComponent } from "next-contentlayer/hooks";
+
 import { components } from "~/components/mdx";
 
-export async function getStaticPaths() {
+export function getStaticPaths() {
   const paths = allPosts.map((post) => post.url);
   return {
     paths,
@@ -13,7 +14,7 @@ export async function getStaticPaths() {
   };
 }
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
+export const getStaticProps: GetStaticProps = ({ params }) => {
   const post = allPosts.find(
     (post) => post._raw.flattenedPath === params?.slug,
   );

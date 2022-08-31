@@ -2,6 +2,7 @@ import clsx from "clsx";
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 import { HiMenuAlt2, HiOutlineMoon, HiOutlineSun } from "react-icons/hi";
+
 import { NextLink } from "./next-link";
 
 const tabs = [
@@ -120,6 +121,7 @@ const useDarkMode = () => {
     return () => {
       mediaMatch.removeEventListener("change", colorSchemeChangeListener);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const toggleDarkMode = () => {

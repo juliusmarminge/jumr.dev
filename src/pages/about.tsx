@@ -1,6 +1,7 @@
 import { type NextPage } from "next";
 import Head from "next/head";
 import { AiOutlineHeart } from "react-icons/ai";
+
 import { NextLink } from "../components/next-link";
 
 const AboutPage: NextPage = () => {

@@ -1,7 +1,8 @@
 import type { InferGetStaticPropsType, NextPage } from "next";
-import Head from "next/head";
-import Image from "next/future/image";
 import dynamic from "next/dynamic";
+import Image from "next/future/image";
+import Head from "next/head";
+
 import ProfilePic from "../../public/images/profile.png";
 
 const TwitterFeed = dynamic(

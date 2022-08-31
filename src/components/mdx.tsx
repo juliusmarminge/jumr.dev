@@ -1,7 +1,8 @@
 import React from "react";
-import { NextLink } from "./next-link";
 import { BiCopy } from "react-icons/bi";
 import { RiCheckboxCircleLine } from "react-icons/ri";
+
+import { NextLink } from "./next-link";
 
 const CodeBlock: React.FC<{
   children: React.ReactNode;
@@ -20,7 +21,9 @@ const CodeBlock: React.FC<{
       <button
         className="border-1 absolute top-1 right-1 hidden aspect-square items-center justify-center rounded-md bg-inherit p-2 hover:text-gray-400 group-hover:flex"
         onClick={() => {
-          navigator.clipboard.writeText(inputRef.current?.textContent ?? "");
+          void navigator.clipboard.writeText(
+            inputRef.current?.textContent ?? "",
+          );
           setCopied(true);
           setTimeout(() => {
             setCopied(false);

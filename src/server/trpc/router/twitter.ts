@@ -1,10 +1,11 @@
 // FIXME: proper type definitions for twitter
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { t } from "../utils";
-import { z } from "zod";
-import Client from "twitter-api-sdk";
-import { env } from "../../../env/server.mjs";
 import { TRPCError } from "@trpc/server";
+import Client from "twitter-api-sdk";
+import { z } from "zod";
+
+import { env } from "../../../env/server.mjs";
+import { t } from "../utils";
 
 const twitterId = "3557533403";
 const client = new Client(env.TWITTER_BEARER_TOKEN);
@@ -61,7 +62,7 @@ export const twitterRouter = t.router({
       } else if (referencedTweet?.type === "retweeted") {
         // the original tweet
         originalTweet = tweet.includes?.tweets?.find(
-          (t) => t.id === referencedTweet?.id,
+          (t) => t.id === referencedTweet.id,
         );
         author = tweet.includes?.users?.find(
           (u) => u.id === originalTweet?.author_id,
@@ -74,7 +75,7 @@ export const twitterRouter = t.router({
         id,
         body: originalTweet?.text,
         createdAt: originalTweet?.created_at,
-        type: referencedTweet?.type,
+        type: referencedTweet.type,
         author: {
           profileImg: author?.profile_image_url,
           name: author?.name,
