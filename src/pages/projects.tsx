@@ -13,19 +13,38 @@ import SvPreview from "../../public/images/sv.png";
 import CT3APreview from "../../public/images/ct3a.png";
 import TRPCPreview from "../../public/images/trpc.png";
 import CT3TPreview from "../../public/images/ct3t.png";
+import clsx from "clsx";
 
-const REPOS = {
+type RepoStatus = "In Progress";
+const REPOS: Record<
+  "personal" | "oss",
+  {
+    name: string;
+    img: StaticImageData;
+    status?: RepoStatus;
+  }[]
+> = {
   personal: [
-    { name: "juliusmarminge/stocks", img: StocksPreview },
-    { name: "juliusmarminge/pathfinding-visualizer", img: PfvPreview },
-    { name: "juliusmarminge/sorting-visualizer", img: SvPreview },
+    {
+      name: "juliusmarminge/stocks",
+      img: StocksPreview,
+      status: "In Progress",
+    },
     { name: "t3-oss/create-t3-turbo", img: CT3TPreview },
+    {
+      name: "juliusmarminge/pathfinding-visualizer",
+      img: PfvPreview,
+    },
+    {
+      name: "juliusmarminge/sorting-visualizer",
+      img: SvPreview,
+    },
   ],
   oss: [
     { name: "t3-oss/create-t3-app", img: CT3APreview },
     { name: "trpc/trpc", img: TRPCPreview },
   ],
-} as const;
+};
 
 const ProjectSection: React.FC<{
   title: string;
@@ -37,6 +56,19 @@ const ProjectSection: React.FC<{
       <h2 className="py-1 text-2xl font-bold">{title}</h2>
       <p className="text-md pb-4">{description}</p>
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">{children}</div>
+    </div>
+  );
+};
+
+const StatusCard: React.FC<{ status?: RepoStatus }> = ({ status }) => {
+  return (
+    <div
+      className={clsx(
+        "h-max rounded-xl px-2 py-1 text-sm font-semibold text-zinc-900",
+        { "bg-yellow-500": status === "In Progress" },
+      )}
+    >
+      {status}
     </div>
   );
 };
@@ -68,15 +100,19 @@ const ProjectCard: React.FC<{ repo: Repo }> = ({ repo }) => {
   if (!img) throw new Error("Add a preview img for repo " + repo.full_name);
   return (
     <div className="rounded-lg bg-base-300 p-4 hover:bg-base-200 ">
-      <h3 className="text-xl font-bold">{repo.name}</h3>
-      <p className="text-md">{repo.description}</p>
+      <div className="flex justify-between">
+        <div className="flex flex-col">
+          <h3 className="text-xl font-bold">{repo.name}</h3>
+          <p className="text-md pb-4">{repo.description}</p>
+        </div>
+        <StatusCard status={repo.status} />
+      </div>
       <NextLink href={repo.homepage || repo.html_url}>
-        <h4>Check it out!</h4>
         <Image
           src={img}
           alt="Preview"
           placeholder="blur"
-          className="aspect-video w-full"
+          className="aspect-video w-full rounded-lg"
         />
       </NextLink>
 
@@ -146,7 +182,10 @@ const RepoValidator = z.object({
   stargazers_count: z.number(),
 });
 // then w e add the preview image to that shape
-type Repo = z.infer<typeof RepoValidator> & { img: StaticImageData };
+type Repo = z.infer<typeof RepoValidator> & {
+  img: StaticImageData;
+  status?: RepoStatus;
+};
 
 export const getStaticProps = async () => {
   const repos: Record<keyof typeof REPOS, Repo[]> = { personal: [], oss: [] };
@@ -163,6 +202,7 @@ export const getStaticProps = async () => {
         language: "TypeScript",
         stargazers_count: 42069,
         img: StocksPreview,
+        status: "In Progress",
       },
       {
         name: "pathfinding-visualizer",
@@ -194,7 +234,11 @@ export const getStaticProps = async () => {
     ).json();
     const validated = RepoValidator.safeParse(repoRes);
     if (validated.success) {
-      repos.personal.push({ ...validated.data, img: repo.img });
+      repos.personal.push({
+        ...validated.data,
+        img: repo.img,
+        status: repo.status,
+      });
     } else {
       console.log(repoRes);
       console.log(validated.error);
@@ -207,7 +251,7 @@ export const getStaticProps = async () => {
     ).json();
     const validated = RepoValidator.safeParse(repoRes);
     if (validated.success) {
-      repos.oss.push({ ...validated.data, img: repo.img });
+      repos.oss.push({ ...validated.data, img: repo.img, status: repo.status });
     } else {
       console.log(repoRes);
       console.log(validated.error);
