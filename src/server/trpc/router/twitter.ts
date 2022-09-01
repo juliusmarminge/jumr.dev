@@ -39,7 +39,9 @@ export const twitterRouter = t.router({
       .object({ id: z.string() })
       .array()
       .safeParse(feed.data);
-    if (!parsedFeed.success) return console.log("failed");
+    if (!parsedFeed.success) {
+      throw new TRPCError({ code: "BAD_REQUEST" });
+    }
 
     const formattedFeed: any[] = [];
     for (const { id } of parsedFeed.data) {

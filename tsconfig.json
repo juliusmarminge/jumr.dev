@@ -23,10 +23,9 @@
   },
   "include": [
     "next-env.d.ts",
-    "next-auth.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "**/*.js",
+    "**/*.cjs",
     "**/*.mjs",
     ".contentlayer/generated"
   ],
