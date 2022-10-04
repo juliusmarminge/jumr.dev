@@ -1,9 +1,9 @@
-import { allPosts, Post } from "contentlayer/generated";
 import { format, parseISO } from "date-fns";
 import { GetStaticProps } from "next";
 import Head from "next/head";
 import { useMDXComponent } from "next-contentlayer/hooks";
 
+import { allPosts, Post } from "@/contentlayer/generated";
 import { components } from "~/components/mdx";
 
 export function getStaticPaths() {

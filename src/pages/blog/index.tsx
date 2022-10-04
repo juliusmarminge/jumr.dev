@@ -1,7 +1,7 @@
-import { allPosts, Post } from "contentlayer/generated";
 import { format, parseISO } from "date-fns";
 import Head from "next/head";
 
+import { allPosts, Post } from "@/contentlayer/generated";
 import { NextLink } from "~/components/next-link";
 
 export const getStaticProps = () => {
