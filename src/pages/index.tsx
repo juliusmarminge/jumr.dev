@@ -2,6 +2,7 @@ import type { InferGetStaticPropsType, NextPage } from "next";
 import dynamic from "next/dynamic";
 import Image from "next/future/image";
 import Head from "next/head";
+import superjson from "superjson";
 
 import ProfilePic from "../../public/images/profile.png";
 
@@ -9,17 +10,31 @@ const TwitterFeed = dynamic(
   async () => (await import("../components/twitter-feed")).TwitterFeed,
   { ssr: false },
 );
+import { createProxySSGHelpers } from "@trpc/react/ssg";
+
+import { trpc } from "~/utils/trpc";
+
 import { appRouter } from "../server/trpc/router";
 
 export const getStaticProps = async () => {
-  const caller = appRouter.createCaller({});
-  const twitterFeed = await caller.twitter.feed();
-  return { props: { twitterFeed }, revalidate: 86400 };
+  const ssg = createProxySSGHelpers({
+    router: appRouter,
+    ctx: {},
+    transformer: superjson,
+  });
+
+  await ssg.twitter.feed.fetch();
+  return { props: { trpcState: ssg.dehydrate() }, revalidate: 86400 };
 };
 
-const HomePage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
-  twitterFeed,
-}) => {
+const HomePage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = (
+  _props,
+) => {
+  const { data: twitterFeed } = trpc.twitter.feed.useQuery();
+  if (!twitterFeed) {
+    // unreachable
+    return null;
+  }
   return (
     <>
       <Head key="home">
@@ -50,7 +65,7 @@ const HomePage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
           </div>
         </div>
         <div className="divider lg:divider-horizontal" />
-        <div className="flex-1 overflow-y-hidden">
+        <div className="flex-1 overflow-y-scroll">
           <h1 className="py-4 text-2xl font-bold">My Twitter Feed</h1>
           <TwitterFeed feed={twitterFeed} />
         </div>

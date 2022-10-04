@@ -13,13 +13,7 @@ const client = new Client(env.TWITTER_BEARER_TOKEN);
 const FormattedFeedValidator = z.object({
   id: z.string(),
   body: z.string(),
-  // FIXME: Send back Date instead
-  createdAt: z.string().transform((str) =>
-    new Intl.DateTimeFormat("en-US", {
-      month: "short",
-      day: "2-digit",
-    }).format(new Date(str)),
-  ),
+  createdAt: z.string().transform((str) => new Date(str)),
   type: z
     .enum(["retweeted", "quoted", "replied_to"])
     .transform((arg) => (arg === "replied_to" ? "reply" : arg)),

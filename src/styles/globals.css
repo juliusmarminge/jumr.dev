@@ -15,6 +15,10 @@ body {
   scrollbar-width: none; /* Firefox */
 }
 
+#history-steps > li::after {
+  @apply h-10 w-10 text-sm;
+}
+
 .markdown h1,
 .markdown h2,
 .markdown h3,

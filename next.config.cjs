@@ -5,12 +5,6 @@ module.exports = withContentlayer({
   reactStrictMode: true,
   swcMinify: true,
   images: {
-    domains: ["pbs.twimg.com"],
-  },
-  experimental: {
-    images: {
-      allowFutureImage: true,
-      remotePatterns: [{ hostname: "pbs.twimg.com" }],
-    },
+    remotePatterns: [{ hostname: "pbs.twimg.com" }],
   },
 });

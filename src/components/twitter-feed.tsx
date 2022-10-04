@@ -3,6 +3,8 @@ import Image from "next/future/image";
 import { AiOutlineRetweet } from "react-icons/ai";
 import { BsReply } from "react-icons/bs";
 
+import { dateFmt } from "~/utils/date-formatter";
+
 import { AppRouter } from "../server/trpc/router";
 import type { Tweet } from "../server/trpc/router/twitter";
 import { NextLink } from "./next-link";
@@ -54,7 +56,7 @@ export const TweetComponent: React.FC<{
             </div>
           </a>
           <div className="text-xs">
-            <p>{tweet.createdAt}</p>
+            <p>{dateFmt.format(tweet.createdAt)}</p>
           </div>
         </div>
         <p className="whitespace-pre-wrap pt-4 text-sm">{tweet.body}</p>
