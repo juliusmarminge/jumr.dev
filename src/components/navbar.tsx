@@ -81,7 +81,7 @@ export const Navbar = () => {
       <div className="navbar-end gap-4">
         {/** Theme Toggle */}
 
-        <label className="swap swap-rotate items-center">
+        <label className="swap-rotate swap items-center">
           <input
             type="checkbox"
             checked={isDarkMode}

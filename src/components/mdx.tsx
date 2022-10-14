@@ -30,7 +30,7 @@ const CodeBlock: React.FC<{
           }, 1500);
         }}
       >
-        <label className="swap-rotate swap items-center">
+        <label className="swap swap-rotate items-center">
           <input type="checkbox" checked={copied} onChange={() => void 0} />
 
           <BiCopy className="swap-off h-6 w-6" />

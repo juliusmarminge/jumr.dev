@@ -26,10 +26,10 @@ const AboutPage: NextPage = () => {
           Sponsor me
         </NextLink>
 
-        <h1 className="text-3xl font-bold mt-4">History</h1>
+        <h1 className="mt-4 text-3xl font-bold">History</h1>
         <ul className="steps steps-vertical" id="history-steps">
           <li data-content="2014" className="step step-primary ">
-            <div className="flex flex-col justify-start max-w-xl text-left h-max">
+            <div className="flex h-max max-w-xl flex-col justify-start text-left">
               <span className="text-left font-semibold">1st line of code</span>
               <span>
                 I have written code for quite some time now, testing different
@@ -41,7 +41,7 @@ const AboutPage: NextPage = () => {
             </div>
           </li>
           <li data-content="2019" className="step step-primary ">
-            <div className="flex flex-col max-w-lg text-left">
+            <div className="flex max-w-lg flex-col text-left">
               <span className="font-semibold">1st Github Repo</span>
               <span></span>
             </div>
