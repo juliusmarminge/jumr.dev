@@ -1,13 +1,18 @@
+import React, { useEffect } from "react";
+
 import clsx from "clsx";
 import { useRouter } from "next/router";
-import React, { useEffect } from "react";
-import { HiMenuAlt2, HiOutlineMoon, HiOutlineSun } from "react-icons/hi";
+import {
+  HiMenuAlt2,
+  HiOutlineMoon,
+  HiOutlineSun,
+} from "react-icons/hi";
 
 import { NextLink } from "./next-link";
 
 const tabs = [
   { name: "Home", href: "/" },
-  { name: "About", href: "/about" },
+  // { name: "About", href: "/about" },
   { name: "Blog", href: "/blog" },
   { name: "Projects", href: "/projects" },
 ];
@@ -81,7 +86,7 @@ export const Navbar = () => {
       <div className="navbar-end gap-4">
         {/** Theme Toggle */}
 
-        <label className="swap-rotate swap items-center">
+        <label className="swap swap-rotate items-center">
           <input
             type="checkbox"
             checked={isDarkMode}
