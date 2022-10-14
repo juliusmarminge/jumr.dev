@@ -1,16 +1,10 @@
 import React from "react";
 
 import clsx from "clsx";
-import {
-  InferGetStaticPropsType,
-  type NextPage,
-} from "next";
+import { InferGetStaticPropsType, type NextPage } from "next";
 import Image, { StaticImageData } from "next/future/image";
 import Head from "next/head";
-import {
-  AiOutlineGithub,
-  AiOutlineStar,
-} from "react-icons/ai";
+import { AiOutlineGithub, AiOutlineStar } from "react-icons/ai";
 import { SiTypescript } from "react-icons/si";
 import { z } from "zod";
 import { NextLink } from "~/components/next-link";
@@ -202,7 +196,7 @@ type Repo = z.infer<typeof RepoValidator> & {
 export const getStaticProps = async () => {
   const repos: Record<keyof typeof REPOS, Repo[]> = { personal: [], oss: [] };
 
-  if (process.env.NODE_ENV === "development" && false) {
+  if (process.env.NODE_ENV === "development") {
     // to prevent rate-limiting during dev
     repos.personal.push(
       {

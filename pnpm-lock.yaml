@@ -21,7 +21,6 @@ specifiers:
   eslint-config-next: 12.3.1
   eslint-config-prettier: ^4.2.1
   eslint-plugin-prettier: ^4.2.1
-  eslint-plugin-simple-import-sort: ^7.0.0
   next: 12.3.1
   next-contentlayer: 0.2.7
   postcss: ^8.4.14
@@ -72,7 +71,6 @@ devDependencies:
   eslint-config-next: 12.3.1_nwctkcr5uyxf47tw7zkgamxmfq
   eslint-config-prettier: 4.3.0_eslint@8.23.0
   eslint-plugin-prettier: 4.2.1_picoxbhzp2mlk3pg6eezfxbvka
-  eslint-plugin-simple-import-sort: 7.0.0_eslint@8.23.0
   postcss: 8.4.16
   prettier: 2.7.1
   prettier-plugin-tailwindcss: 0.1.13_prettier@2.7.1
@@ -1996,14 +1994,6 @@ packages:
       resolve: 2.0.0-next.4
       semver: 6.3.0
       string.prototype.matchall: 4.0.7
-    dev: true
-
-  /eslint-plugin-simple-import-sort/7.0.0_eslint@8.23.0:
-    resolution: {integrity: sha512-U3vEDB5zhYPNfxT5TYR7u01dboFZp+HNpnGhkDB2g/2E4wZ/g1Q9Ton8UwCLfRV9yAKyYqDh62oHOamvkFxsvw==}
-    peerDependencies:
-      eslint: '>=5.0.0'
-    dependencies:
-      eslint: 8.23.0
     dev: true
 
   /eslint-scope/5.1.1:
