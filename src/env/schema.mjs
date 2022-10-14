@@ -7,6 +7,7 @@ import { z } from "zod";
  */
 export const serverSchema = z.object({
   TWITTER_BEARER_TOKEN: z.string().min(1),
+  OCTOKIT_TOKEN: z.string().min(1),
 });
 
 /**

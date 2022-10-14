@@ -1,20 +1,19 @@
-import type { InferGetStaticPropsType, NextPage } from "next";
-import dynamic from "next/dynamic";
+import type { NextPage } from "next";
 import Image from "next/future/image";
 import Head from "next/head";
 import superjson from "superjson";
-
-import ProfilePic from "../../public/images/profile.png";
-
-const TwitterFeed = dynamic(
-  async () => (await import("../components/twitter-feed")).TwitterFeed,
-  { ssr: false },
-);
-import { createProxySSGHelpers } from "@trpc/react/ssg";
-
+import { TwitterFeed } from "~/components/twitter-feed";
 import { trpc } from "~/utils/trpc";
 
+import { createProxySSGHelpers } from "@trpc/react/ssg";
+
+import ProfilePic from "../../public/images/profile.png";
 import { appRouter } from "../server/trpc/router";
+
+/*const TwitterFeed = dynamic(
+  async () => (await import("../components/twitter-feed")).TwitterFeed,
+  { ssr: false },
+);*/
 
 export const getStaticProps = async () => {
   const ssg = createProxySSGHelpers({
@@ -27,9 +26,7 @@ export const getStaticProps = async () => {
   return { props: { trpcState: ssg.dehydrate() }, revalidate: 86400 };
 };
 
-const HomePage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = (
-  _props,
-) => {
+const HomePage: NextPage = () => {
   const { data: twitterFeed } = trpc.twitter.feed.useQuery();
   if (!twitterFeed) {
     // unreachable
@@ -54,9 +51,10 @@ const HomePage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = (
               <h2 className="pt-2 text-sm font-semibold">
                 Software Engineering student @ BTH - Sweden
               </h2>
-              <h2 className="pb-2 text-sm font-semibold">
+              <h2 className="py-1 text-sm font-semibold">
                 Open Source Contributor & Maintainer
               </h2>
+              <h2 className="b"></h2>
               <p className="py-2">Passionate about tech, especially new one.</p>
               <p className="text-sm italic text-warning">
                 This site is under construction

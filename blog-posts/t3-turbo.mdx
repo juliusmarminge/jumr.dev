@@ -9,7 +9,7 @@ We have turn these requests down due to the added complexity it would bring, and
 
 But... I won't let y'all down entirely, so I decided to create a template repo that should help you setup a T3 monorepo. Presenting `create-t3-turbo`. I'll admit the name might be deceiving since it isn't a scaffolding tool like `create-t3-app` is, but instead just a template repo with all the pieces included without any options to pick and choose.
 
-Apologies in advance, this post is going to be a bit long, so for everyone who just want to see the final result, you can browse the repo directly [here](https://github.com/juliusmarminge/create-t3-turbo). TL;DR, we are going to take an existing T3 app and split it into a monorepo using turborepo. After that, we'll add an Expo app to the monorepo and consume the tRPC API on both web and mobile. I'll break this process down into smaller pieces and commit accordingly, so that you can follow along as easy as possible.
+Apologies in advance, this post is going to be a bit long, so for everyone who just want to see the final result, you can browse the repo directly [here](https://github.com/t3-oss/create-t3-turbo). TL;DR, we are going to take an existing T3 app and split it into a monorepo using turborepo. After that, we'll add an Expo app to the monorepo and consume the tRPC API on both web and mobile. I'll break this process down into smaller pieces and commit accordingly, so that you can follow along as easy as possible.
 
 > Note: Due to the fact that `next-auth` currently doesn't support `react-native`, and I do not want to prescribe _a way_ to solve this problem, I'll leave auth out entirely for this demo.
 
@@ -25,19 +25,19 @@ I'll select all packages except for `next-auth`.
 
 At this point, you'll have a new T3 app in `apps/nextjs`, and if you check the `package.json`, you'll see that it got named `@acme/nextjs`. If you are using an existing app, just move it into the `apps/` sub-directory and scope-name it to something appropriate. Also clean out any temporary files, as well as your lockfile, we'll get all of those re-setup when we initialize turbo.
 
-_Your repo should look something like [this](https://github.com/juliusmarminge/create-t3-turbo/tree/9151258225518a1a44d7aa45c49f0b33ebb9933c) now._
+_Your repo should look something like [this](https://github.com/t3-oss/create-t3-turbo/tree/9151258225518a1a44d7aa45c49f0b33ebb9933c) now._
 
 ## Initializing turbo
 
 Now we'll install turbo and create some basic configuration files for it. Add the following configuration files into your project root, these are basic configuration files inspired by the turbo example apps:
 
-- [package.json](https://github.com/juliusmarminge/create-t3-turbo/blob/main/package.json)
-- [turbo.json](https://github.com/juliusmarminge/create-t3-turbo/blob/main/turbo.json)
+- [package.json](https://github.com/t3-oss/create-t3-turbo/blob/main/package.json)
+- [turbo.json](https://github.com/t3-oss/create-t3-turbo/blob/main/turbo.json)
 
 Next, move the `.gitignore` from your T3 app into the project root, and add `.turbo`, `.expo` and `dist` to its ignored files. We'll also need a base `tsconfig` that we'll later inherit from. We'll use the `tsconfig.json` from the T3 app as base, and then inherit from this file in the T3 app:
 
-- [tsconfig.json](https://github.com/juliusmarminge/create-t3-turbo/blob/main/tsconfig.json)
-- [apps/nextjs/tsconfig.json](https://github.com/juliusmarminge/create-t3-turbo/blob/main/apps/nextjs/tsconfig.json)
+- [tsconfig.json](https://github.com/t3-oss/create-t3-turbo/blob/main/tsconfig.json)
+- [apps/nextjs/tsconfig.json](https://github.com/t3-oss/create-t3-turbo/blob/main/apps/nextjs/tsconfig.json)
 
 Now, install all the dependencies using your preffered package manager:
 
@@ -45,15 +45,15 @@ Now, install all the dependencies using your preffered package manager:
 npm install
 ```
 
-_Your repo should look something like [this](https://github.com/juliusmarminge/create-t3-turbo/tree/208f2c8e0de03165e4fb23071f4df5b85628bd24) now._
+_Your repo should look something like [this](https://github.com/t3-oss/create-t3-turbo/tree/208f2c8e0de03165e4fb23071f4df5b85628bd24) now._
 
 ## Extracting your prisma database client to it's own package
 
 Let's start restructing this monorepo. We'll start off with extracting the prisma client to it's own package. This way, it is more reusable when you add more things which consumes it later.
 We'll start off by creating a new package, `@acme/db` in `packages/db` with some basic configuration files:
 
-- [package.json](https://github.com/juliusmarminge/create-t3-turbo/blob/main/packages/db/package.json)
-- [tsconfig.json](https://github.com/juliusmarminge/create-t3-turbo/blob/main/packages/db/tsconfig.json)
+- [package.json](https://github.com/t3-oss/create-t3-turbo/blob/main/packages/db/package.json)
+- [tsconfig.json](https://github.com/t3-oss/create-t3-turbo/blob/main/packages/db/tsconfig.json)
 
 We'll move the `client` as well as the `prisma` models from the T3 App, you might also need to remove the `global` declaration.
 
@@ -66,7 +66,7 @@ You can now delete the `prisma` and `@prisma/client` dependencies in the T3 app,
 
 > Note: We won't do type validation for environment variables in this subpackage, so remove the `env` import and use `process.env` instead. You can also remove the `DATABASE_URL` in the env-schema defined in the `env/schema.mjs`.
 
-_Your repo should now look something like [this](https://github.com/juliusmarminge/create-t3-turbo/tree/5f8117aaacc2713d2719e7d12b04d82d984d14fa)._
+_Your repo should now look something like [this](https://github.com/t3-oss/create-t3-turbo/tree/5f8117aaacc2713d2719e7d12b04d82d984d14fa)._
 
 ## Extracting your tRPC router to its own package
 
@@ -74,8 +74,8 @@ Next, we'll do a similar thing with our tRPC router and extract that out from th
 
 We'll initialize a new package, `@acme/api` in `packages/api` with some basic configuration files:
 
-- [package.json](https://github.com/juliusmarminge/create-t3-turbo/blob/main/packages/api/package.json)
-- [tsconfig.json](https://github.com/juliusmarminge/create-t3-turbo/blob/main/packages/api/tsconfig.json)
+- [package.json](https://github.com/t3-oss/create-t3-turbo/blob/main/packages/api/package.json)
+- [tsconfig.json](https://github.com/t3-oss/create-t3-turbo/blob/main/packages/api/tsconfig.json)
 
 Next, we'll move the tRPC router from the T3 app into this package:
 
@@ -125,7 +125,7 @@ export default withTM(["@acme/api"])(
 );
 ```
 
-When you're done, your repo should look something like [this](https://github.com/juliusmarminge/create-t3-turbo/tree/8550e4648b21d0edd037f98e256dcb089e530ae3).
+When you're done, your repo should look something like [this](https://github.com/t3-oss/create-t3-turbo/tree/8550e4648b21d0edd037f98e256dcb089e530ae3).
 
 Now you should be able to launch the application again. Run a `install` then start the dev-server.
 
@@ -193,7 +193,7 @@ npm run dev
 
 should start up `Prisma Studio`, `Next.js` and `Expo`. Make some changes to the `App`'s content and you should see it refresh on the phone. We'll now move on to adding the other awesome T3 tech to this mobile application.
 
-_Your repo should now look something like [this](https://github.com/juliusmarminge/create-t3-turbo/tree/789f952256932033a03e57658f18b48ac7833945)_
+_Your repo should now look something like [this](https://github.com/t3-oss/create-t3-turbo/tree/789f952256932033a03e57658f18b48ac7833945)_
 
 ### Adding Tailwind
 
@@ -226,7 +226,7 @@ We'll also need to include the types to support the className keyword without ge
 
 Now you're done and can use Tailwind classes just like normal. You'll even have the awesome Intellisense if you have the VSCode plugin installed.
 
-_At this point, your repo should look something like [this](https://github.com/juliusmarminge/create-t3-turbo/tree/6709d7f417474a82e83150a72a1ac73c62f02c26)._
+_At this point, your repo should look something like [this](https://github.com/t3-oss/create-t3-turbo/tree/6709d7f417474a82e83150a72a1ac73c62f02c26)._
 
 ### Consuming your tRPC API in Expo
 
@@ -332,7 +332,7 @@ module.exports = {
 
 Your tRPC API is now setup and ready to be consumed. Before that, lets modify the router so we have something to display.
 
-_At this point, your repo should look something like [this](https://github.com/juliusmarminge/create-t3-turbo/tree/61dc5cbb1ad67d6566fe7eb5208b694cb12dc304)._
+_At this point, your repo should look something like [this](https://github.com/t3-oss/create-t3-turbo/tree/61dc5cbb1ad67d6566fe7eb5208b694cb12dc304)._
 
 ### Making something pseudo-useful
 
@@ -361,7 +361,7 @@ export const postRouter = t.router({
 });
 ```
 
-For now, I'll just add a few example posts using Prisma Studio. The resulting repo looks something like [this](https://github.com/juliusmarminge/create-t3-turbo/tree/af11f71f651e919e80038828fbb15b95f5886451), and we can now consume this on both the Next.js and Expo applications.
+For now, I'll just add a few example posts using Prisma Studio. The resulting repo looks something like [this](https://github.com/t3-oss/create-t3-turbo/tree/af11f71f651e919e80038828fbb15b95f5886451), and we can now consume this on both the Next.js and Expo applications.
 
 > Note: If you want to share components and navigation logic between your applications, check out [Solito](https://solito.dev). I however, believe these platforms are different enough that they should be treated differently, so I'll satisfy with just sharing my API logic, and write separate components and screens for each platform.
 
@@ -440,7 +440,7 @@ And we're done! You should see your posts appearing on both applications, and if
 
 ## Final Words
 
-Thank you for reading this post. This was my first ever post, so if you enjoyed it, go give the repo a [star](https://github.com/juliusmarminge/create-t3-turbo/stargazers). If it helped you out, consider [buying me a coffee](https://github.com/sponsors/juliusmarminge), I would truly appreciate it!
+Thank you for reading this post. This was my first ever post, so if you enjoyed it, go give the repo a [star](https://github.com/t3-oss/create-t3-turbo/stargazers). If it helped you out, consider [buying me a coffee](https://github.com/sponsors/t3-oss), I would truly appreciate it!
 
 Also, this blog is not finished yet, but I wanted to get this post up as soon as possible to satisfy the community demands. If you have any suggestions for how to improve it, feel free to get in touch!
 

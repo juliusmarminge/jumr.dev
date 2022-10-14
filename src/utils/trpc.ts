@@ -1,7 +1,9 @@
+import superjson from "superjson";
+
 // src/utils/trpc.ts
 import { createTRPCNext } from "@trpc/next";
 import { httpBatchLink } from "@trpc/react";
-import superjson from "superjson";
+import { GetInferenceHelpers } from "@trpc/server";
 
 import type { AppRouter } from "../server/trpc/router";
 
@@ -21,3 +23,5 @@ export const trpc = createTRPCNext<AppRouter>({
   },
   ssr: false,
 });
+
+export type InferTRPC = GetInferenceHelpers<AppRouter>;

@@ -1,16 +1,13 @@
-import { inferProcedureOutput } from "@trpc/server";
 import Image from "next/future/image";
 import { AiOutlineRetweet } from "react-icons/ai";
 import { BsReply } from "react-icons/bs";
-
 import { dateFmt } from "~/utils/date-formatter";
+import { InferTRPC } from "~/utils/trpc";
 
-import { AppRouter } from "../server/trpc/router";
-import type { Tweet } from "../server/trpc/router/twitter";
 import { NextLink } from "./next-link";
 
 export const TweetComponent: React.FC<{
-  tweet: Tweet;
+  tweet: InferTRPC["twitter"]["feed"]["output"][number];
 }> = ({ tweet }) => {
   const TweetTypeView = () => {
     if (tweet.type === "retweeted")
@@ -66,7 +63,7 @@ export const TweetComponent: React.FC<{
 };
 
 export const TwitterFeed: React.FC<{
-  feed: inferProcedureOutput<AppRouter["twitter"]["feed"]>;
+  feed: InferTRPC["twitter"]["feed"]["output"];
 }> = ({ feed }) => {
   return (
     <div className="flex flex-col gap-2">
