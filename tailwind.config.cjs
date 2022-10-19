@@ -11,6 +11,7 @@ module.exports = {
       typography: ({ theme }) => ({
         yellow: {
           css: {
+            "--tw-prose-body": theme("colors.stone[300]"),
             "--tw-prose-links": theme("colors.yellow[600]"),
             "--tw-prose-headings": theme("colors.stone[400]"),
             "--tw-prose-quotes": theme("colors.stone[400]"),
