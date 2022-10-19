@@ -13,34 +13,34 @@ import { Projects } from "../components/projects";
 
 const Home: NextPage = () => {
   return (
-    <div className="scrollbar-accent z-0 h-screen snap-y snap-mandatory overflow-x-hidden overflow-y-scroll scroll-smooth text-white">
+    <div className="scrollbar-accent z-0 h-screen overflow-x-hidden overflow-y-scroll scroll-smooth text-white">
       <Head>
         <title>🇸🇪 Julius | SWE | OSS</title>
       </Head>
 
       <Header />
 
-      <section id="hero" className="snap-start">
+      <section id="hero">
         <Hero />
       </section>
 
-      <section id="about" className="snap-center">
+      <section id="about">
         <About />
       </section>
 
-      <section id="blog" className="snap-start">
+      <section id="blog">
         <Blog />
       </section>
 
-      <section id="experience" className="snap-center">
+      <section id="experience">
         <ExperienceSection />
       </section>
 
-      <section id="projects" className="snap-start">
+      <section id="projects">
         <Projects />
       </section>
 
-      <section id="final-words" className="snap-start">
+      <section id="final-words">
         <FinalWords />
       </section>
 
