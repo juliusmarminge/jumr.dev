@@ -39,7 +39,7 @@ export const Blog: React.FC<{ posts: Post[] }> = ({ posts }) => {
 
       <div className="flex flex-col gap-8">
         <div className="z-20 grid grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-3">
-          {posts.slice(0, 5).map((post, idx) => (
+          {posts.map((post, idx) => (
             <Link key={idx} href={post.url}>
               <a>
                 <BlogCard {...post} />
