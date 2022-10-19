@@ -1,7 +1,14 @@
 import { motion } from "framer-motion";
+import Image, { StaticImageData } from "next/future/image";
+import { BiLinkExternal } from "react-icons/bi";
+
+import StocksPreview from "../../public/images/stocks.png";
+import CT3TPreview from "../../public/images/ct3t.png";
+import PFVPreview from "../../public/images/pfv.png";
+import SVPreview from "../../public/images/sv.png";
 
 interface ProjectProps {
-  img: string;
+  img: string | StaticImageData;
   title: string;
   description: string[];
   previewLink: string;
@@ -10,19 +17,20 @@ interface ProjectProps {
 
 const ProjectCard: React.FC<ProjectProps> = (props) => {
   return (
-    <div className="flex h-[85vh] flex-shrink-0 snap-center flex-col items-center justify-center space-y-5 p-20 md:p-40">
-      <motion.img
+    <div className="flex h-[85vh] w-full flex-shrink-0 snap-start flex-col items-center justify-start space-y-5 p-20 md:p-40">
+      <motion.div
         initial={{ opacity: 0, y: -300 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 1 }}
         viewport={{ once: true }}
-        height={500}
-        width={500}
-        src={props.img}
-        alt={props.title}
-      />
-
-      <div className="max-w-6xl px-0 md:px-10">
+      >
+        <Image
+          src={props.img}
+          alt={props.title}
+          className="mx-auto aspect-video w-full"
+        />
+      </motion.div>
+      <div className="max-w-6xl px-0">
         <h4 className="py-4 text-center text-4xl font-semibold">
           {props.title}
         </h4>
@@ -34,6 +42,26 @@ const ProjectCard: React.FC<ProjectProps> = (props) => {
             {desc}
           </p>
         ))}
+        <div className="flex flex-row justify-center space-x-5 py-5 md:justify-start">
+          <a
+            href={props.previewLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1 rounded-lg bg-stone-900 py-3 px-4 text-lg font-semibold text-accent-500 hover:bg-stone-900/70"
+          >
+            Preview
+            <BiLinkExternal />
+          </a>
+          <a
+            href={props.githubLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1 rounded-lg bg-stone-900 py-3 px-4 text-lg font-semibold text-accent-500 hover:bg-stone-900/70"
+          >
+            GitHub
+            <BiLinkExternal />
+          </a>
+        </div>
       </div>
     </div>
   );
@@ -42,7 +70,7 @@ const ProjectCard: React.FC<ProjectProps> = (props) => {
 export const Projects = () => {
   const projects: ProjectProps[] = [
     {
-      img: "https://user-images.githubusercontent.com/51714798/185813523-7882d03d-1449-4a07-8771-c45af37025a8.png",
+      img: CT3TPreview,
       title: "Create T3 Turbo",
       description: [
         "Create T3 Turbo is a clean and simple starter repo using the T3 Stack along with Expo React Native. " +
@@ -55,20 +83,21 @@ export const Projects = () => {
       githubLink: "https://github.com/t3-oss/create-t3-turbo",
     },
     {
-      img: "https://raw.githubusercontent.com/juliusmarminge/jumr.dev/main/public/images/stocks.png",
+      img: StocksPreview,
       title: "Stocks",
       description: [
-        "A simple visualizer of different pathfinding algorithms.",
-        "This project was created to help me understand how pathfinding algorithms work, and to help me learn React. " +
-          "It was initially wrote using class components and `create-react-app`, " +
-          "but I have since rewritten it using functional components and Vite. " +
-          "I've been meaning to add more algorithms, but it's not a priority I have at the moment.",
+        "A web app where you can track all your stock purchases at one place.",
+        "I started building this app since I wanted a single place where I " +
+          "could track all my stock purchases, since they are spread around " +
+          "different apps and websites.",
+        "This app is a work in progress and I tend to work a bit on it when I have time." +
+          "It's currently very basic, but I plan to add more features in the future.",
       ],
       previewLink: "https://stocks.jumr.dev/",
       githubLink: "https://github.com/juliusmarminge/stocks",
     },
     {
-      img: "https://user-images.githubusercontent.com/51714798/175106114-f26d6d3f-a1a9-4077-8558-ab94797a9668.gif",
+      img: PFVPreview,
       title: "Pathfinding Visualizer",
       description: [
         "A simple visualizer of different pathfinding algorithms.",
@@ -81,7 +110,7 @@ export const Projects = () => {
       githubLink: "https://github.com/juliusmarminge/pathfinding-visualizer",
     },
     {
-      img: "https://user-images.githubusercontent.com/51714798/175004224-87370b3c-5bf0-4c6e-828e-490bff464adb.gif",
+      img: SVPreview,
       title: "Sorting Visualizer",
       description: [
         "Visualizer for visualizing sorting algorithms." +
