@@ -3,15 +3,20 @@ import Head from "next/head";
 import Link from "next/link";
 import { FaArrowAltCircleUp } from "react-icons/fa";
 
-import { About } from "../components/about";
-import { Blog } from "../components/blog";
-import { ExperienceSection } from "../components/experience";
-import { FinalWords } from "../components/final-words";
-import { Header } from "../components/header";
-import { Hero } from "../components/hero";
-import { Projects } from "../components/projects";
+import { allPosts, type Post } from "~/contentlayer/generated";
+import { About } from "~/components/about";
+import { Blog } from "~/components/blog";
+import { ExperienceSection } from "~/components/experience";
+import { FinalWords } from "~/components/final-words";
+import { Header } from "~/components/header";
+import { Hero } from "~/components/hero";
+import { Projects } from "~/components/projects";
 
-const Home: NextPage = () => {
+export const getStaticProps = () => {
+  return { props: { posts: allPosts } };
+};
+
+const Home: NextPage<{ posts: Post[] }> = ({ posts }) => {
   return (
     <div className="scrollbar-accent z-0 h-screen overflow-x-hidden overflow-y-scroll scroll-smooth text-white">
       <Head>
@@ -29,7 +34,7 @@ const Home: NextPage = () => {
       </section>
 
       <section id="blog">
-        <Blog />
+        <Blog posts={posts} />
       </section>
 
       <section id="experience">

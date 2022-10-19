@@ -1,24 +1,21 @@
+import { format, parseISO } from "date-fns";
 import { motion } from "framer-motion";
 import Image from "next/future/image";
 import Link from "next/link";
+import { type Post } from "~/contentlayer/generated";
 
-interface BlogPost {
-  title: string;
-  description: string;
-  date: string;
-  slug: string;
-  img: string;
-}
-const BlogCard: React.FC<BlogPost> = (props) => {
+const BlogCard: React.FC<Post> = (props) => {
   return (
     <div className="flex cursor-pointer flex-col rounded-lg border p-4">
       <h4 className="text-center text-lg font-semibold">{props.title}</h4>
-      <p className="text-center text-sm uppercase">{props.date}</p>
+      <p className="text-center text-sm uppercase">
+        {format(parseISO(props.date), "LLLL d, yyyy")}
+      </p>
       <div>
         <Image
           height={500}
           width={500}
-          src={props.img}
+          src={props.previewImg}
           alt={props.title}
           className="mx-auto aspect-square h-28 py-4 md:h-36 xl:h-48"
         />
@@ -28,41 +25,7 @@ const BlogCard: React.FC<BlogPost> = (props) => {
   );
 };
 
-export const Blog = () => {
-  const previewPosts: BlogPost[] = [
-    {
-      slug: "t3-turbo",
-      title: "Migrating your T3 App into a Turborepo",
-      date: "Jun 16 2022",
-      img: "https://user-images.githubusercontent.com/51714798/193696098-5ea53aa5-826f-411d-b694-b27f6a1d2421.png",
-      description:
-        "Detailed walkthrough on how to migrate your T3 App into a Turborepo. We'll also add an Expo React Native Application to the mix.",
-    },
-    {
-      slug: "t3-turbo",
-      title: "Migrating your T3 App into a Turborepo",
-      date: "Jun 16 2022",
-      img: "https://user-images.githubusercontent.com/51714798/193696098-5ea53aa5-826f-411d-b694-b27f6a1d2421.png",
-      description:
-        "Detailed walkthrough on how to migrate your T3 App into a Turborepo. We'll also add an Expo React Native Application to the mix.",
-    },
-    {
-      slug: "t3-turbo",
-      title: "Migrating your T3 App into a Turborepo",
-      date: "Jun 16 2022",
-      img: "https://user-images.githubusercontent.com/51714798/193696098-5ea53aa5-826f-411d-b694-b27f6a1d2421.png",
-      description:
-        "Detailed walkthrough on how to migrate your T3 App into a Turborepo. We'll also add an Expo React Native Application to the mix.",
-    },
-    {
-      slug: "t3-turbo",
-      title: "Migrating your T3 App into a Turborepo",
-      date: "Jun 16 2022",
-      img: "https://user-images.githubusercontent.com/51714798/193696098-5ea53aa5-826f-411d-b694-b27f6a1d2421.png",
-      description:
-        "Detailed walkthrough on how to migrate your T3 App into a Turborepo. We'll also add an Expo React Native Application to the mix.",
-    },
-  ];
+export const Blog: React.FC<{ posts: Post[] }> = ({ posts }) => {
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -76,8 +39,8 @@ export const Blog = () => {
 
       <div className="flex flex-col gap-8">
         <div className="z-20 grid grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-3">
-          {previewPosts.slice(0, 5).map((post, idx) => (
-            <Link key={idx} href={`/blog/${post.slug}`}>
+          {posts.slice(0, 5).map((post, idx) => (
+            <Link key={idx} href={post.url}>
               <a>
                 <BlogCard {...post} />
               </a>
