@@ -2,6 +2,7 @@ import { format, parseISO } from "date-fns";
 import { motion } from "framer-motion";
 import Image from "next/future/image";
 import Link from "next/link";
+
 import { type Post } from "~/contentlayer/generated";
 
 const BlogCard: React.FC<Post> = (props) => {

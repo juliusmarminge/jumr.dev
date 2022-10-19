@@ -3,11 +3,11 @@ import { GetStaticProps } from "next";
 import Head from "next/head";
 import Link from "next/link";
 import { useMDXComponent } from "next-contentlayer/hooks";
-
-import { allPosts, Post } from "~/contentlayer/generated";
-import { components } from "~/components/mdx";
-import { Header } from "~/components/header";
 import { FaHome } from "react-icons/fa";
+
+import { Header } from "~/components/header";
+import { components } from "~/components/mdx";
+import { allPosts, Post } from "~/contentlayer/generated";
 
 export function getStaticPaths() {
   const paths = allPosts.map((post) => post.url);

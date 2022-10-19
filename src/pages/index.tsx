@@ -3,7 +3,6 @@ import Head from "next/head";
 import Link from "next/link";
 import { FaArrowAltCircleUp } from "react-icons/fa";
 
-import { allPosts, type Post } from "~/contentlayer/generated";
 import { About } from "~/components/about";
 import { Blog } from "~/components/blog";
 import { ExperienceSection } from "~/components/experience";
@@ -11,6 +10,7 @@ import { FinalWords } from "~/components/final-words";
 import { Header } from "~/components/header";
 import { Hero } from "~/components/hero";
 import { Projects } from "~/components/projects";
+import { type Post, allPosts } from "~/contentlayer/generated";
 
 export const getStaticProps = () => {
   return { props: { posts: allPosts } };

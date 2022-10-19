@@ -2,9 +2,9 @@ import { motion } from "framer-motion";
 import Image, { StaticImageData } from "next/future/image";
 import { BiLinkExternal } from "react-icons/bi";
 
-import StocksPreview from "../../public/images/stocks.png";
 import CT3TPreview from "../../public/images/ct3t.png";
 import PFVPreview from "../../public/images/pfv.png";
+import StocksPreview from "../../public/images/stocks.png";
 import SVPreview from "../../public/images/sv.png";
 
 interface ProjectProps {
