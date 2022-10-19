@@ -1,8 +1,19 @@
+import Link from "next/link";
 import React from "react";
-import { BiCopy } from "react-icons/bi";
+import { BsClipboard } from "react-icons/bs";
 import { RiCheckboxCircleLine } from "react-icons/ri";
 
-import { NextLink } from "./next-link";
+const NextLink: React.FC<{
+  href: string;
+  className?: string;
+  children: React.ReactNode;
+}> = ({ href, children, className }) => {
+  return (
+    <Link href={href}>
+      <a className={className}>{children}</a>
+    </Link>
+  );
+};
 
 const CodeBlock: React.FC<{
   children: React.ReactNode;
@@ -19,7 +30,7 @@ const CodeBlock: React.FC<{
       <code>{children}</code>
 
       <button
-        className="border-1 absolute top-1 right-1 hidden aspect-square items-center justify-center rounded-md bg-inherit p-2 hover:text-gray-400 group-hover:flex"
+        className="border-1 absolute top-1 right-1 hidden aspect-square items-center justify-center rounded-md bg-inherit p-2 group-hover:flex hover:text-gray-400"
         onClick={() => {
           void navigator.clipboard.writeText(
             inputRef.current?.textContent ?? "",
@@ -33,8 +44,8 @@ const CodeBlock: React.FC<{
         <label className="swap swap-rotate items-center">
           <input type="checkbox" checked={copied} onChange={() => void 0} />
 
-          <BiCopy className="swap-off h-6 w-6" />
-          <RiCheckboxCircleLine className="swap-on h-6 w-6 text-success" />
+          <BsClipboard className="swap-off h-6 w-6 p-[0.2rem] text-stone-300" />
+          <RiCheckboxCircleLine className="swap-on h-6 w-6 text-green-600" />
         </label>
       </button>
     </pre>

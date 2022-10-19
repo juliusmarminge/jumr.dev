@@ -17,8 +17,8 @@ class MyDocument extends Document {
     return (
       <Html lang="en">
         <Head>
-          <meta property="title" content="Julius Marminge - SWE" />
-          <meta property="og:title" content="Julius Marminge - SWE" />
+          <meta property="title" content="🇸🇪 Julius | SWE | OSS" />
+          <meta property="og:title" content="🇸🇪 Julius | SWE | OSS" />
           <meta
             name="description"
             content="Hi, I'm Julius! A Software Engineer from Sweden passionate about tech."

@@ -4,8 +4,6 @@
 /node_modules
 /.pnp
 .pnp.js
-package-lock.json
-yarn.lock
 
 # testing
 /coverage
@@ -24,6 +22,7 @@ yarn.lock
 # misc
 .DS_Store
 *.pem
+.eslintcache
 
 # debug
 npm-debug.log*
@@ -41,9 +40,5 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 
-
 # Contentlayer
 .contentlayer
-
-
-.eslintcache

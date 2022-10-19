@@ -2,18 +2,8 @@ import "../styles/globals.css";
 
 import type { AppType } from "next/dist/shared/lib/utils";
 
-import { Navbar } from "../components/navbar";
-import { trpc } from "../utils/trpc";
-
 const MyApp: AppType = ({ Component, pageProps }) => {
-  return (
-    <div className="mx-auto flex min-h-screen w-[95%] flex-col justify-between lg:w-4/5">
-      <Navbar />
-      <div className="flex flex-1 flex-col">
-        <Component {...pageProps} />
-      </div>
-    </div>
-  );
+  return <Component {...pageProps} />;
 };
 
-export default trpc.withTRPC(MyApp);
+export default MyApp;

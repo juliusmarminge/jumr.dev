@@ -1,0 +1,20 @@
+.prose .anchor {
+  @apply invisible cursor-pointer pl-2 no-underline;
+}
+
+.prose a {
+  @apply transition-all;
+}
+
+.prose .anchor:after {
+  @apply text-gray-400;
+  content: "#";
+}
+
+.anchor:hover {
+  @apply visible;
+}
+
+.prose *:hover > .anchor {
+  @apply visible;
+}
