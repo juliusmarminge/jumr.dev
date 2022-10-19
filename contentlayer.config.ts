@@ -46,6 +46,7 @@ const source = makeSource({
           properties: {
             className: ["anchor"],
           },
+          behavior: "append",
         },
       ],
     ],

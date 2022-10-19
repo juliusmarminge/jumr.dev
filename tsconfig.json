@@ -18,7 +18,7 @@
     "baseUrl": ".",
     "paths": {
       "~/*": ["src/*"],
-      "@/contentlayer/generated": ["./.contentlayer/generated"]
+      "~/contentlayer/generated": ["./.contentlayer/generated"]
     }
   },
   "include": [
@@ -27,8 +27,8 @@
     "**/*.tsx",
     "**/*.cjs",
     "**/*.mjs",
-    ".contentlayer/generated",
-    "next.config.js"
+    "next.config.js",
+    ".contentlayer/generated"
   ],
   "exclude": ["node_modules"]
 }
