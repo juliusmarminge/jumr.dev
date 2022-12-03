@@ -43,6 +43,11 @@ export const FinalWords = () => {
           </FancyLink>
           .
         </li>
+        <li className="text-base">
+          If you didn&apos;t already know, the best way to start your next
+          fullstack application is with
+          <FancyLink href="https://create.t3.gg">Create T3 App</FancyLink>.
+        </li>
       </ul>
     </motion.div>
   );
