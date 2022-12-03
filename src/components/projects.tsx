@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import Image, { StaticImageData } from "next/future/image";
+import Image, { StaticImageData } from "next/image";
 import { BiLinkExternal } from "react-icons/bi";
 
 import CT3TPreview from "../../public/images/ct3t.png";

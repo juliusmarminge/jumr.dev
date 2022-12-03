@@ -1,6 +1,6 @@
 import { format, parseISO } from "date-fns";
 import { motion } from "framer-motion";
-import Image from "next/future/image";
+import Image from "next/image";
 import Link from "next/link";
 
 import { type Post } from "~/contentlayer/generated";
@@ -42,9 +42,7 @@ export const Blog: React.FC<{ posts: Post[] }> = ({ posts }) => {
         <div className="z-20 grid grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-3">
           {posts.map((post, idx) => (
             <Link key={idx} href={post.url}>
-              <a>
-                <BlogCard {...post} />
-              </a>
+              <BlogCard {...post} />
             </Link>
           ))}
         </div>

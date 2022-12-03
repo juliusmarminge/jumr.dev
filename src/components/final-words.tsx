@@ -7,10 +7,11 @@ const FancyLink: React.FC<{ href: string; children: React.ReactNode }> = ({
   children,
 }) => {
   return (
-    <Link href={href}>
-      <a className="underline decoration-accent-500 decoration-2 underline-offset-4">
-        {children}
-      </a>
+    <Link
+      href={href}
+      className="underline decoration-accent-500 decoration-2 underline-offset-4"
+    >
+      {children}
     </Link>
   );
 };

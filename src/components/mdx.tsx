@@ -9,8 +9,8 @@ const NextLink: React.FC<{
   children: React.ReactNode;
 }> = ({ href, children, className }) => {
   return (
-    <Link href={href}>
-      <a className={className}>{children}</a>
+    <Link href={href} className={className}>
+      {children}
     </Link>
   );
 };

@@ -39,10 +39,11 @@ const PostLayout: React.FC<{ post: Post }> = ({ post }) => {
       <Header isBlog />
       <article className="mx-auto max-w-7xl p-5">
         <div className="relative mb-6 text-center">
-          <Link href="/#blog">
-            <a className="absolute left-0 top-1 flex h-max items-center gap-1 font-semibold text-stone-300 hover:text-stone-400">
-              <FaHome className="text-3xl" />
-            </a>
+          <Link
+            href="/#blog"
+            className="absolute left-0 top-1 flex h-max items-center gap-1 font-semibold text-stone-300 hover:text-stone-400"
+          >
+            <FaHome className="text-3xl" />
           </Link>
           <h1 className="mx-auto mb-1 max-w-xs text-3xl font-bold text-stone-300 md:max-w-2xl">
             {post.title}
