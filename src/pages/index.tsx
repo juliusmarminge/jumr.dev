@@ -41,9 +41,9 @@ const Home: NextPage<{ posts: Post[] }> = ({ posts }) => {
         <ExperienceSection />
       </section>
 
-      <section id="projects">
+      {/* <section id="projects">
         <Projects />
-      </section>
+      </section> */}
 
       <section id="final-words">
         <FinalWords />
