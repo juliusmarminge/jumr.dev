@@ -23,7 +23,9 @@ export const About = () => {
         <h4 className="text-4xl font-semibold">Get to know me!</h4>
         <p className="text-base">
           I&apos;m a software engineer from Sweden. I&apos;m passionate about
-          building
+          building stuff wheter it be developer tools or applications. I&apos;m
+          eager to learn new things and will never be afraid of exploring new
+          technologies.
         </p>
       </div>
     </motion.div>

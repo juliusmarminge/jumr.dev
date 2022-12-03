@@ -14,11 +14,11 @@ const BlogCard: React.FC<Post> = (props) => {
       </p>
       <div>
         <Image
-          height={500}
-          width={500}
           src={props.previewImg}
           alt={props.title}
-          className="mx-auto aspect-square h-28 py-4 md:h-36 xl:h-48"
+          className="mx-auto aspect-[2/1] h-28 py-4 md:h-36 xl:h-48"
+          height={400}
+          width={800}
         />
         <p className="text-sm md:text-left">{props.description}</p>
       </div>

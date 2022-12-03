@@ -6,8 +6,10 @@ import { IconType } from "react-icons/lib";
 import {
   SiCplusplus,
   SiNextdotjs,
+  SiPrisma,
   SiPython,
   SiReact,
+  SiTailwindcss,
   SiTypescript,
 } from "react-icons/si";
 
@@ -36,25 +38,33 @@ export const ExperienceSection = () => {
         FaDatabase,
       ],
       period: ["2020", "present"],
-      bullets: ["Input useful information"],
+      bullets: [
+        "I'm currently studying at Blekinge Institute of Technology learning all about Software Engineering, from low level programming, compilers, databases, to project management and software architecture.",
+      ],
     },
     {
       note: "Open Source",
       img: "https://avatars.githubusercontent.com/u/108266839?s=200&v=4",
       title: "Create T3 App",
       subtitle: "Core OSS Maintainer",
-      stackIcons: [SiTypescript, SiReact, SiNextdotjs],
+      stackIcons: [SiTypescript, SiReact, SiNextdotjs, SiTailwindcss, SiPrisma],
       period: ["Jun 22", "present"],
-      bullets: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
+      bullets: [
+        "The best way to start a full-stack, typesafe Next.js app",
+        "Get started on your next idea without worrying about the comlpex project setup",
+      ],
     },
     {
       note: "Open Source",
       img: "https://avatars.githubusercontent.com/u/78011399?s=200&v=4",
       title: "tRPC",
       subtitle: "Core OSS Contributor",
-      stackIcons: [SiTypescript, SiReact, SiNextdotjs],
+      stackIcons: [SiTypescript],
       period: ["Jul 22", "present"],
-      bullets: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
+      bullets: [
+        "Move Fast and Break Nothing. End-to-end typesafe APIs made easy.",
+        "GraphQL alternative for fullstack TypeScript applications with an excellent developer experience",
+      ],
     },
   ];
   return (
