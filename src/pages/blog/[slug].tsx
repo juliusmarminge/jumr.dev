@@ -49,7 +49,8 @@ const PostLayout: React.FC<{ post: Post }> = ({ post }) => {
             {post.title}
           </h1>
           <p className="text-sm text-stone-400">
-            {format(parseISO(post.date), "LLLL d, yyyy")}
+            {format(parseISO(post.date), "LLLL d, yyyy")} - (Updated{" "}
+            {format(parseISO(post.updatedAt), "LLLL d, yyyy")})
           </p>
         </div>
 

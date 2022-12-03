@@ -22,6 +22,10 @@ const Post = defineDocumentType(() => ({
       type: "date",
       required: true,
     },
+    updatedAt: {
+      type: "date",
+      required: true,
+    },
     previewImg: {
       type: "string",
       required: true,
