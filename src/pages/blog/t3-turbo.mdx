@@ -91,7 +91,7 @@ mv apps/nextjs/src/server/trpc packages/api/src
 
 We'll create a few barrel-files in the `api` package to make importing easier:
 
-```ts:index.ts
+```ts filename="index.ts"
 export type { AppRouter } from "./src/router";
 export { appRouter } from "./src/router";
 
@@ -99,34 +99,34 @@ export { createContext } from "./src/context";
 export type { Context } from "./src/context";
 ```
 
-```ts:transformer.ts
+```ts filename=transformer.ts
 import superjson from "superjson";
 export const transformer = superjson;
 ```
 
 There are a few small bits that we need to modify now. First, we'll resolve some imports:
 
-```ts:packages/api/src/context.ts
+```ts filename="packages/api/src/context.ts"
 import { prisma } from "@acme/db";
 ```
 
-```ts:apps/nextjs/src/utils/trpc.ts
+```ts filename="apps/nextjs/src/utils/trpc.ts"
 import type { AppRouter } from "@acme/api";
 import { transformer } from "@acme/api/transformer"; // <-- use this in `initTRPC`
 ```
 
-```ts:apps/nextjs/src/pages/api/trpc/[trpc].ts
+```ts filename="apps/nextjs/src/pages/api/trpc/[trpc].ts"
 import { appRouter, createContext } from "@acme/api";
 ```
 
 Then, we'll add the `@acme/api` package as a dependency for the T3 App, and remove `superjson`. Since Next.js 13, they support transpiling packages natively via an experimental tag which I'll be using. If you're scared by the experimental flag, use `next-transpile-modules` instead. Transpile the `@acme/api` package in your `next.config.mjs` like this:
 
-```ts:next.config.mjs
+```ts filename="next.config.mjs"
 const config = {
   experimental: {
     transpilePackages: ["@acme/api"],
-  }
-}
+  },
+};
 ```
 
 When you're done, your repo should look something like [this](https://github.com/t3-oss/create-t3-turbo/tree/8550e4648b21d0edd037f98e256dcb089e530ae3).
@@ -147,19 +147,21 @@ You should be left with a React Native application using Typescript, React 18 wi
 
 In the `package.json`, change the main entrypoint, I'll also scope the package name to get it coherant with the rest of the repo as well as adding a `dev` script so that it launches in my preferred way along with the others:
 
-```json:package.json
-"name": "@acme/expo",
-"main": "src/_app.tsx",
-"scripts": {
-  "dev": "expo start --ios", // depending on your use-case
+```json filename="package.json"
+{
+  "name": "@acme/expo",
+  "main": "src/_app.tsx",
+  "scripts": {
+    "dev": "expo start --ios", // depending on your use-case
+    ...
+  }
   ...
 }
-...
 ```
 
 Now we need to create this entrypoint, move the `App.tsx` to `src/_app.tsx` and add the following content:
 
-```tsx:_app.tsx
+```tsx filename="_app.tsx"
 import { registerRootComponent } from "expo";
 
 const App = () => {
@@ -218,13 +220,13 @@ cp apps/nextjs/tailwind.config.cjs apps/expo/tailwind.config.cjs
 
 Then, in order to use tailwind directly on the elements without needing to wrap them in `styled()`, we'll use their Babel plugin. In your `babel.config.js`, add the following field:
 
-```js:babel.config.js
+```js filename="babel.config.js"
 plugins: ["nativewind/babel"],
 ```
 
 We'll also need to include the types to support the className keyword without getting a bunch of type-errors. Create a `types/nativewind.d.ts` file and add the following tripple-slash directive to it:
 
-```ts:types/nativewind.d.ts
+```ts filename="types/nativewind.d.ts"
 /// <reference types="nativewind/types" />
 ```
 
@@ -242,7 +244,7 @@ npm install @trpc/client@experimental @trpc/server@experimental @trpc/react@expe
 
 Setup the `trpc` object in `src/utils/trpc.ts`:
 
-```ts:utils/trpc.ts
+```ts
 import { createTRPCReact } from "@trpc/react-query";
 import type { AppRouter } from "@acme/api";
 
@@ -251,7 +253,7 @@ export const trpc = createTRPCReact<AppRouter>();
 
 Next, we'll configure the `trpcClient` and `queryClient` in the `_app.tsx`:
 
-```tsx:_app.tsx
+```tsx filename="_app.tsx"
 import React from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
@@ -268,9 +270,7 @@ const App = () => {
 
   return (
     <trpc.Provider client={trpcClient} queryClient={queryClient}>
-      <QueryClientProvider client={queryClient}>
-        ...
-      </QueryClientProvider>
+      <QueryClientProvider client={queryClient}>...</QueryClientProvider>
     </trpc.Provider>
   );
 };
@@ -278,7 +278,7 @@ const App = () => {
 
 As a bonus, I'll refactor the screen's content out to `src/screens/Home.tsx`. You should be left with something like this:
 
-```tsx:src/_app.tsx
+```tsx filename="src/_app.tsx"
 import { registerRootComponent } from "expo";
 import { StatusBar } from "expo-status-bar";
 import React from "react";
@@ -294,7 +294,9 @@ const url = "http://localhost:3000/api/trpc";
 
 const App = () => {
   const [queryClient] = React.useState(() => new QueryClient());
-  const [trpcClient] = React.useState(() => trpc.createClient({ url, transformer }));
+  const [trpcClient] = React.useState(() =>
+    trpc.createClient({ url, transformer }),
+  );
 
   return (
     <trpc.Provider client={trpcClient} queryClient={queryClient}>
@@ -311,12 +313,12 @@ const App = () => {
 registerRootComponent(App);
 ```
 
-```tsx:src/screens/home.tsx
+```tsx filename="src/screens/home.tsx"
 import { View, Text } from "react-native";
 
 export const HomeScreen = () => {
   return (
-    <View className="flex flex-1 bg-white items-center justify-center">
+    <View className="flex flex-1 items-center justify-center bg-white">
       <Text className="font-bold text-blue-800">Home Screen</Text>
     </View>
   );
@@ -325,25 +327,25 @@ export const HomeScreen = () => {
 
 If you launch the application at this point, you'll notice there are errors about `copy-anything` (used by `superjson`) not being resolved correctly. This is because metro doesn't resolve `.cjs` files by default, so we'll have to add support for this in order to support `superjson` transforming. Create a `metro.config.js` and add the following:
 
-```js:metro.config.js
-const { getDefaultConfig } = require('expo/metro-config');
-const path = require('path');
+```js filename="metro.config.js"
+const { getDefaultConfig } = require("expo/metro-config");
+const path = require("path");
 
 const projectRoot = __dirname;
-const workspaceRoot = path.resolve(projectRoot, '../..');
+const workspaceRoot = path.resolve(projectRoot, "../..");
 
 // Create the default Metro config
 const config = getDefaultConfig(projectRoot);
 
 // Add the additional `cjs` extension to the resolver
-config.resolver.sourceExts.push('cjs');
+config.resolver.sourceExts.push("cjs");
 
 // 1. Watch all files within the monorepo
 config.watchFolders = [workspaceRoot];
 // 2. Let Metro know where to resolve packages and in what order
 config.resolver.nodeModulesPaths = [
-  path.resolve(projectRoot, 'node_modules'),
-  path.resolve(workspaceRoot, 'node_modules'),
+  path.resolve(projectRoot, "node_modules"),
+  path.resolve(workspaceRoot, "node_modules"),
 ];
 // 3. Force Metro to resolve (sub)dependencies only from the `nodeModulesPaths`
 config.resolver.disableHierarchicalLookup = true;
@@ -361,7 +363,7 @@ You can most likely skip this step, in that case you can skip to the [final word
 
 I'll make a blog-ish example here. Since this is highly personal, I'll just go over this briefly. I'll first modify my prisma model to include some basic data for a post:
 
-```js:schema.prisma
+```js filename="schema.prisma"
 model Post {
     id      String @id @default(cuid())
     title   String
@@ -371,7 +373,7 @@ model Post {
 
 Next, I'll fetch this data in a tRPC postRouter:
 
-```ts:router/post.ts
+```ts filename="router/post.ts"
 export const postRouter = t.router({
   all: publicProcedure.query(async ({ ctx }) => {
     return await ctx.prisma.post.findMany();
@@ -388,7 +390,7 @@ For now, I'll just add a few example posts using Prisma Studio. The resulting re
 
 I'll create a PostCard in both React as well as React Native:
 
-```tsx:apps/nextjs/src/pages/index.tsx
+```tsx filename="apps/nextjs/src/pages/index.tsx"
 const PostCard: React.FC<{
   post: RouterOutputs["post"]["all"][number];
 }> = ({ post }) => {
@@ -401,7 +403,7 @@ const PostCard: React.FC<{
 };
 ```
 
-```tsx:apps/expo/src/screens/Home.tsx
+```tsx filename="apps/expo/src/screens/Home.tsx"
 const PostCard: React.FC<{
   post: RouterOutputs["post"]["all"][number];
 }> = ({ post }) => {
@@ -416,7 +418,7 @@ const PostCard: React.FC<{
 
 Next, we'll fetch the posts from our API and display them using these cards:
 
-```tsx:apps/nextjs/src/pages/index.tsx
+```tsx filename="apps/nextjs/src/pages/index.tsx"
 const Home: NextPage = () => {
   const postQuery = trpc.post.all.useQuery();
 
@@ -437,7 +439,7 @@ const Home: NextPage = () => {
 };
 ```
 
-```tsx:apps/expo/src/screens/Home.tsx
+```tsx filename="apps/expo/src/screens/Home.tsx"
 export const HomeScreen = () => {
   const postQuery = trpc.post.all.useQuery();
 

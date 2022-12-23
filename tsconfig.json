@@ -17,8 +17,7 @@
     "noUncheckedIndexedAccess": true,
     "baseUrl": ".",
     "paths": {
-      "~/*": ["src/*"],
-      "~/contentlayer/generated": ["./.contentlayer/generated"]
+      "~/*": ["src/*"]
     }
   },
   "include": [
@@ -27,8 +26,8 @@
     "**/*.tsx",
     "**/*.cjs",
     "**/*.mjs",
-    "next.config.js",
-    ".contentlayer/generated"
+    "next.config.mjs",
+    "theme.config.jsx"
   ],
   "exclude": ["node_modules"]
 }
