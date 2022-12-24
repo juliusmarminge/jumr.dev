@@ -51,9 +51,9 @@ export const Hero = () => {
           <Link href="#experience">
             <button className="hero-btn">Experience</button>
           </Link>
-          <Link href="#projects">
+          {/* <Link href="#projects">
             <button className="hero-btn">Projects</button>
-          </Link>
+          </Link> */}
           <Link href="#blog">
             <button className="hero-btn">Blog</button>
           </Link>
