@@ -22,7 +22,6 @@ const meta = z.object({
 /** Read all files in the blog directory */
 export async function getAllArticles() {
   const blogDir = join(process.cwd(), "src/pages/blog");
-  console.log({ blogDir });
   const filenames = await globby("*.mdx", {
     cwd: blogDir,
     absolute: false,
