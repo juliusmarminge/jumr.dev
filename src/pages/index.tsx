@@ -9,7 +9,7 @@ import { ExperienceSection } from "~/components/experience";
 import { FinalWords } from "~/components/final-words";
 import { Header } from "~/components/header";
 import { Hero } from "~/components/hero";
-import { Projects } from "~/components/projects";
+// import { Projects } from "~/components/projects";
 import { getAllArticles, Meta } from "~/lib/blog";
 
 export const getStaticProps = async () => {
