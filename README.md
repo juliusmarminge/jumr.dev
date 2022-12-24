@@ -1,5 +1,14 @@
 ## Getting Started
 
+### Tech Stack
+
+This project is built using:
+
+- [Next.js](https://nextjs.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Nextra](https://nextra.site/)
+- [Framer Motion](https://www.framer.com/motion/)
+
 (Fork) and Clone:
 
 ```sh
