@@ -10,6 +10,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@vercel/analytics": "^0.1.6",
     "clsx": "^1.2.1",
     "date-fns": "^2.29.3",
     "framer-motion": "^7.5.3",

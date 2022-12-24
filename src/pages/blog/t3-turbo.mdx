@@ -6,6 +6,8 @@ updatedAt: 2022-12-03
 previewImg: /images/ct3t.png
 ---
 
+import { Callout } from "~/components/callout";
+
 For a while now, we've been getting a lot of requests for including a CLI option to scaffold [create-t3-app](https://github.com/t3-oss/create-t3-app) into a monorepo so that you can share code between your web and mobile application.
 We have turn these requests down due to the added complexity it would bring, and the fact that we do not want to prescribe how to run your monorepo. There are several tooling available for monorepos, including [Lerna](https://lerna.js.org) and [NX](https://nx.dev). Then there's the new kid on the block, [turborepo](https://turborepo.org) which we recently migrated the `create-t3-app` repo into so that we could have our upcoming documentation site in the same repo as the CLI scaffolding tool.
 
@@ -13,13 +15,25 @@ But... I won't let y'all down entirely, so I decided to create a template repo t
 
 Apologies in advance, this post is going to be a bit long, so for everyone who just want to see the final result, you can browse the repo directly [here](https://github.com/t3-oss/create-t3-turbo). TL;DR, we are going to take an existing T3 app and split it into a monorepo using turborepo. After that, we'll add an Expo app to the monorepo and consume the tRPC API on both web and mobile. I'll break this process down into smaller pieces and commit accordingly, so that you can follow along as easy as possible.
 
-> **Note:** Due to the fact that `next-auth` currently doesn't support `react-native`, and I do not want to prescribe _a way_ to solve this problem, I'll leave auth out entirely for this demo.
+<Callout type="info">
+  Due to the fact that `next-auth` currently doesn't support `react-native`, and
+  I do not want to prescribe _a way_ to solve this problem, I'll leave auth out
+  entirely for this demo.
+</Callout>
+<Callout>
+  This post has been updated since the original and thus there may be
+  differences between the project snapshots linked, and the result of the steps
+  described in this post.
+</Callout>
 
 ## Initializing your T3 App
 
-> **Note:** This post has been updated since the original and thus there may be differences between the project snapshots linked, and the result of the steps described in this post.
-
-For demonstration purposes, I'll start by creating a new T3 app, but you can of course use your existing one. Since we're going to be turning this into a monorepo, I'll also showcase the ability to enter a scoped appname when using the CLI. I'll assume you are already in a git repository and I'll hold off on installing the dependencies until we have setup turborepo. Lastly, if you haven't already tried out the `next` version of the CLI, try it out - it is... Blazingly Fast™.
+For demonstration purposes, I'll start by creating a new T3 app, but you can of course
+use your existing one. Since we're going to be turning this into a monorepo, I'll
+also showcase the ability to enter a scoped appname when using the CLI. I'll assume
+you are already in a git repository and I'll hold off on installing the dependencies
+until we have setup turborepo. Lastly, if you haven't already tried out the `next`
+version of the CLI, try it out - it is... Blazingly Fast™.
 
 ```bash
 npm create t3-app@latest apps/@acme/nextjs --noGit --noInstall
@@ -27,9 +41,19 @@ npm create t3-app@latest apps/@acme/nextjs --noGit --noInstall
 
 I'll select all packages except for `next-auth`.
 
-> Editors Note (2022-12-03): There is now an [auth package](https://github.com/t3-oss/create-t3-turbo/tree/main/packages/auth) in the final repository that showcases how you'd code split that to work with the rest of the pieces. This uses Next-Auth.js which unfortunately doesn't support Expo, but the code split can most likely be used with other auth providers too.
-
-At this point, you'll have a new T3 app in `apps/nextjs`, and if you check the `package.json`, you'll see that it got named `@acme/nextjs`. If you are using an existing app, just move it into the `apps/` sub-directory and scope-name it to something appropriate. Also clean out any temporary files, as well as your lockfile, we'll get all of those re-setup when we initialize turbo.
+<Callout type="default">
+  (2022-12-03): There is now an [auth
+  package](https://github.com/t3-oss/create-t3-turbo/tree/main/packages/auth) in
+  the final repository that showcases how you'd code split that to work with the
+  rest of the pieces. This uses Next-Auth.js which unfortunately doesn't support
+  Expo, but the code split can most likely be used with other auth providers
+  too.
+</Callout>
+At this point, you'll have a new T3 app in `apps/nextjs`, and if you check the `package.json`,
+you'll see that it got named `@acme/nextjs`. If you are using an existing app, just
+move it into the `apps/` sub-directory and scope-name it to something appropriate.
+Also clean out any temporary files, as well as your lockfile, we'll get all of those
+re-setup when we initialize turbo.
 
 _Your repo should look something like [this](https://github.com/t3-oss/create-t3-turbo/tree/9151258225518a1a44d7aa45c49f0b33ebb9933c) now._
 
@@ -70,8 +94,10 @@ mv apps/nextjs/prisma packages/db/prisma
 
 You can now delete the `prisma` and `@prisma/client` dependencies in the T3 app, as well as the `postinstall` script.
 
-> Note: We won't do type validation for environment variables in this subpackage, so remove the `env` import and use `process.env` instead.
-
+<Callout>
+  We won't do type validation for environment variables in this subpackage, so
+  remove the `env` import and use `process.env` instead.
+</Callout>
 _Your repo should now look something like [this](https://github.com/t3-oss/create-t3-turbo/tree/5f8117aaacc2713d2719e7d12b04d82d984d14fa)._
 
 ## Extracting your tRPC router to its own package
@@ -189,7 +215,18 @@ Expo might also have initialized its own Git repository, in that case we'll have
 rm -rf apps/expo/.git
 ```
 
-> Note: As of writing this post, React Native only supports React 18.0.0. Make sure to match the versions in your Next.js application, or you'll get some errors when starting up. Clean the dependencies and remove the lockfile, and re-install once you have.
+<Callout>
+  As of writing this post, React Native only supports React 18.0.0. Make sure to
+  match the versions in your Next.js application, or you'll get some errors when
+  starting up. Clean the dependencies and remove the lockfile, and re-install
+  once you have.
+</Callout>
+<Callout type="info">
+  (2022-12-24): Since the Next.js app is now using Next13 which requires React
+  `18.2`, you'll most likely want to match the Expo app to the same version. It
+  will throw some warnings in the console but it should work for most cases. If
+  it doesn't for you - lock it to `18.1` awaiting Expo SDK 48.
+</Callout>
 
 You should now be able to start the application. Running
 
@@ -386,8 +423,13 @@ export const postRouter = t.router({
 
 For now, I'll just add a few example posts using Prisma Studio. The resulting repo looks something like [this](https://github.com/t3-oss/create-t3-turbo/tree/af11f71f651e919e80038828fbb15b95f5886451), and we can now consume this on both the Next.js and Expo applications.
 
-> Note: If you want to share components and navigation logic between your applications, check out [Solito](https://solito.dev). I however, believe these platforms are different enough that they should be treated differently, so I'll satisfy with just sharing my API logic, and write separate components and screens for each platform.
-
+<Callout type="info">
+  If you want to share components and navigation logic between your
+  applications, check out [Solito](https://solito.dev). I however, believe these
+  platforms are different enough that they should be treated differently, so
+  I'll satisfy with just sharing my API logic, and write separate components and
+  screens for each platform.
+</Callout>
 I'll create a PostCard in both React as well as React Native:
 
 ```tsx filename="apps/nextjs/src/pages/index.tsx"

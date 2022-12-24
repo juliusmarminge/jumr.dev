@@ -7,6 +7,7 @@ specifiers:
   '@types/react-dom': 18.0.5
   '@typescript-eslint/eslint-plugin': ^5.47.0
   '@typescript-eslint/parser': ^5.47.0
+  '@vercel/analytics': ^0.1.6
   autoprefixer: ^10.4.7
   clsx: ^1.2.1
   date-fns: ^2.29.3
@@ -32,6 +33,7 @@ specifiers:
   zod: ^3.20.0
 
 dependencies:
+  '@vercel/analytics': 0.1.6_react@18.2.0
   clsx: 1.2.1
   date-fns: 2.29.3
   framer-motion: 7.5.3_biqbaboplfbrettd7655fr4n2y
@@ -716,6 +718,14 @@ packages:
       '@typescript-eslint/types': 5.47.0
       eslint-visitor-keys: 3.3.0
     dev: true
+
+  /@vercel/analytics/0.1.6_react@18.2.0:
+    resolution: {integrity: sha512-zNd5pj3iDvq8IMBQHa1YRcIteiw6ZiPB8AsONHd8ieFXlNpLqhXfIYnf4WvTfZ7S1NSJ++mIM14aJnNac/VMXQ==}
+    peerDependencies:
+      react: ^16.8||^17||^18
+    dependencies:
+      react: 18.2.0
+    dev: false
 
   /acorn-jsx/5.3.2_acorn@8.8.0:
     resolution: {integrity: sha512-rq9s+JNhf0IChjtDXxllJ7g41oZk5SlXtp0LHwyA5cejwn7vKmKp4pPri6YEePv2PU65sAsegbXtIinmDFDXgQ==}
