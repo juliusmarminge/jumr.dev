@@ -2,11 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url("markdown/code.css");
-@import url("markdown/headings.css");
-/* FIXME: Roll my own swap */
-@import url("swap.css");
-
 @layer base {
   body {
     @apply scrollbar-accent bg-[rgb(36,36,36)];

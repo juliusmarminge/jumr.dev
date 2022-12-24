@@ -1,10 +1,13 @@
 ---
-title: "Migrating your T3 App into a Turborepo"
-description: "Detailed walkthrough on how to migrate your T3 App into a Turborepo. We'll also add an Expo React Native Application to the mix."
-date: "2022-08-22"
-updatedAt: "2022-12-03"
-previewImg: "/images/ct3t.png"
+title: Migrating your T3 App into a Turborepo
+description: Detailed walkthrough on how to migrate your T3 App into a Turborepo. We'll also add an Expo React Native Application to the mix.
+date: 2022-08-22
+updatedAt: 2022-12-03
+previewImg: /images/ct3t.png
+readingTime: 15
 ---
+
+import { Callout } from "~/components/callout";
 
 For a while now, we've been getting a lot of requests for including a CLI option to scaffold [create-t3-app](https://github.com/t3-oss/create-t3-app) into a monorepo so that you can share code between your web and mobile application.
 We have turn these requests down due to the added complexity it would bring, and the fact that we do not want to prescribe how to run your monorepo. There are several tooling available for monorepos, including [Lerna](https://lerna.js.org) and [NX](https://nx.dev). Then there's the new kid on the block, [turborepo](https://turborepo.org) which we recently migrated the `create-t3-app` repo into so that we could have our upcoming documentation site in the same repo as the CLI scaffolding tool.
@@ -13,13 +16,25 @@ But... I won't let y'all down entirely, so I decided to create a template repo t
 
 Apologies in advance, this post is going to be a bit long, so for everyone who just want to see the final result, you can browse the repo directly [here](https://github.com/t3-oss/create-t3-turbo). TL;DR, we are going to take an existing T3 app and split it into a monorepo using turborepo. After that, we'll add an Expo app to the monorepo and consume the tRPC API on both web and mobile. I'll break this process down into smaller pieces and commit accordingly, so that you can follow along as easy as possible.
 
-> **Note:** Due to the fact that `next-auth` currently doesn't support `react-native`, and I do not want to prescribe _a way_ to solve this problem, I'll leave auth out entirely for this demo.
+<Callout type="info">
+  Due to the fact that `next-auth` currently doesn't support `react-native`, and
+  I do not want to prescribe _a way_ to solve this problem, I'll leave auth out
+  entirely for this demo.
+</Callout>
+<Callout>
+  This post has been updated since the original and thus there may be
+  differences between the project snapshots linked, and the result of the steps
+  described in this post.
+</Callout>
 
 ## Initializing your T3 App
 
-> **Note:** This post has been updated since the original and thus there may be differences between the project snapshots linked, and the result of the steps described in this post.
-
-For demonstration purposes, I'll start by creating a new T3 app, but you can of course use your existing one. Since we're going to be turning this into a monorepo, I'll also showcase the ability to enter a scoped appname when using the CLI. I'll assume you are already in a git repository and I'll hold off on installing the dependencies until we have setup turborepo. Lastly, if you haven't already tried out the `next` version of the CLI, try it out - it is... Blazingly Fast™.
+For demonstration purposes, I'll start by creating a new T3 app, but you can of course
+use your existing one. Since we're going to be turning this into a monorepo, I'll
+also showcase the ability to enter a scoped appname when using the CLI. I'll assume
+you are already in a git repository and I'll hold off on installing the dependencies
+until we have setup turborepo. Lastly, if you haven't already tried out the `next`
+version of the CLI, try it out - it is... Blazingly Fast™.
 
 ```bash
 npm create t3-app@latest apps/@acme/nextjs --noGit --noInstall
@@ -27,9 +42,19 @@ npm create t3-app@latest apps/@acme/nextjs --noGit --noInstall
 
 I'll select all packages except for `next-auth`.
 
-> Editors Note (2022-12-03): There is now an [auth package](https://github.com/t3-oss/create-t3-turbo/tree/main/packages/auth) in the final repository that showcases how you'd code split that to work with the rest of the pieces. This uses Next-Auth.js which unfortunately doesn't support Expo, but the code split can most likely be used with other auth providers too.
-
-At this point, you'll have a new T3 app in `apps/nextjs`, and if you check the `package.json`, you'll see that it got named `@acme/nextjs`. If you are using an existing app, just move it into the `apps/` sub-directory and scope-name it to something appropriate. Also clean out any temporary files, as well as your lockfile, we'll get all of those re-setup when we initialize turbo.
+<Callout type="default">
+  (2022-12-03): There is now an [auth
+  package](https://github.com/t3-oss/create-t3-turbo/tree/main/packages/auth) in
+  the final repository that showcases how you'd code split that to work with the
+  rest of the pieces. This uses Next-Auth.js which unfortunately doesn't support
+  Expo, but the code split can most likely be used with other auth providers
+  too.
+</Callout>
+At this point, you'll have a new T3 app in `apps/nextjs`, and if you check the `package.json`,
+you'll see that it got named `@acme/nextjs`. If you are using an existing app, just
+move it into the `apps/` sub-directory and scope-name it to something appropriate.
+Also clean out any temporary files, as well as your lockfile, we'll get all of those
+re-setup when we initialize turbo.
 
 _Your repo should look something like [this](https://github.com/t3-oss/create-t3-turbo/tree/9151258225518a1a44d7aa45c49f0b33ebb9933c) now._
 
@@ -70,8 +95,10 @@ mv apps/nextjs/prisma packages/db/prisma
 
 You can now delete the `prisma` and `@prisma/client` dependencies in the T3 app, as well as the `postinstall` script.
 
-> Note: We won't do type validation for environment variables in this subpackage, so remove the `env` import and use `process.env` instead.
-
+<Callout>
+  We won't do type validation for environment variables in this subpackage, so
+  remove the `env` import and use `process.env` instead.
+</Callout>
 _Your repo should now look something like [this](https://github.com/t3-oss/create-t3-turbo/tree/5f8117aaacc2713d2719e7d12b04d82d984d14fa)._
 
 ## Extracting your tRPC router to its own package
@@ -91,7 +118,7 @@ mv apps/nextjs/src/server/trpc packages/api/src
 
 We'll create a few barrel-files in the `api` package to make importing easier:
 
-```ts:index.ts
+```ts filename="index.ts"
 export type { AppRouter } from "./src/router";
 export { appRouter } from "./src/router";
 
@@ -99,34 +126,34 @@ export { createContext } from "./src/context";
 export type { Context } from "./src/context";
 ```
 
-```ts:transformer.ts
+```ts filename=transformer.ts
 import superjson from "superjson";
 export const transformer = superjson;
 ```
 
 There are a few small bits that we need to modify now. First, we'll resolve some imports:
 
-```ts:packages/api/src/context.ts
+```ts filename="packages/api/src/context.ts"
 import { prisma } from "@acme/db";
 ```
 
-```ts:apps/nextjs/src/utils/trpc.ts
+```ts filename="apps/nextjs/src/utils/trpc.ts"
 import type { AppRouter } from "@acme/api";
 import { transformer } from "@acme/api/transformer"; // <-- use this in `initTRPC`
 ```
 
-```ts:apps/nextjs/src/pages/api/trpc/[trpc].ts
+```ts filename="apps/nextjs/src/pages/api/trpc/[trpc].ts"
 import { appRouter, createContext } from "@acme/api";
 ```
 
 Then, we'll add the `@acme/api` package as a dependency for the T3 App, and remove `superjson`. Since Next.js 13, they support transpiling packages natively via an experimental tag which I'll be using. If you're scared by the experimental flag, use `next-transpile-modules` instead. Transpile the `@acme/api` package in your `next.config.mjs` like this:
 
-```ts:next.config.mjs
+```ts filename="next.config.mjs"
 const config = {
   experimental: {
     transpilePackages: ["@acme/api"],
-  }
-}
+  },
+};
 ```
 
 When you're done, your repo should look something like [this](https://github.com/t3-oss/create-t3-turbo/tree/8550e4648b21d0edd037f98e256dcb089e530ae3).
@@ -147,19 +174,21 @@ You should be left with a React Native application using Typescript, React 18 wi
 
 In the `package.json`, change the main entrypoint, I'll also scope the package name to get it coherant with the rest of the repo as well as adding a `dev` script so that it launches in my preferred way along with the others:
 
-```json:package.json
-"name": "@acme/expo",
-"main": "src/_app.tsx",
-"scripts": {
-  "dev": "expo start --ios", // depending on your use-case
+```json filename="package.json"
+{
+  "name": "@acme/expo",
+  "main": "src/_app.tsx",
+  "scripts": {
+    "dev": "expo start --ios", // depending on your use-case
+    ...
+  }
   ...
 }
-...
 ```
 
 Now we need to create this entrypoint, move the `App.tsx` to `src/_app.tsx` and add the following content:
 
-```tsx:_app.tsx
+```tsx filename="_app.tsx"
 import { registerRootComponent } from "expo";
 
 const App = () => {
@@ -187,7 +216,18 @@ Expo might also have initialized its own Git repository, in that case we'll have
 rm -rf apps/expo/.git
 ```
 
-> Note: As of writing this post, React Native only supports React 18.0.0. Make sure to match the versions in your Next.js application, or you'll get some errors when starting up. Clean the dependencies and remove the lockfile, and re-install once you have.
+<Callout>
+  As of writing this post, React Native only supports React 18.0.0. Make sure to
+  match the versions in your Next.js application, or you'll get some errors when
+  starting up. Clean the dependencies and remove the lockfile, and re-install
+  once you have.
+</Callout>
+<Callout type="info">
+  (2022-12-24): Since the Next.js app is now using Next13 which requires React
+  `18.2`, you'll most likely want to match the Expo app to the same version. It
+  will throw some warnings in the console but it should work for most cases. If
+  it doesn't for you - lock it to `18.1` awaiting Expo SDK 48.
+</Callout>
 
 You should now be able to start the application. Running
 
@@ -218,13 +258,13 @@ cp apps/nextjs/tailwind.config.cjs apps/expo/tailwind.config.cjs
 
 Then, in order to use tailwind directly on the elements without needing to wrap them in `styled()`, we'll use their Babel plugin. In your `babel.config.js`, add the following field:
 
-```js:babel.config.js
+```js filename="babel.config.js"
 plugins: ["nativewind/babel"],
 ```
 
 We'll also need to include the types to support the className keyword without getting a bunch of type-errors. Create a `types/nativewind.d.ts` file and add the following tripple-slash directive to it:
 
-```ts:types/nativewind.d.ts
+```ts filename="types/nativewind.d.ts"
 /// <reference types="nativewind/types" />
 ```
 
@@ -242,7 +282,7 @@ npm install @trpc/client@experimental @trpc/server@experimental @trpc/react@expe
 
 Setup the `trpc` object in `src/utils/trpc.ts`:
 
-```ts:utils/trpc.ts
+```ts
 import { createTRPCReact } from "@trpc/react-query";
 import type { AppRouter } from "@acme/api";
 
@@ -251,7 +291,7 @@ export const trpc = createTRPCReact<AppRouter>();
 
 Next, we'll configure the `trpcClient` and `queryClient` in the `_app.tsx`:
 
-```tsx:_app.tsx
+```tsx filename="_app.tsx"
 import React from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
@@ -268,9 +308,7 @@ const App = () => {
 
   return (
     <trpc.Provider client={trpcClient} queryClient={queryClient}>
-      <QueryClientProvider client={queryClient}>
-        ...
-      </QueryClientProvider>
+      <QueryClientProvider client={queryClient}>...</QueryClientProvider>
     </trpc.Provider>
   );
 };
@@ -278,7 +316,7 @@ const App = () => {
 
 As a bonus, I'll refactor the screen's content out to `src/screens/Home.tsx`. You should be left with something like this:
 
-```tsx:src/_app.tsx
+```tsx filename="src/_app.tsx"
 import { registerRootComponent } from "expo";
 import { StatusBar } from "expo-status-bar";
 import React from "react";
@@ -294,7 +332,9 @@ const url = "http://localhost:3000/api/trpc";
 
 const App = () => {
   const [queryClient] = React.useState(() => new QueryClient());
-  const [trpcClient] = React.useState(() => trpc.createClient({ url, transformer }));
+  const [trpcClient] = React.useState(() =>
+    trpc.createClient({ url, transformer }),
+  );
 
   return (
     <trpc.Provider client={trpcClient} queryClient={queryClient}>
@@ -311,12 +351,12 @@ const App = () => {
 registerRootComponent(App);
 ```
 
-```tsx:src/screens/home.tsx
+```tsx filename="src/screens/home.tsx"
 import { View, Text } from "react-native";
 
 export const HomeScreen = () => {
   return (
-    <View className="flex flex-1 bg-white items-center justify-center">
+    <View className="flex flex-1 items-center justify-center bg-white">
       <Text className="font-bold text-blue-800">Home Screen</Text>
     </View>
   );
@@ -325,25 +365,25 @@ export const HomeScreen = () => {
 
 If you launch the application at this point, you'll notice there are errors about `copy-anything` (used by `superjson`) not being resolved correctly. This is because metro doesn't resolve `.cjs` files by default, so we'll have to add support for this in order to support `superjson` transforming. Create a `metro.config.js` and add the following:
 
-```js:metro.config.js
-const { getDefaultConfig } = require('expo/metro-config');
-const path = require('path');
+```js filename="metro.config.js"
+const { getDefaultConfig } = require("expo/metro-config");
+const path = require("path");
 
 const projectRoot = __dirname;
-const workspaceRoot = path.resolve(projectRoot, '../..');
+const workspaceRoot = path.resolve(projectRoot, "../..");
 
 // Create the default Metro config
 const config = getDefaultConfig(projectRoot);
 
 // Add the additional `cjs` extension to the resolver
-config.resolver.sourceExts.push('cjs');
+config.resolver.sourceExts.push("cjs");
 
 // 1. Watch all files within the monorepo
 config.watchFolders = [workspaceRoot];
 // 2. Let Metro know where to resolve packages and in what order
 config.resolver.nodeModulesPaths = [
-  path.resolve(projectRoot, 'node_modules'),
-  path.resolve(workspaceRoot, 'node_modules'),
+  path.resolve(projectRoot, "node_modules"),
+  path.resolve(workspaceRoot, "node_modules"),
 ];
 // 3. Force Metro to resolve (sub)dependencies only from the `nodeModulesPaths`
 config.resolver.disableHierarchicalLookup = true;
@@ -361,7 +401,7 @@ You can most likely skip this step, in that case you can skip to the [final word
 
 I'll make a blog-ish example here. Since this is highly personal, I'll just go over this briefly. I'll first modify my prisma model to include some basic data for a post:
 
-```js:schema.prisma
+```js filename="schema.prisma"
 model Post {
     id      String @id @default(cuid())
     title   String
@@ -371,7 +411,7 @@ model Post {
 
 Next, I'll fetch this data in a tRPC postRouter:
 
-```ts:router/post.ts
+```ts filename="router/post.ts"
 export const postRouter = t.router({
   all: publicProcedure.query(async ({ ctx }) => {
     return await ctx.prisma.post.findMany();
@@ -384,11 +424,16 @@ export const postRouter = t.router({
 
 For now, I'll just add a few example posts using Prisma Studio. The resulting repo looks something like [this](https://github.com/t3-oss/create-t3-turbo/tree/af11f71f651e919e80038828fbb15b95f5886451), and we can now consume this on both the Next.js and Expo applications.
 
-> Note: If you want to share components and navigation logic between your applications, check out [Solito](https://solito.dev). I however, believe these platforms are different enough that they should be treated differently, so I'll satisfy with just sharing my API logic, and write separate components and screens for each platform.
-
+<Callout type="info">
+  If you want to share components and navigation logic between your
+  applications, check out [Solito](https://solito.dev). I however, believe these
+  platforms are different enough that they should be treated differently, so
+  I'll satisfy with just sharing my API logic, and write separate components and
+  screens for each platform.
+</Callout>
 I'll create a PostCard in both React as well as React Native:
 
-```tsx:apps/nextjs/src/pages/index.tsx
+```tsx filename="apps/nextjs/src/pages/index.tsx"
 const PostCard: React.FC<{
   post: RouterOutputs["post"]["all"][number];
 }> = ({ post }) => {
@@ -401,7 +446,7 @@ const PostCard: React.FC<{
 };
 ```
 
-```tsx:apps/expo/src/screens/Home.tsx
+```tsx filename="apps/expo/src/screens/Home.tsx"
 const PostCard: React.FC<{
   post: RouterOutputs["post"]["all"][number];
 }> = ({ post }) => {
@@ -416,7 +461,7 @@ const PostCard: React.FC<{
 
 Next, we'll fetch the posts from our API and display them using these cards:
 
-```tsx:apps/nextjs/src/pages/index.tsx
+```tsx filename="apps/nextjs/src/pages/index.tsx"
 const Home: NextPage = () => {
   const postQuery = trpc.post.all.useQuery();
 
@@ -437,7 +482,7 @@ const Home: NextPage = () => {
 };
 ```
 
-```tsx:apps/expo/src/screens/Home.tsx
+```tsx filename="apps/expo/src/screens/Home.tsx"
 export const HomeScreen = () => {
   const postQuery = trpc.post.all.useQuery();
 
@@ -461,7 +506,7 @@ And we're done! You should see your posts appearing on both applications, and if
 
 ## Final Words
 
-Thank you for reading this post. This was my first ever post, so if you enjoyed it, go give the repo a [star](https://github.com/t3-oss/create-t3-turbo/stargazers). If it helped you out, consider [buying me a coffee](https://github.com/sponsors/t3-oss), I would truly appreciate it!
+Thank you for reading this post. This was my first ever post, so if you enjoyed it, go give the repo a [star](https://github.com/t3-oss/create-t3-turbo/stargazers). If it helped you out, consider [buying me a coffee](https://github.com/sponsors/juliusmarminge), I would truly appreciate it!
 
 Also, this blog is not finished yet, but I wanted to get this post up as soon as possible to satisfy the community demands. If you have any suggestions for how to improve it, feel free to get in touch!
 

@@ -3,9 +3,9 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 
-import { type Post } from "~/contentlayer/generated";
+import { Meta } from "~/lib/blog";
 
-const BlogCard: React.FC<Post> = (props) => {
+const BlogCard: React.FC<Meta> = (props) => {
   return (
     <div className="flex cursor-pointer flex-col rounded-lg border p-4">
       <h4 className="text-center text-lg font-semibold">{props.title}</h4>
@@ -26,7 +26,7 @@ const BlogCard: React.FC<Post> = (props) => {
   );
 };
 
-export const Blog: React.FC<{ posts: Post[] }> = ({ posts }) => {
+export const Blog: React.FC<{ posts: Meta[] }> = ({ posts }) => {
   return (
     <motion.div
       initial={{ opacity: 0 }}

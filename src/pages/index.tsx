@@ -1,4 +1,4 @@
-import type { NextPage } from "next";
+import { type NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
 import { FaArrowAltCircleUp } from "react-icons/fa";
@@ -9,14 +9,20 @@ import { ExperienceSection } from "~/components/experience";
 import { FinalWords } from "~/components/final-words";
 import { Header } from "~/components/header";
 import { Hero } from "~/components/hero";
-import { Projects } from "~/components/projects";
-import { type Post, allPosts } from "~/contentlayer/generated";
+// import { Projects } from "~/components/projects";
+import { getAllArticles, Meta } from "~/lib/blog";
 
-export const getStaticProps = () => {
-  return { props: { posts: allPosts } };
+export const getStaticProps = async () => {
+  const allPosts = await getAllArticles();
+
+  return {
+    props: {
+      posts: allPosts,
+    },
+  };
 };
 
-const Home: NextPage<{ posts: Post[] }> = ({ posts }) => {
+const Home: NextPage<{ posts: Meta[] }> = ({ posts }) => {
   return (
     <div className="scrollbar-accent z-0 h-screen overflow-x-hidden overflow-y-scroll scroll-smooth text-white">
       <Head>

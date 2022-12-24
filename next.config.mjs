@@ -1,15 +1,22 @@
 // @ts-check
-/* eslint-disable @typescript-eslint/no-var-requires */
-const { withContentlayer } = require("next-contentlayer");
+
+import nextra from "nextra";
+const withNextra = nextra({
+  theme: "nextra-theme-blog",
+  themeConfig: "./theme.config.tsx",
+  defaultShowCopyCode: true,
+});
 
 /** @type {import("next").NextConfig} */
 const config = {
   reactStrictMode: true,
-  swcMinify: true,
   // Next.js i18n docs: https://nextjs.org/docs/advanced-features/i18n-routing
   i18n: {
     locales: ["en"],
     defaultLocale: "en",
+  },
+  eslint: {
+    ignoreDuringBuilds: true,
   },
   images: {
     remotePatterns: [
@@ -19,4 +26,4 @@ const config = {
   },
 };
 
-module.exports = withContentlayer(config);
+export default withNextra(config);
