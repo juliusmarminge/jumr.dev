@@ -7,7 +7,7 @@ const getOGLink = (meta: Meta) =>
     title: meta.title,
     description: meta.description,
     date: meta.date,
-    slug: meta.url,
+    // slug: meta.url,
   });
 
 const theme = {

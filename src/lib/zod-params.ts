@@ -39,6 +39,6 @@ export const blogParams = zodParams(
     title: z.string(),
     description: z.string(),
     date: z.string(),
-    slug: z.string(),
+    // slug: z.string(),
   }),
 );
