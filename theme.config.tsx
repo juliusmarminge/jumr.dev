@@ -11,6 +11,16 @@ const theme = {
       </>
     );
   },
+  navs: [
+    {
+      name: "Home",
+      url: "/",
+    },
+    {
+      name: "Blog",
+      url: "/blog",
+    },
+  ],
   footer: (
     <p className="pt-16 text-sm text-stone-500">MIT 2022 © Julius Marminge</p>
   ),
