@@ -47,10 +47,10 @@ class MyDocument extends Document {
             sizes="16x16"
             href="/seo/favicon-16x16.png"
           />
-          <meta name="twitter:image" content="/images/profile.png" />
+          <meta name="twitter:image" content="/api/og" />
           <meta name="twitter:card" content="summary_large_image" />
           <meta name="twitter:creator" content="@jullerino" />
-          <meta name="og:image" content="/seo/profile.png" />
+          <meta name="og:image" content="/api/og" />
           <link rel="manifest" href="/seo/site.webmanifest" />
           <link
             rel="mask-icon"
