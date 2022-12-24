@@ -10,14 +10,7 @@ const withNextra = nextra({
 /** @type {import("next").NextConfig} */
 const config = {
   reactStrictMode: true,
-  // Next.js i18n docs: https://nextjs.org/docs/advanced-features/i18n-routing
-  i18n: {
-    locales: ["en"],
-    defaultLocale: "en",
-  },
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
+  eslint: { ignoreDuringBuilds: true },
   images: {
     remotePatterns: [
       { hostname: "github.com" },
