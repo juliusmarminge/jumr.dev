@@ -34,11 +34,24 @@ function zodParams<TType>(schema: z.ZodType<TType>) {
   };
 }
 
+export const strToFmtDate = z
+  .string()
+  .transform((d) => new Date(d))
+  .pipe(z.date())
+  .transform((d) =>
+    Intl.DateTimeFormat("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    }).format(d),
+  );
+
 export const blogParams = zodParams(
   z.object({
     title: z.string(),
     description: z.string(),
-    date: z.string(),
-    // slug: z.string(),
+    date: strToFmtDate,
+    readingTime: z.number(),
+    slug: z.string(),
   }),
 );
