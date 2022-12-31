@@ -7,11 +7,13 @@ const getOGLink = (meta: Meta) =>
     title: meta.title,
     description: meta.description,
     date: meta.date,
-    // slug: meta.url,
+    readingTime: meta.readingTime,
+    slug: meta.slug,
   });
 
 const theme = {
   head: ({ meta }: { meta: Meta }) => {
+    console.log({ meta });
     return (
       <>
         <meta name="description" content={meta.description} />

@@ -1,4 +1,3 @@
-import { format, parseISO } from "date-fns";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
@@ -9,9 +8,7 @@ const BlogCard: React.FC<Meta> = (props) => {
   return (
     <div className="flex cursor-pointer flex-col rounded-lg border p-4">
       <h4 className="text-center text-lg font-semibold">{props.title}</h4>
-      <p className="text-center text-sm uppercase">
-        {format(parseISO(props.date), "LLLL d, yyyy")}
-      </p>
+      <p className="text-center text-sm uppercase">{props.date}</p>
       <div>
         <Image
           src={props.previewImg}
@@ -41,7 +38,7 @@ export const Blog: React.FC<{ posts: Meta[] }> = ({ posts }) => {
       <div className="flex flex-col gap-8">
         <div className="z-20 grid grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-3">
           {posts.map((post, idx) => (
-            <Link key={idx} href={post.url}>
+            <Link key={idx} href={post.slug}>
               <BlogCard {...post} />
             </Link>
           ))}
