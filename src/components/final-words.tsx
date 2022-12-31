@@ -36,8 +36,8 @@ export const FinalWords = () => {
           .
         </li>
         <li className="text-base">
-          This page was built using Next.js and Tailwind CSS and is open source
-          at{" "}
+          This page was built using Next.js, Tailwind CSS and Nextra and is open
+          source at{" "}
           <FancyLink href="https://github.com/juliusmarminge/jumr.dev">
             GitHub
           </FancyLink>
