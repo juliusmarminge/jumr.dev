@@ -20,8 +20,10 @@ export const CommentSection = () => {
   });
   const comments = discussion?.comments ?? [];
 
-  if (!discussion) return <div>Loading comments...</div>;
+  // FIXME: Hiding this fornow in prod
+  if (process.env.NODE_ENV === "production" && !session.data) return null;
 
+  if (!discussion) return <div>Loading comments...</div>;
   return (
     <div>
       <h2>Questions? Leave a comment below!</h2>
