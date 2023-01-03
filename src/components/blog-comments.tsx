@@ -20,7 +20,7 @@ export const CommentSection = () => {
   });
   const comments = discussion?.comments ?? [];
 
-  if (!discussion) return "Loading comments...";
+  if (!discussion) return <div>Loading comments...</div>;
 
   return (
     <div>
