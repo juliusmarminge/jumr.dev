@@ -5,6 +5,7 @@ import { FaArrowAltCircleUp } from "react-icons/fa";
 
 import { About } from "~/components/about";
 import { Blog } from "~/components/blog";
+import { CommentSection } from "~/components/blog-comments";
 import { ExperienceSection } from "~/components/experience";
 import { FinalWords } from "~/components/final-words";
 import { Header } from "~/components/header";
@@ -24,7 +25,7 @@ export const getStaticProps = async () => {
 
 const Home: NextPage<{ posts: Meta[] }> = ({ posts }) => {
   return (
-    <div className="scrollbar-accent z-0 h-screen overflow-x-hidden overflow-y-scroll scroll-smooth text-white">
+    <div className="scrollbar-accent z-0 h-screen overflow-y-scroll scroll-smooth text-white overflow-x-hidden">
       <Head>
         <title>🇸🇪 Julius | SWE | OSS</title>
       </Head>
@@ -54,6 +55,8 @@ const Home: NextPage<{ posts: Meta[] }> = ({ posts }) => {
       <section id="final-words">
         <FinalWords />
       </section>
+
+      <CommentSection />
 
       <footer className="sticky bottom-5 z-[1000] w-full">
         <div className="flex items-center justify-center">
