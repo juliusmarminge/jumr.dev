@@ -1,52 +1,33 @@
+import clsx from "clsx";
 import Image from "next/image";
 import Link from "next/link";
 import { signIn, useSession } from "next-auth/react";
 import { useState } from "react";
 import { FaThumbsUp } from "react-icons/fa";
 
-import { api } from "~/lib/api";
+import { api, RouterOutputs } from "~/lib/api";
+
+type Discussion = RouterOutputs["github"]["getDiscussionBySlug"];
+type Comment = Discussion["comments"][number];
 
 export const CommentSection = () => {
-  const comments = [
-    {
-      id: "1",
-      text: "Great post!!!",
-      author: "Theo Browne",
-      handle: "t3dotgg",
-      authorImg: "https://github.com/t3dotgg.png",
-      date: "2022-12-13",
-      likes: 10,
-    },
-    {
-      id: "1",
-      text: "Great post2!!!",
-      author: "Alex / KATT",
-      handle: "katt",
-      authorImg: "https://github.com/katt.png",
-      date: "2022-12-13",
-      likes: 5,
-    },
-    {
-      id: "1",
-      text: "Great post3!!!",
-      author: "Trash",
-      handle: "bautistaaa",
-      authorImg: "https://github.com/bautistaaa.png",
-      date: "2022-12-13",
-      likes: 69,
-    },
-  ]; // useComments();
-
   const session = useSession();
   const [text, setText] = useState("");
 
-  const { data } = api.github.getDiscussionBySlug.useQuery({
-    slug: "blog-t3-turbo",
+  const { data: discussion } = api.github.getDiscussionBySlug.useQuery({
+    repo: "tkdodo/blog-comments",
+    slug: "blog/2022-in-review",
   });
+  const comments = discussion?.comments ?? [];
+
+  if (!discussion) return "Loading comments...";
 
   return (
     <div>
       <h2>Questions? Leave a comment below!</h2>
+      <p>
+        View full discussion <Link href={discussion.url}>on GitHub</Link>.
+      </p>
       <div className="flex flex-col gap-3">
         <textarea
           className="rounded-md border-b-2 border-stone-200 p-2"
@@ -89,55 +70,52 @@ export const CommentSection = () => {
   );
 };
 
-interface CommentProps {
-  id: string;
-  text: string;
-  author: string;
-  handle: string;
-  authorImg: string;
-  date: string;
-  likes: number;
-}
-
-const Comment = (props: CommentProps) => {
+const Comment = (props: Comment) => {
   const likeComment = () => {};
   const replyToComment = () => {};
 
   const session = useSession();
   const [isCreatingReply, setIsCreatingReply] = useState(false);
 
+  console.log(props);
+
   return (
     <div className="nx-not-prose flex space-x-2 py-2">
-      <Link href={`https://github.com/${props.handle}`}>
+      <Link href={props.author.url} className="relative h-10 w-10">
         <Image
-          src={props.authorImg}
-          alt={props.author}
-          width={40}
-          height={40}
-          className="m-0 h-10 w-10 rounded-full"
+          src={props.author.avatarUrl}
+          alt={props.author.login}
+          fill
+          className="m-0 rounded-full"
         />
       </Link>
       <div className="flex flex-1 flex-col gap-1">
         <div className="flex gap-2">
-          <Link
-            href={`https://github.com/${props.handle}`}
-            className="text-sm font-bold"
-          >
-            {props.author}
+          <Link href={props.author.url} className="text-sm font-bold">
+            {props.author.login}
           </Link>
-          <span className="text-sm text-stone-500">{props.date}</span>
+          <span className="text-sm text-stone-500">{props.createdAt}</span>
         </div>
 
-        <p className="text-sm">{props.text}</p>
+        <p
+          className="text-sm"
+          dangerouslySetInnerHTML={{ __html: props.bodyHTML }}
+        />
 
         <div className="flex items-center gap-2">
           <div className="flex items-center gap-1 text-sm">
             <button
               title="Login to like this comment"
               className="btn-disabled-tooltip flex items-center gap-1 rounded-full p-2 text-sm disabled:cursor-not-allowed hover:bg-stone-700"
-              disabled={!session.data}
+              disabled={!session.data || !props.viewerCanUpvote}
             >
-              <FaThumbsUp className="text-lg" onClick={() => likeComment()} />
+              <FaThumbsUp
+                className={clsx(
+                  "text-lg",
+                  props.viewerHasUpvoted && "text-blue-500",
+                )}
+                onClick={() => likeComment()}
+              />
             </button>
             {props.likes}
           </div>
@@ -174,6 +152,10 @@ const Comment = (props: CommentProps) => {
             </div>
           </div>
         )}
+
+        {props.replies?.map((reply) => (
+          <Comment key={reply.id} {...reply} replies={null} />
+        ))}
       </div>
     </div>
   );

@@ -17,6 +17,7 @@ const config = {
     remotePatterns: [
       { hostname: "github.com" },
       { hostname: "user-images.githubusercontent.com" },
+      { hostname: "avatars.githubusercontent.com" },
     ],
   },
 };
