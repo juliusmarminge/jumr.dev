@@ -71,5 +71,6 @@ export type AppRouter = typeof appRouter;
 export default createNextApiHandler({
   router: appRouter,
   createContext: () => ({}),
-  onError: ({ error, path }) => `❌ ${path} ${error.message}`,
+  onError: ({ error, path }) =>
+    `❌ TRPC Error: ${path ?? "<no-path>"} ${error.message}`,
 });
