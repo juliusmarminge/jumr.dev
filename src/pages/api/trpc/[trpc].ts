@@ -17,10 +17,12 @@ const fetchGithubGQL = <TResponse>(
     body: JSON.stringify({ query, variables }),
   }).then(async (r) => {
     if (!r.ok) {
-      const text = await r.text();
-      throw new Error(text);
+      console.error(r);
+      throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
     }
-    return (await r.json()).data as TResponse;
+    const data = await r.json();
+    if ("data" in data) return data.data as TResponse;
+    return data as TResponse;
   });
 
 const appRouter = t.router({
@@ -43,7 +45,8 @@ const appRouter = t.router({
           id
           url
           number
-          reactions {
+          upvoteCount
+          reactions (content:THUMBS_UP) {
             totalCount
           }
           comments(first: $first) {
@@ -59,6 +62,10 @@ const appRouter = t.router({
                 login
                 url
               }
+              reactions (content:THUMBS_UP) {
+                totalCount
+                viewerHasReacted
+              }
               replies(first: $first) {
                 nodes {
                   id
@@ -67,6 +74,10 @@ const appRouter = t.router({
                   upvoteCount
                   viewerHasUpvoted
                   viewerCanUpvote
+                  reactions (content:THUMBS_UP) {
+                    totalCount
+                    viewerHasReacted
+                  }
                   author {
                     avatarUrl
                     login
@@ -88,6 +99,7 @@ const appRouter = t.router({
               id: string;
               url: string;
               number: number;
+              upvoteCount: number;
               reactions: {
                 totalCount: number;
               };
@@ -104,6 +116,10 @@ const appRouter = t.router({
                     login: string;
                     url: string;
                   };
+                  reactions: {
+                    totalCount: number;
+                    viewerHasReacted: boolean;
+                  };
                   replies: {
                     nodes: {
                       id: string;
@@ -112,6 +128,10 @@ const appRouter = t.router({
                       upvoteCount: number;
                       viewerHasUpvoted: boolean;
                       viewerCanUpvote: boolean;
+                      reactions: {
+                        totalCount: number;
+                        viewerHasReacted: boolean;
+                      };
                       author: {
                         avatarUrl: string;
                         login: string;
@@ -134,18 +154,18 @@ const appRouter = t.router({
           env.GITHUB_TOKEN,
         );
 
-        console.log(res);
-
         const discussion = res.search.nodes[0];
         if (!discussion) throw new TRPCError({ code: "NOT_FOUND" });
 
         const comments = discussion.comments.nodes.map((comment) => ({
           id: comment.id,
-          likes: comment.upvoteCount,
+          likes: comment.upvoteCount + comment.reactions.totalCount,
           createdAt: comment.createdAt,
           bodyHTML: comment.bodyHTML,
-          viewerHasUpvoted: comment.viewerHasUpvoted,
-          viewerCanUpvote: comment.viewerCanUpvote,
+          viewerHasUpvoted:
+            comment.viewerHasUpvoted || comment.reactions.viewerHasReacted,
+          viewerCanUpvote:
+            comment.viewerCanUpvote && !comment.reactions.viewerHasReacted,
           author: {
             avatarUrl: comment.author.avatarUrl,
             login: comment.author.login,
@@ -154,11 +174,13 @@ const appRouter = t.router({
           replies: comment.replies.nodes.length
             ? comment.replies.nodes.map((reply) => ({
                 id: reply.id,
-                likes: reply.upvoteCount,
+                likes: reply.upvoteCount + reply.reactions.totalCount,
                 createdAt: reply.createdAt,
                 bodyHTML: reply.bodyHTML,
-                viewerHasUpvoted: reply.viewerHasUpvoted,
-                viewerCanUpvote: reply.viewerCanUpvote,
+                viewerHasUpvoted:
+                  reply.viewerHasUpvoted || reply.reactions.viewerHasReacted,
+                viewerCanUpvote:
+                  reply.viewerCanUpvote && !reply.reactions.viewerHasReacted,
                 author: {
                   avatarUrl: reply.author.avatarUrl,
                   login: reply.author.login,
@@ -172,9 +194,28 @@ const appRouter = t.router({
           id: discussion.id,
           url: discussion.url,
           number: discussion.number,
-          likes: discussion.reactions.totalCount,
+          likes: discussion.reactions.totalCount + discussion.upvoteCount,
           comments: comments,
         };
+      }),
+
+    likeComment: t.procedure
+      .input(
+        z.object({
+          id: z.string(),
+        }),
+      )
+      .mutation(async ({ input }) => {
+        const gql = `
+  mutation ($id: ID!) {
+    addReaction(input: {subjectId: $id, content: THUMBS_UP}) {
+      reaction {
+        id
+      }
+    }
+  }`;
+
+        await fetchGithubGQL(gql, { id: input.id }, env.GITHUB_TOKEN);
       }),
   }),
 });

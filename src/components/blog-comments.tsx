@@ -71,7 +71,10 @@ export const CommentSection = () => {
 };
 
 const Comment = (props: Comment) => {
-  const likeComment = () => {};
+  const utils = api.useContext();
+  const { mutate: likeComment } = api.github.likeComment.useMutation({
+    onSettled: () => utils.github.getDiscussionBySlug.invalidate(),
+  });
   const replyToComment = () => {};
 
   const session = useSession();
@@ -114,7 +117,7 @@ const Comment = (props: Comment) => {
                   "text-lg",
                   props.viewerHasUpvoted && "text-blue-500",
                 )}
-                onClick={() => likeComment()}
+                onClick={() => likeComment({ id: props.id })}
               />
             </button>
             {props.likes}
