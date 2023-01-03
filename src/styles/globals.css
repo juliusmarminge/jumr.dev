@@ -27,4 +27,12 @@
   .scrollbar-accent {
     @apply scrollbar scrollbar-track-gray-400/20 scrollbar-thumb-accent-500/80;
   }
+
+  .btn-disabled-tooltip {
+    @apply relative inline-block;
+  }
+  .btn-disabled-tooltip:disabled:hover::after {
+    @apply absolute top-0 left-full z-10 w-[15ch] rounded-lg bg-stone-600 px-2 py-1;
+    content: attr(title);
+  }
 }
