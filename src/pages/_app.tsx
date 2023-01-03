@@ -5,6 +5,8 @@ import { type AppType } from "next/app";
 import { Session } from "next-auth";
 import { SessionProvider } from "next-auth/react";
 
+import { api } from "~/lib/api";
+
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,
   pageProps,
@@ -19,4 +21,4 @@ const MyApp: AppType<{ session: Session | null }> = ({
   );
 };
 
-export default MyApp;
+export default api.withTRPC(MyApp);

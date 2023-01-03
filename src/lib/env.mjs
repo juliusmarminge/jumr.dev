@@ -3,6 +3,7 @@ import { z } from "zod";
 const envSchema = z.object({
   GITHUB_ID: z.string(),
   GITHUB_SECRET: z.string(),
+  GITHUB_TOKEN: z.string(),
   NEXTAUTH_URL: z.preprocess(
     (str) =>
       process.env.VERCEL_URL ? "https://" + process.env.VERCEL_URL : str,

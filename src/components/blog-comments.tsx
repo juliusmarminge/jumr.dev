@@ -1,8 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
-import { useSession } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import { useState } from "react";
 import { FaThumbsUp } from "react-icons/fa";
+
+import { api } from "~/lib/api";
 
 export const CommentSection = () => {
   const comments = [
@@ -36,30 +38,50 @@ export const CommentSection = () => {
   ]; // useComments();
 
   const session = useSession();
+  const [text, setText] = useState("");
+
+  const { data } = api.github.getDiscussionBySlug.useQuery({
+    slug: "blog-t3-turbo",
+  });
 
   return (
     <div>
       <h2>Questions? Leave a comment below!</h2>
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-3">
         <textarea
           className="rounded-md border-b-2 border-stone-200 p-2"
           placeholder="Leave a comment..."
+          value={text}
+          onChange={(e) => setText(e.target.value)}
         />
-        <div className="flex items-center justify-end">
-          <button
-            className="rounded-full py-1 px-2 text-sm font-medium hover:bg-stone-700"
-            onClick={() => {}}
-          >
-            Cancel
-          </button>
-          <button
-            className="rounded-full bg-blue-500 py-1 px-2 text-sm font-medium text-stone-800 hover:bg-blue-400"
-            onClick={() => {}}
-          >
-            Comment
-          </button>
+        <div className="flex items-center justify-end gap-2">
+          {!!text.length && (
+            <button
+              className="rounded-full py-2 px-3 text-sm font-medium hover:bg-stone-700"
+              disabled={!session.data || !text.length}
+              onClick={() => setText("")}
+            >
+              Cancel
+            </button>
+          )}
+          {session.data ? (
+            <button
+              className="rounded-full bg-blue-500 py-2 px-3 text-sm font-medium text-stone-100 disabled:bg-stone-800 hover:bg-blue-400 disabled:hover:bg-stone-800"
+              disabled={!text.length}
+              onClick={() => {}}
+            >
+              Comment
+            </button>
+          ) : (
+            <button
+              className="rounded-full bg-blue-500 py-2 px-3 text-sm font-medium text-stone-800  hover:bg-blue-400 "
+              onClick={() => void signIn("github")}
+            >
+              Sign In to Comment
+            </button>
+          )}
         </div>
-      </div>  
+      </div>
       {comments.map((comment) => (
         <Comment key={comment.id} {...comment} />
       ))}
@@ -95,7 +117,7 @@ const Comment = (props: CommentProps) => {
           className="m-0 h-10 w-10 rounded-full"
         />
       </Link>
-      <div className="flex flex-col gap-1">
+      <div className="flex flex-1 flex-col gap-1">
         <div className="flex gap-2">
           <Link
             href={`https://github.com/${props.handle}`}
