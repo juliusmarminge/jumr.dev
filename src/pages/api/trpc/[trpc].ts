@@ -171,23 +171,23 @@ const appRouter = t.router({
             login: comment.author.login,
             url: comment.author.url,
           },
-          replies: comment.replies.nodes.length
-            ? comment.replies.nodes.map((reply) => ({
-                id: reply.id,
-                likes: reply.upvoteCount + reply.reactions.totalCount,
-                createdAt: reply.createdAt,
-                bodyHTML: reply.bodyHTML,
-                viewerHasUpvoted:
-                  reply.viewerHasUpvoted || reply.reactions.viewerHasReacted,
-                viewerCanUpvote:
-                  reply.viewerCanUpvote && !reply.reactions.viewerHasReacted,
-                author: {
-                  avatarUrl: reply.author.avatarUrl,
-                  login: reply.author.login,
-                  url: reply.author.url,
-                },
-              }))
-            : null,
+          isReply: false,
+          replies: comment.replies.nodes.map((reply) => ({
+            id: reply.id,
+            isReply: true,
+            likes: reply.upvoteCount + reply.reactions.totalCount,
+            createdAt: reply.createdAt,
+            bodyHTML: reply.bodyHTML,
+            viewerHasUpvoted:
+              reply.viewerHasUpvoted || reply.reactions.viewerHasReacted,
+            viewerCanUpvote:
+              reply.viewerCanUpvote && !reply.reactions.viewerHasReacted,
+            author: {
+              avatarUrl: reply.author.avatarUrl,
+              login: reply.author.login,
+              url: reply.author.url,
+            },
+          })),
         }));
 
         return {
@@ -216,6 +216,74 @@ const appRouter = t.router({
   }`;
 
         await fetchGithubGQL(gql, { id: input.id }, env.GITHUB_TOKEN);
+      }),
+
+    createComment: t.procedure
+      .input(
+        z.object({
+          discussionId: z.string(),
+          body: z.string(),
+        }),
+      )
+      .mutation(async ({ input }) => {
+        const gql = `
+          mutation ($discussionId: ID!, $body: String!) {
+            addDiscussionComment(input: {discussionId: $discussionId, body: $body}) {
+    	        comment {
+                author {
+                  login
+                }
+                body
+              }
+            }
+          }`;
+
+        const res = await fetchGithubGQL(
+          gql,
+          {
+            discussionId: input.discussionId,
+            body: input.body,
+          },
+          env.GITHUB_TOKEN,
+        );
+
+        console.log(res);
+      }),
+
+    replyToComment: t.procedure
+      .input(
+        z.object({
+          discussionId: z.string(),
+          commentId: z.string(),
+          body: z.string(),
+        }),
+      )
+      .mutation(async ({ input }) => {
+        const gql = `
+          mutation ($discussionId: ID!, $body: String!, $commentId: ID) {
+            addDiscussionComment(input: {discussionId: $discussionId, body: $body, replyToId: $commentId}) {
+    	        comment {
+                author {
+                  login
+                }
+                body
+              }
+            }
+          }`;
+
+        console.log(input);
+
+        const res = await fetchGithubGQL(
+          gql,
+          {
+            discussionId: input.discussionId,
+            commentId: input.commentId,
+            body: input.body,
+          },
+          env.GITHUB_TOKEN,
+        );
+
+        console.log(res);
       }),
   }),
 });

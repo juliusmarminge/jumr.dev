@@ -1,9 +1,11 @@
 import clsx from "clsx";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { signIn, useSession } from "next-auth/react";
 import { useState } from "react";
 import { FaThumbsUp } from "react-icons/fa";
+import { RiHeart2Fill } from "react-icons/ri";
 
 import { api, RouterOutputs } from "~/lib/api";
 
@@ -12,25 +14,35 @@ type Comment = Discussion["comments"][number];
 
 export const CommentSection = () => {
   const session = useSession();
+  const { pathname } = useRouter();
   const [text, setText] = useState("");
 
+  const utils = api.useContext();
+
   const { data: discussion } = api.github.getDiscussionBySlug.useQuery({
-    repo: "tkdodo/blog-comments",
-    slug: "blog/2022-in-review",
+    repo: "juliusmarminge/jumr.dev",
+    slug: pathname,
   });
   const comments = discussion?.comments ?? [];
+
+  const { mutate: createComment } = api.github.createComment.useMutation({
+    onSettled: () => {
+      setText("");
+      void utils.github.getDiscussionBySlug.invalidate();
+    },
+  });
 
   // FIXME: Hiding this fornow in prod
   if (process.env.NODE_ENV === "production" && !session.data) return null;
 
   if (!discussion) return <div>Loading comments...</div>;
   return (
-    <div>
+    <div className="">
       <h2>Questions? Leave a comment below!</h2>
       <p>
         View full discussion <Link href={discussion.url}>on GitHub</Link>.
       </p>
-      <div className="flex flex-col gap-3">
+      <div className="mt-4 flex flex-col gap-3">
         <textarea
           className="rounded-md border-b-2 border-stone-200 p-2"
           placeholder="Leave a comment..."
@@ -51,7 +63,9 @@ export const CommentSection = () => {
             <button
               className="rounded-full bg-blue-500 py-2 px-3 text-sm font-medium text-stone-100 disabled:bg-stone-800 hover:bg-blue-400 disabled:hover:bg-stone-800"
               disabled={!text.length}
-              onClick={() => {}}
+              onClick={() =>
+                createComment({ discussionId: discussion.id, body: text })
+              }
             >
               Comment
             </button>
@@ -66,23 +80,26 @@ export const CommentSection = () => {
         </div>
       </div>
       {comments.map((comment) => (
-        <Comment key={comment.id} {...comment} />
+        <Comment key={comment.id} {...comment} discussionId={discussion.id} />
       ))}
     </div>
   );
 };
 
-const Comment = (props: Comment) => {
+const Comment = (props: Comment & { discussionId: string }) => {
+  const session = useSession();
+  const [replyText, setReplyText] = useState<string | null>(null);
+
   const utils = api.useContext();
   const { mutate: likeComment } = api.github.likeComment.useMutation({
     onSettled: () => utils.github.getDiscussionBySlug.invalidate(),
   });
-  const replyToComment = () => {};
-
-  const session = useSession();
-  const [isCreatingReply, setIsCreatingReply] = useState(false);
-
-  console.log(props);
+  const { mutate: replyToComment } = api.github.replyToComment.useMutation({
+    onSettled: () => {
+      setReplyText(null);
+      void utils.github.getDiscussionBySlug.invalidate();
+    },
+  });
 
   return (
     <div className="nx-not-prose flex space-x-2 py-2">
@@ -112,7 +129,7 @@ const Comment = (props: Comment) => {
             <button
               title="Login to like this comment"
               className="btn-disabled-tooltip flex items-center gap-1 rounded-full p-2 text-sm disabled:cursor-not-allowed hover:bg-stone-700"
-              disabled={!session.data || !props.viewerCanUpvote}
+              disabled={!session.data}
             >
               <FaThumbsUp
                 className={clsx(
@@ -125,32 +142,42 @@ const Comment = (props: Comment) => {
             {props.likes}
           </div>
 
-          <button
-            title="Login to reply to this comment"
-            className="btn-disabled-tooltip rounded-full py-1 px-2 text-sm hover:bg-stone-700"
-            disabled={!session.data}
-            onClick={() => setIsCreatingReply(true)}
-          >
-            Reply
-          </button>
+          {!props.isReply && (
+            <button
+              title="Login to reply to this comment"
+              className="btn-disabled-tooltip rounded-full py-1 px-2 text-sm hover:bg-stone-700"
+              disabled={!session.data}
+              onClick={() => setReplyText("")}
+            >
+              Reply
+            </button>
+          )}
         </div>
 
-        {isCreatingReply && (
+        {replyText !== null && (
           <div className="flex flex-col gap-2">
             <textarea
               className="rounded-md border-b-2 border-stone-200 p-2"
               placeholder="Leave a reply..."
+              value={replyText}
+              onChange={(e) => setReplyText(e.target.value)}
             />
             <div className="flex items-center justify-end">
               <button
                 className="rounded-full py-1 px-2 text-sm font-medium hover:bg-stone-700"
-                onClick={() => setIsCreatingReply(false)}
+                onClick={() => setReplyText(null)}
               >
                 Cancel
               </button>
               <button
                 className="rounded-full bg-blue-500 py-1 px-2 text-sm font-medium text-stone-800 hover:bg-blue-400"
-                onClick={() => replyToComment()}
+                onClick={() =>
+                  replyToComment({
+                    discussionId: props.discussionId,
+                    commentId: props.id,
+                    body: replyText,
+                  })
+                }
               >
                 Reply
               </button>
@@ -158,8 +185,13 @@ const Comment = (props: Comment) => {
           </div>
         )}
 
-        {props.replies?.map((reply) => (
-          <Comment key={reply.id} {...reply} replies={null} />
+        {props.replies.map((reply) => (
+          <Comment
+            key={reply.id}
+            {...reply}
+            replies={[]}
+            discussionId={props.discussionId}
+          />
         ))}
       </div>
     </div>
