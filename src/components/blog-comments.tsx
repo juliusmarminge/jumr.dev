@@ -5,7 +5,6 @@ import { useRouter } from "next/router";
 import { signIn, useSession } from "next-auth/react";
 import { useState } from "react";
 import { FaThumbsUp } from "react-icons/fa";
-import { RiHeart2Fill } from "react-icons/ri";
 
 import { api, RouterOutputs } from "~/lib/api";
 
