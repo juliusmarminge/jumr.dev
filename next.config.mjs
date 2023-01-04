@@ -20,6 +20,10 @@ const config = {
       { hostname: "avatars.githubusercontent.com" },
     ],
   },
+  // eslint-disable-next-line @typescript-eslint/require-await
+  redirects: async () => [
+    { source: "/blog", destination: "/#blog", permanent: true },
+  ],
 };
 
 export default withNextra(config);
