@@ -1,5 +1,6 @@
 import clsx from "clsx";
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { FaDatabase } from "react-icons/fa";
 import { GiProcessor } from "react-icons/gi";
 import { IconType } from "react-icons/lib";
@@ -87,17 +88,20 @@ export const ExperienceSection = () => {
 const ExperienceCard: React.FC<Experience> = (props) => {
   return (
     <article className="relative flex w-[500px] flex-shrink-0 snap-center flex-col items-center space-y-7 overflow-hidden rounded-lg bg-[#292929] p-10 opacity-40 transition-opacity duration-200 hover:opacity-100 md:w-[600px] xl:w-[900px]">
-      <motion.img
+      <motion.div
         initial={{ opacity: 0, y: -100 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 1 }}
         viewport={{ once: true }}
-        height={500}
-        width={500}
-        className="h-32 w-32 rounded-full object-cover object-center xl:h-[200px] xl:w-[200px]"
-        src={props.img}
-        alt=""
-      />
+        className="relative h-32 w-32 xl:h-[200px] xl:w-[200px]"
+      >
+        <Image
+          src={props.img}
+          fill
+          alt=""
+          className="rounded-full object-cover object-center"
+        />
+      </motion.div>
 
       {props.note && (
         <div
