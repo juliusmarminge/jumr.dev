@@ -35,7 +35,7 @@ export const CommentSection = () => {
   // FIXME: Hiding this fornow in prod
   if (process.env.NODE_ENV === "production" && !session.data) return null;
 
-  if (!discussion) return <div>Loading comments...</div>;
+  if (!discussion) return null;
   return (
     <div className="">
       <h2>Questions? Leave a comment below!</h2>
