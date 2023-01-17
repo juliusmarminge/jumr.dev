@@ -13,7 +13,7 @@ const BlogCard: React.FC<Meta> = (props) => {
         <Image
           src={props.previewImg}
           alt={props.title}
-          className="mx-auto aspect-[2/1] h-28 py-4 md:h-36 xl:h-48"
+          className="mx-auto aspect-[2/1] h-28 object-cover py-4 md:h-36 xl:h-48"
           height={400}
           width={800}
         />
