@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 
-import { CommentSection } from "~/components/blog-comments";
+// import { CommentSection } from "~/components/blog-comments";
 import { Meta } from "~/lib/blog";
 import { blogParams } from "~/lib/zod-params";
 
@@ -32,7 +32,7 @@ const theme = {
   },
   footer: (
     <>
-      <CommentSection />
+      {/* <CommentSection /> */}
       <p className="pt-16 text-sm text-stone-500">MIT 2023 © Julius Marminge</p>
     </>
   ),
