@@ -33,6 +33,8 @@ export const Hero = () => {
       <Circles />
       <Image
         src={ProfileImg}
+        height={144}
+        width={144}
         alt="Profile picture"
         className="relative mx-auto h-36 w-36 rounded-full"
       />
