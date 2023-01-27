@@ -1,5 +1,6 @@
 import { initTRPC, TRPCError } from "@trpc/server";
-import { createNextApiHandler } from "@trpc/server/adapters/next";
+import { NextApiRequest, NextApiResponse } from "next";
+// import { createNextApiHandler } from "@trpc/server/adapters/next";
 import { z } from "zod";
 
 import { env } from "~/lib/env.mjs";
@@ -247,7 +248,7 @@ const appRouter = t.router({
           env.GITHUB_TOKEN,
         );
 
-        // console.log(res);
+        console.log(res);
       }),
 
     replyToComment: t.procedure
@@ -283,16 +284,20 @@ const appRouter = t.router({
           env.GITHUB_TOKEN,
         );
 
-        // console.log(res);
+        console.log(res);
       }),
   }),
 });
 
 export type AppRouter = typeof appRouter;
 
-export default createNextApiHandler({
-  router: appRouter,
-  createContext: () => ({}),
-  onError: ({ error, path }) =>
-    `❌ TRPC Error: ${path ?? "<no-path>"} ${error.message}`,
-});
+export default (req: NextApiRequest, res: NextApiResponse) => {
+  res.status(200).json("trpc not activated");
+
+  // createNextApiHandler({
+  //   router: appRouter,
+  //   createContext: () => ({}),
+  //   onError: ({ error, path }) =>
+  //     `❌ TRPC Error: ${path ?? "<no-path>"} ${error.message}`,
+  // })(req, res);
+};

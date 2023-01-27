@@ -33,6 +33,7 @@ export const Hero = () => {
       <Circles />
       <Image
         src={ProfileImg}
+        priority
         height={144}
         width={144}
         alt="Profile picture"
