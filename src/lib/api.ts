@@ -10,9 +10,7 @@ export const api = createTRPCNext<AppRouter>({
       links: [
         httpBatchLink({ url: "/api/trpc" }),
         loggerLink({
-          enabled: (opts) =>
-            process.env.NODE_ENV === "development" ||
-            (opts.direction === "down" && opts.result instanceof Error),
+          enabled: (opts) => process.env.NODE_ENV === "development",
         }),
       ],
     };

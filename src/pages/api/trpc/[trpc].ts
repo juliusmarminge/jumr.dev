@@ -17,7 +17,7 @@ const fetchGithubGQL = <TResponse>(
     body: JSON.stringify({ query, variables }),
   }).then(async (r) => {
     if (!r.ok) {
-      console.error(r);
+      // console.error(r);
       throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
     }
     const data = await r.json();
@@ -247,7 +247,7 @@ const appRouter = t.router({
           env.GITHUB_TOKEN,
         );
 
-        console.log(res);
+        // console.log(res);
       }),
 
     replyToComment: t.procedure
@@ -271,7 +271,7 @@ const appRouter = t.router({
             }
           }`;
 
-        console.log(input);
+        // console.log(input);
 
         const res = await fetchGithubGQL(
           gql,
@@ -283,7 +283,7 @@ const appRouter = t.router({
           env.GITHUB_TOKEN,
         );
 
-        console.log(res);
+        // console.log(res);
       }),
   }),
 });
