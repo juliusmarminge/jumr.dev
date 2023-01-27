@@ -9,7 +9,7 @@ export const About = () => {
       transition={{ duration: 1.5 }}
       className="section-container"
     >
-      <h3 className="section-title">About</h3>
+      <h2 className="section-title">About</h2>
 
       <motion.div
         initial={{ opacity: 0, x: -200 }}
@@ -27,7 +27,7 @@ export const About = () => {
       </motion.div>
 
       <div className="space-y-10 px-0 md:px-10">
-        <h4 className="text-4xl font-semibold">Get to know me!</h4>
+        <h3 className="text-4xl font-semibold">Get to know me!</h3>
         <p className="text-base">
           I&apos;m a software engineer from Sweden. I&apos;m passionate about
           building stuff whether it be developer tools or applications. I&apos;m

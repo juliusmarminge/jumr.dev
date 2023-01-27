@@ -18,16 +18,16 @@ export const Header: React.FC<{ isBlog?: boolean }> = ({ isBlog = false }) => {
         className="flex items-center"
       >
         <Link href="https://github.com/juliusmarminge">
-          <SiGithub className="header-icon" />
+          <SiGithub className="header-icon" title="Github" />
         </Link>
         <Link href="https://twitter.com/jullerino">
-          <SiTwitter className="header-icon" />
+          <SiTwitter className="header-icon" title="Twitter" />
         </Link>
         <Link href="https://www.linkedin.com/in/julius-marminge-b9a12a241/">
-          <SiLinkedin className="header-icon" />
+          <SiLinkedin className="header-icon" title="LinkedIn" />
         </Link>
         <Link href="https://discord.com/users/136072283444871168">
-          <SiDiscord className="header-icon" />
+          <SiDiscord className="header-icon" title="Discord" />
         </Link>
       </motion.div>
 

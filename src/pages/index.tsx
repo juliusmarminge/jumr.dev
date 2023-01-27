@@ -61,7 +61,10 @@ const Home: NextPage<{ posts: Meta[] }> = ({ posts }) => {
       <footer className="sticky bottom-5 z-[1000] w-full">
         <div className="flex items-center justify-center">
           <Link href="#hero">
-            <FaArrowAltCircleUp className="h-10 w-10 cursor-pointer fill-gray-400 transition-colors duration-200 hover:fill-gray-300" />
+            <FaArrowAltCircleUp
+              title="Go to the top"
+              className="h-10 w-10 cursor-pointer fill-gray-400 transition-colors duration-200 hover:fill-gray-300"
+            />
           </Link>
         </div>
       </footer>
