@@ -36,7 +36,7 @@ export async function getAllArticles() {
     readingTime: 12,
     previewImg:
       "https://og-image.trpc.io/api/blog?input=%7B%22title%22%3A%22Writing%20a%20tiny%20tRPC%20client%22%2C%22description%22%3A%22Ever%20wondered%20how%20tRPC%20works%3F%20Maybe%20you%20want%20to%20start%20contributing%20to%20the%20project%20but%20you're%20frightened%20by%20the%20internals%3F%20The%20aim%20of%20this%20post%20is%20to%20familiarize%20you%20with%20the%20internals%20of%20tRPC%20by%20writing%20a%20minimal%20client%20that%20covers%20the%20big%20parts%20of%20how%20tRPC%20works.%22%2C%22authorName%22%3A%22Julius%20Marminge%22%2C%22authorTitle%22%3A%22tRPC%20Core%20Team%20Member%22%2C%22authorImg%22%3A%22https%3A%2F%2Fgithub.com%2Fjuliusmarminge.png%22%2C%22date%22%3A%222023-01-17T00%3A00%3A00.000Z%22%2C%22readingTimeInMinutes%22%3A11.04%7D",
-    slug: "/blog/tinyrpc",
+    slug: "https://trpc.io/blog/tinyrpc-client",
   });
 
   return articles.sort((a, b) => b.date.localeCompare(a.date));
