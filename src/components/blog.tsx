@@ -5,6 +5,8 @@ import Link from "next/link";
 import { Meta } from "~/lib/blog";
 
 const BlogCard: React.FC<Meta> = (props) => {
+  const truncatedDescription = props.description.slice(0, 150) + "...";
+
   return (
     <div className="flex cursor-pointer flex-col rounded-lg border p-4">
       <h4 className="text-center text-lg font-semibold">{props.title}</h4>
@@ -17,7 +19,7 @@ const BlogCard: React.FC<Meta> = (props) => {
           height={400}
           width={800}
         />
-        <p className="text-sm md:text-left">{props.description}</p>
+        <p className="text-sm md:text-left">{truncatedDescription}</p>
       </div>
     </div>
   );

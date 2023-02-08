@@ -19,6 +19,7 @@ const config = {
       { hostname: "www.bth.se" },
       { hostname: "user-images.githubusercontent.com" },
       { hostname: "avatars.githubusercontent.com" },
+      { hostname: "og-image.trpc.io" },
     ],
   },
   // eslint-disable-next-line @typescript-eslint/require-await
