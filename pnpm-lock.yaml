@@ -8,7 +8,7 @@ specifiers:
   '@trpc/react-query': ^10.7.0
   '@trpc/server': ^10.7.0
   '@types/node': 18.0.0
-  '@types/react': 18.0.14
+  '@types/react': 18.0.28
   '@types/react-dom': 18.0.5
   '@typescript-eslint/eslint-plugin': ^5.47.0
   '@typescript-eslint/parser': ^5.47.0
@@ -65,7 +65,7 @@ dependencies:
 devDependencies:
   '@tailwindcss/typography': 0.5.7_tailwindcss@3.2.4
   '@types/node': 18.0.0
-  '@types/react': 18.0.14
+  '@types/react': 18.0.28
   '@types/react-dom': 18.0.5
   '@typescript-eslint/eslint-plugin': 5.47.0_ncmi6noazr3nzas7jxykisekym
   '@typescript-eslint/parser': 5.47.0_lzzuuodtsqwxnvqeq4g4likcqa
@@ -178,7 +178,7 @@ packages:
       react: '>=16'
     dependencies:
       '@types/mdx': 2.0.3
-      '@types/react': 18.0.14
+      '@types/react': 18.0.28
       react: 18.2.0
     dev: false
 
@@ -681,11 +681,11 @@ packages:
   /@types/react-dom/18.0.5:
     resolution: {integrity: sha512-OWPWTUrY/NIrjsAPkAk1wW9LZeIjSvkXRhclsFO8CZcZGCOg2G0YZy4ft+rOyYxy8B7ui5iZzi9OkDebZ7/QSA==}
     dependencies:
-      '@types/react': 18.0.14
+      '@types/react': 18.0.28
     dev: true
 
-  /@types/react/18.0.14:
-    resolution: {integrity: sha512-x4gGuASSiWmo0xjDLpm5mPb52syZHJx02VKbqUKdLmKtAwIh63XClGsiTI1K6DO5q7ox4xAsQrU+Gl3+gGXF9Q==}
+  /@types/react/18.0.28:
+    resolution: {integrity: sha512-RD0ivG1kEztNBdoAK7lekI9M+azSnitIn85h4iOiaLjaTrMjzslhaqCGaI4IyCJ1RljWiLCEu4jyrLLgqxBTew==}
     dependencies:
       '@types/prop-types': 15.7.5
       '@types/scheduler': 0.16.2
