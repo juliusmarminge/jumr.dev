@@ -1,38 +1,38 @@
-import clsx from "clsx";
-import Image from "next/image";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import { signIn, useSession } from "next-auth/react";
-import { useState } from "react";
-import { FaThumbsUp } from "react-icons/fa";
+import { useState } from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import clsx from 'clsx';
+import { signIn, useSession } from 'next-auth/react';
+import { FaThumbsUp } from 'react-icons/fa';
 
-import { api, RouterOutputs } from "~/lib/api";
+import { RouterOutputs, api } from '~/lib/api';
 
-type Discussion = RouterOutputs["github"]["getDiscussionBySlug"];
-type Comment = Discussion["comments"][number];
+type Discussion = RouterOutputs['github']['getDiscussionBySlug'];
+type Comment = Discussion['comments'][number];
 
 export const CommentSection = () => {
   const session = useSession();
   const { pathname } = useRouter();
-  const [text, setText] = useState("");
+  const [text, setText] = useState('');
 
   const utils = api.useContext();
 
   const { data: discussion } = api.github.getDiscussionBySlug.useQuery({
-    repo: "juliusmarminge/jumr.dev",
+    repo: 'juliusmarminge/jumr.dev',
     slug: pathname,
   });
   const comments = discussion?.comments ?? [];
 
   const { mutate: createComment } = api.github.createComment.useMutation({
     onSettled: () => {
-      setText("");
+      setText('');
       void utils.github.getDiscussionBySlug.invalidate();
     },
   });
 
   // FIXME: Hiding this fornow in prod
-  if (process.env.NODE_ENV === "production" && !session.data) return null;
+  if (process.env.NODE_ENV === 'production' && !session.data) return null;
 
   if (!discussion) return null;
   return (
@@ -53,7 +53,7 @@ export const CommentSection = () => {
             <button
               className="rounded-full py-2 px-3 text-sm font-medium hover:bg-stone-700"
               disabled={!session.data || !text.length}
-              onClick={() => setText("")}
+              onClick={() => setText('')}
             >
               Cancel
             </button>
@@ -71,7 +71,7 @@ export const CommentSection = () => {
           ) : (
             <button
               className="rounded-full bg-blue-500 py-2 px-3 text-sm font-medium text-stone-800  hover:bg-blue-400 "
-              onClick={() => void signIn("github")}
+              onClick={() => void signIn('github')}
             >
               Sign In to Comment
             </button>
@@ -132,8 +132,8 @@ const Comment = (props: Comment & { discussionId: string }) => {
             >
               <FaThumbsUp
                 className={clsx(
-                  "text-lg",
-                  props.viewerHasUpvoted && "text-blue-500",
+                  'text-lg',
+                  props.viewerHasUpvoted && 'text-blue-500',
                 )}
                 onClick={() => likeComment({ id: props.id })}
               />
@@ -146,7 +146,7 @@ const Comment = (props: Comment & { discussionId: string }) => {
               title="Login to reply to this comment"
               className="btn-disabled-tooltip rounded-full py-1 px-2 text-sm hover:bg-stone-700"
               disabled={!session.data}
-              onClick={() => setReplyText("")}
+              onClick={() => setReplyText('')}
             >
               Reply
             </button>

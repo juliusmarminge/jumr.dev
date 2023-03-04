@@ -1,11 +1,11 @@
-import { motion } from "framer-motion";
-import Image, { StaticImageData } from "next/image";
-import { BiLinkExternal } from "react-icons/bi";
+import Image, { StaticImageData } from 'next/image';
+import { motion } from 'framer-motion';
+import { BiLinkExternal } from 'react-icons/bi';
 
-import CT3TPreview from "../../public/images/ct3t.png";
-import PFVPreview from "../../public/images/pfv.png";
-import StocksPreview from "../../public/images/stocks.png";
-import SVPreview from "../../public/images/sv.png";
+import CT3TPreview from '../../public/images/ct3t.png';
+import PFVPreview from '../../public/images/pfv.png';
+import StocksPreview from '../../public/images/stocks.png';
+import SVPreview from '../../public/images/sv.png';
 
 interface ProjectProps {
   img: string | StaticImageData;
@@ -71,53 +71,53 @@ export const Projects = () => {
   const projects: ProjectProps[] = [
     {
       img: CT3TPreview,
-      title: "Create T3 Turbo",
+      title: 'Create T3 Turbo',
       description: [
-        "Create T3 Turbo is a clean and simple starter repo using the T3 Stack along with Expo React Native. " +
-          "It uses the T3 Stack, but has separated all the pieces out to make use of Turborepo caching, " +
-          "and to enable the tRPC API and Prisma Client to be reused for multiple applications.",
-        "It comes with two applications; a Next.js for the web, and a Expo React Native for mobile, " +
-          "but can be easily extended to include more to suit your needs.",
+        'Create T3 Turbo is a clean and simple starter repo using the T3 Stack along with Expo React Native. ' +
+          'It uses the T3 Stack, but has separated all the pieces out to make use of Turborepo caching, ' +
+          'and to enable the tRPC API and Prisma Client to be reused for multiple applications.',
+        'It comes with two applications; a Next.js for the web, and a Expo React Native for mobile, ' +
+          'but can be easily extended to include more to suit your needs.',
       ],
-      previewLink: "https://create-t3-turbo.vercel.app/",
-      githubLink: "https://github.com/t3-oss/create-t3-turbo",
+      previewLink: 'https://create-t3-turbo.vercel.app/',
+      githubLink: 'https://github.com/t3-oss/create-t3-turbo',
     },
     {
       img: StocksPreview,
-      title: "Stocks",
+      title: 'Stocks',
       description: [
-        "A web app where you can track all your stock purchases at one place.",
-        "I started building this app since I wanted a single place where I " +
-          "could track all my stock purchases, since they are spread around " +
-          "different apps and websites.",
-        "This app is a work in progress and I tend to work a bit on it when I have time." +
+        'A web app where you can track all your stock purchases at one place.',
+        'I started building this app since I wanted a single place where I ' +
+          'could track all my stock purchases, since they are spread around ' +
+          'different apps and websites.',
+        'This app is a work in progress and I tend to work a bit on it when I have time.' +
           "It's currently very basic, but I plan to add more features in the future.",
       ],
-      previewLink: "https://stocks.jumr.dev/",
-      githubLink: "https://github.com/juliusmarminge/stocks",
+      previewLink: 'https://stocks.jumr.dev/',
+      githubLink: 'https://github.com/juliusmarminge/stocks',
     },
     {
       img: PFVPreview,
-      title: "Pathfinding Visualizer",
+      title: 'Pathfinding Visualizer',
       description: [
-        "A simple visualizer of different pathfinding algorithms.",
-        "This project was created to help me understand how pathfinding algorithms work, and to help me learn React. " +
-          "It was initially wrote using class components and `create-react-app`, " +
-          "but I have since rewritten it using functional components and Vite. " +
+        'A simple visualizer of different pathfinding algorithms.',
+        'This project was created to help me understand how pathfinding algorithms work, and to help me learn React. ' +
+          'It was initially wrote using class components and `create-react-app`, ' +
+          'but I have since rewritten it using functional components and Vite. ' +
           "I've been meaning to add more algorithms, but it's not a priority I have at the moment.",
       ],
-      previewLink: "https://pfv.jumr.dev/",
-      githubLink: "https://github.com/juliusmarminge/pathfinding-visualizer",
+      previewLink: 'https://pfv.jumr.dev/',
+      githubLink: 'https://github.com/juliusmarminge/pathfinding-visualizer',
     },
     {
       img: SVPreview,
-      title: "Sorting Visualizer",
+      title: 'Sorting Visualizer',
       description: [
-        "Visualizer for visualizing sorting algorithms." +
-          "Very similar to the Pathfinding Visualizer, but for sorting algorithms. ",
+        'Visualizer for visualizing sorting algorithms.' +
+          'Very similar to the Pathfinding Visualizer, but for sorting algorithms. ',
       ],
-      previewLink: "https://sv.jumr.dev/",
-      githubLink: "https://github.com/juliusmarminge/sorting-visualizer",
+      previewLink: 'https://sv.jumr.dev/',
+      githubLink: 'https://github.com/juliusmarminge/sorting-visualizer',
     },
   ];
   return (

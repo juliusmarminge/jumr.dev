@@ -1,16 +1,16 @@
 /* eslint-disable @next/next/no-img-element */
-import { ImageResponse } from "@vercel/og";
+import { ImageResponse } from '@vercel/og';
 
-import { getFont } from "~/lib/og-fonts";
+import { getFont } from '~/lib/og-fonts';
 
 export const config = {
-  runtime: "experimental-edge",
+  runtime: 'experimental-edge',
 };
 
 export default async (req: Request) => {
   const url = new URL(req.url);
   const inter = await getFont({
-    family: "Inter",
+    family: 'Inter',
     weights: [400, 700] as const,
   });
 
@@ -37,8 +37,8 @@ export default async (req: Request) => {
       width: 1200,
       height: 600,
       fonts: [
-        { name: "Inter", data: inter[400], weight: 400 },
-        { name: "Inter", data: inter[700], weight: 700 },
+        { name: 'Inter', data: inter[400], weight: 400 },
+        { name: 'Inter', data: inter[700], weight: 700 },
       ],
     },
   );

@@ -1,9 +1,9 @@
-import { initTRPC, TRPCError } from "@trpc/server";
-import { NextApiRequest, NextApiResponse } from "next";
+import { NextApiRequest, NextApiResponse } from 'next';
+import { TRPCError, initTRPC } from '@trpc/server';
 // import { createNextApiHandler } from "@trpc/server/adapters/next";
-import { z } from "zod";
+import { z } from 'zod';
 
-import { env } from "~/lib/env.mjs";
+import { env } from '~/lib/env.mjs';
 
 const t = initTRPC.create();
 
@@ -12,17 +12,17 @@ const fetchGithubGQL = <TResponse>(
   variables: Record<string, unknown>,
   token: string,
 ) =>
-  fetch("https://api.github.com/graphql", {
-    method: "POST",
+  fetch('https://api.github.com/graphql', {
+    method: 'POST',
     headers: { Authorization: `Bearer ${token}` },
     body: JSON.stringify({ query, variables }),
   }).then(async (r) => {
     if (!r.ok) {
       // console.error(r);
-      throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
+      throw new TRPCError({ code: 'INTERNAL_SERVER_ERROR' });
     }
     const data = await r.json();
-    if ("data" in data) return data.data as TResponse;
+    if ('data' in data) return data.data as TResponse;
     return data as TResponse;
   });
 
@@ -156,7 +156,7 @@ const appRouter = t.router({
         );
 
         const discussion = res.search.nodes[0];
-        if (!discussion) throw new TRPCError({ code: "NOT_FOUND" });
+        if (!discussion) throw new TRPCError({ code: 'NOT_FOUND' });
 
         const comments = discussion.comments.nodes.map((comment) => ({
           id: comment.id,
@@ -292,7 +292,7 @@ const appRouter = t.router({
 export type AppRouter = typeof appRouter;
 
 export default (req: NextApiRequest, res: NextApiResponse) => {
-  res.status(200).json("trpc not activated");
+  res.status(200).json('trpc not activated');
 
   // createNextApiHandler({
   //   router: appRouter,

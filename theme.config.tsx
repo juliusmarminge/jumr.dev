@@ -1,11 +1,11 @@
-import { useRouter } from "next/router";
+import { useRouter } from 'next/router';
 
 // import { CommentSection } from "~/components/blog-comments";
-import { Meta } from "~/lib/blog";
-import { blogParams } from "~/lib/zod-params";
+import type { Meta } from '~/lib/blog';
+import { blogParams } from '~/lib/zod-params';
 
 const getOGLink = (meta: Meta, url: string) =>
-  "/api/og-blog?" +
+  '/api/og-blog?' +
   blogParams.toSearchString({
     title: meta.title,
     description: meta.description,
@@ -25,7 +25,7 @@ const theme = {
         <meta property="og:title" content={meta.title} />
         <meta property="og:image" content={getOGLink(meta, pathname)} />
         <meta property="twitter:image" content={getOGLink(meta, pathname)} />
-        <meta name="keywords" content={meta.tags?.join(",")} />
+        <meta name="keywords" content={meta.tags?.join(',')} />
         <meta name="author" content="Julius Marminge" />
       </>
     );

@@ -26,6 +26,7 @@
     "**/*.tsx",
     "**/*.cjs",
     "**/*.mjs",
+    ".eslintrc.cjs",
     "next.config.mjs",
     "theme.config.tsx"
   ],

@@ -1,8 +1,8 @@
-import NextAuth, { type AuthOptions } from "next-auth";
-import GithubProvider from "next-auth/providers/github";
+import NextAuth, { type AuthOptions } from 'next-auth';
+import GithubProvider from 'next-auth/providers/github';
 
 if (!process.env.GITHUB_ID || !process.env.GITHUB_SECRET) {
-  throw new Error("❌ Missing GITHUB_ID or GITHUB_SECRET in NextAuth config");
+  throw new Error('❌ Missing GITHUB_ID or GITHUB_SECRET in NextAuth config');
 }
 
 const options: AuthOptions = {

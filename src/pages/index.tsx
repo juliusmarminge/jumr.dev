@@ -1,17 +1,17 @@
-import { type NextPage } from "next";
-import Head from "next/head";
-import Link from "next/link";
-import { FaArrowAltCircleUp } from "react-icons/fa";
+import { type NextPage } from 'next';
+import Head from 'next/head';
+import Link from 'next/link';
+import { FaArrowAltCircleUp } from 'react-icons/fa';
 
-import { About } from "~/components/about";
-import { Blog } from "~/components/blog";
-import { CommentSection } from "~/components/blog-comments";
-import { ExperienceSection } from "~/components/experience";
-import { FinalWords } from "~/components/final-words";
-import { Header } from "~/components/header";
-import { Hero } from "~/components/hero";
 // import { Projects } from "~/components/projects";
-import { getAllArticles, Meta } from "~/lib/blog";
+import { Meta, getAllArticles } from '~/lib/blog';
+import { About } from '~/components/about';
+import { Blog } from '~/components/blog';
+import { CommentSection } from '~/components/blog-comments';
+import { ExperienceSection } from '~/components/experience';
+import { FinalWords } from '~/components/final-words';
+import { Header } from '~/components/header';
+import { Hero } from '~/components/hero';
 
 export const getStaticProps = async () => {
   const allPosts = await getAllArticles();
