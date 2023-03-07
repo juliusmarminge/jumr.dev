@@ -13,7 +13,7 @@ specifiers:
   '@typescript-eslint/eslint-plugin': ^5.47.0
   '@typescript-eslint/parser': ^5.47.0
   '@vercel/analytics': ^0.1.6
-  '@vercel/og': ^0.3.0
+  '@vercel/og': ^0.4.0
   autoprefixer: ^10.4.7
   clsx: ^1.2.1
   date-fns: ^2.29.3
@@ -47,7 +47,7 @@ dependencies:
   '@trpc/react-query': 10.7.0_x4ie6nhblo2vtx2aafrgzlfqy4
   '@trpc/server': 10.7.0
   '@vercel/analytics': 0.1.6_react@18.2.0
-  '@vercel/og': 0.3.0
+  '@vercel/og': 0.4.0
   clsx: 1.2.1
   date-fns: 2.29.3
   framer-motion: 10.0.1_biqbaboplfbrettd7655fr4n2y
@@ -792,8 +792,8 @@ packages:
       react: 18.2.0
     dev: false
 
-  /@vercel/og/0.3.0:
-    resolution: {integrity: sha512-0L7tAgyLJWv2jdCg7NQtoWOs+ZK+pYeJBev3r1Y8apHjcu7Qj/OfR65JlAPfTMH8b6iUpVtBeHWVUo5KAhaC2A==}
+  /@vercel/og/0.4.0:
+    resolution: {integrity: sha512-FFjXYCD5ZM0VotC9niy11qf4m6D99JVQ73P/uCLJl/r2PeOj0l26xwTEQ4HHJ/yZ6ncByCNoWAjk+S0fjMJmwg==}
     engines: {node: '>=16'}
     dependencies:
       '@resvg/resvg-wasm': 2.4.1
