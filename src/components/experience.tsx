@@ -52,7 +52,7 @@ export const ExperienceSection = () => {
       period: ["Jun 22", "present"],
       bullets: [
         "The best way to start a full-stack, typesafe Next.js app",
-        "Get started on your next idea without worrying about the comlpex project setup",
+        "Get started on your next idea without worrying about the complex project setup",
       ],
     },
     {
