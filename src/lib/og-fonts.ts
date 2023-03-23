@@ -8,21 +8,21 @@ export async function getFont<TWeights extends readonly number[]>({
   text?: string;
 }): Promise<Record<TWeights[number], ArrayBuffer>> {
   const API = `https://fonts.googleapis.com/css2?family=${family}:wght@${weights.join(
-    ';',
-  )}${text ? `&text=${encodeURIComponent(text)}` : ''}`;
+    ";",
+  )}${text ? `&text=${encodeURIComponent(text)}` : ""}`;
 
-  const css = await (
+  const css = (await (
     await fetch(API, {
       headers: {
         // Make sure it returns TTF.
-        'User-Agent':
-          'Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_8; de-at) AppleWebKit/533.21.1 (KHTML, like Gecko) Version/5.0.5 Safari/533.21.1',
+        "User-Agent":
+          "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_8; de-at) AppleWebKit/533.21.1 (KHTML, like Gecko) Version/5.0.5 Safari/533.21.1",
       },
     })
-  ).text();
+  ).text()) as string;
 
   const fonts = css
-    .split('@font-face {')
+    .split("@font-face {")
     .splice(1)
     .map((font) => {
       const u = font.match(/src: url\((.+)\) format\('(opentype|truetype)'\)/);
@@ -37,5 +37,8 @@ export async function getFont<TWeights extends readonly number[]>({
     const res = await fetch(font.url);
     return [font.weight, await res.arrayBuffer()];
   });
-  return Object.fromEntries(await Promise.all(promises));
+  return Object.fromEntries(await Promise.all(promises)) as Record<
+    TWeights[number],
+    ArrayBuffer
+  >;
 }

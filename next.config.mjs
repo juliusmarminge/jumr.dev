@@ -1,4 +1,5 @@
 import withMdx from '@next/mdx';
+import rehypePrettyCode from 'rehype-pretty-code';
 
 import './src/lib/env.mjs';
 
@@ -20,4 +21,6 @@ const config = {
   ],
 };
 
-export default withMdx()(config);
+export default withMdx({ options: { rehypePlugins: [[rehypePrettyCode]] } })(
+  config,
+);
