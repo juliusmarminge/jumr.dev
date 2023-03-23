@@ -6,7 +6,7 @@ export async function getFont<const TWeights extends readonly number[]>({
   family: string;
   weights: TWeights;
   text?: string;
-}): Promise<Record<TWeights[number], ArrayBuffer>> {
+}) {
   const API = `https://fonts.googleapis.com/css2?family=${family}:wght@${weights.join(
     ";",
   )}${text ? `&text=${encodeURIComponent(text)}` : ""}`;

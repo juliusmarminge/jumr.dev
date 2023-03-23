@@ -2,7 +2,10 @@ import withMdx from "@next/mdx";
 import rehypePrettyCode from "rehype-pretty-code";
 import { getHighlighter } from "shiki";
 
-import "./src/lib/env.mjs";
+// Validate environment variables
+// Blog post articles are validated automatically as
+// the `getAllArticles` function is called in `app/page.tsx`
+await import("./src/lib/env.mjs");
 
 /** @type {import("next").NextConfig} */
 const nextConfig = {
@@ -28,7 +31,7 @@ export default withMdx({
       [
         rehypePrettyCode,
         /** @type {import("rehype-pretty-code").Options} */
-        {
+        ({
           theme: "github-dark",
           getHighlighter,
           onVisitLine(node) {
@@ -45,7 +48,7 @@ export default withMdx({
             node.properties.className = ["word"];
             node.properties["data-word-id"] = id;
           },
-        },
+        }),
       ],
     ],
   },
