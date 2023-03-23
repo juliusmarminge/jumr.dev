@@ -1,4 +1,4 @@
-export async function getFont<TWeights extends readonly number[]>({
+export async function getFont<const TWeights extends readonly number[]>({
   family,
   weights,
   text,

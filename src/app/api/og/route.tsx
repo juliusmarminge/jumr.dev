@@ -11,7 +11,7 @@ export const GET = async (req: Request) => {
   const url = new URL(req.url);
   const inter = await getFont({
     family: "Inter",
-    weights: [400, 700] as const,
+    weights: [400, 700],
   });
 
   return new ImageResponse(
