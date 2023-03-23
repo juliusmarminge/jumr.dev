@@ -6,7 +6,7 @@
     "build": "next build",
     "dev": "next dev",
     "format": "prettier --write '**/*.{ts,tsx,cjs,mjs,json,md,mdx}'",
-    "lint": "eslint . --cache --cache-strategy content --ignore-path .gitignore",
+    "lint": "eslint . --ignore-path .gitignore",
     "start": "next start"
   },
   "dependencies": {

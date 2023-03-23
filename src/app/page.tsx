@@ -1,19 +1,18 @@
-import Head from 'next/head';
-import Link from 'next/link';
-import { FaArrowAltCircleUp } from 'react-icons/fa';
+import Link from "next/link";
+import { FaArrowAltCircleUp } from "react-icons/fa";
 
 // import { Projects } from "~/components/projects";
-import { getAllArticles } from '~/lib/blog';
-import { About } from '~/components/about';
-import { Blog } from '~/components/blog';
-import { CommentSection } from '~/components/blog-comments';
-import { ExperienceSection } from '~/components/experience';
-import { FinalWords } from '~/components/final-words';
-import { Header } from '~/components/header';
-import { Hero } from '~/components/hero';
+import { getAllArticles } from "~/lib/blog";
+import { About } from "~/components/about";
+import { Blog } from "~/components/blog";
+import { CommentSection } from "~/components/blog-comments";
+import { ExperienceSection } from "~/components/experience";
+import { FinalWords } from "~/components/final-words";
+import { Header } from "~/components/header";
+import { Hero } from "~/components/hero";
 
 export const metadata = {
-  title: '🇸🇪 Julius | SWE | OSS',
+  title: "🇸🇪 Julius | SWE | OSS",
 };
 
 export default async function Home() {
@@ -21,10 +20,6 @@ export default async function Home() {
 
   return (
     <div className="z-0 h-screen overflow-y-scroll scroll-smooth text-white overflow-x-hidden scrollbar-none">
-      <Head>
-        <title>🇸🇪 Julius | SWE | OSS</title>
-      </Head>
-
       <Header />
 
       <section id="hero">
