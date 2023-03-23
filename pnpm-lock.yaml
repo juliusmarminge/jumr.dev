@@ -10,13 +10,13 @@ specifiers:
   '@trpc/react-query': ^10.7.0
   '@trpc/server': ^10.7.0
   '@types/mdx': ^2.0.3
-  '@types/node': 18.14.6
+  '@types/node': 18.15.5
   '@types/react': 18.0.28
   '@types/react-dom': 18.0.11
   '@typescript-eslint/eslint-plugin': ^5.47.0
   '@typescript-eslint/parser': ^5.47.0
   '@vercel/analytics': ^0.1.6
-  '@vercel/og': ^0.3.0
+  '@vercel/og': ^0.4.0
   autoprefixer: ^10.4.12
   clsx: ^1.2.1
   date-fns: ^2.29.3
@@ -36,7 +36,7 @@ specifiers:
   react-wrap-balancer: ^0.4.0
   rehype-pretty-code: ^0.9.4
   shiki: ^0.14.1
-  tailwind-scrollbar: 2.1.0
+  tailwind-scrollbar: 3.0.0
   tailwindcss: ^3.2.4
   typescript: ^5.0.2
   zod: ^3.20.2
@@ -50,7 +50,7 @@ dependencies:
   '@trpc/react-query': 10.7.0_x4ie6nhblo2vtx2aafrgzlfqy4
   '@trpc/server': 10.7.0
   '@vercel/analytics': 0.1.6_react@18.2.0
-  '@vercel/og': 0.3.0
+  '@vercel/og': 0.4.1
   clsx: 1.2.1
   date-fns: 2.29.3
   framer-motion: 10.0.1_biqbaboplfbrettd7655fr4n2y
@@ -68,7 +68,7 @@ dependencies:
 devDependencies:
   '@ianvs/prettier-plugin-sort-imports': 3.7.1_prettier@2.8.4
   '@types/mdx': 2.0.3
-  '@types/node': 18.14.6
+  '@types/node': 18.15.5
   '@types/react': 18.0.28
   '@types/react-dom': 18.0.11
   '@typescript-eslint/eslint-plugin': 5.47.0_nmzrfbvz63tmhlvx3npkqoorsu
@@ -80,7 +80,7 @@ devDependencies:
   postcss: 8.4.18
   prettier: 2.8.4
   prettier-plugin-tailwindcss: 0.2.4_2m34gfnsqvzqy5bj5eci3wt3by
-  tailwind-scrollbar: 2.1.0_tailwindcss@3.2.4
+  tailwind-scrollbar: 3.0.0_tailwindcss@3.2.4
   tailwindcss: 3.2.4_postcss@8.4.18
   typescript: 5.0.2
 
@@ -732,8 +732,8 @@ packages:
     resolution: {integrity: sha512-iiUgKzV9AuaEkZqkOLDIvlQiL6ltuZd9tGcW3gwpnX8JbuiuhFlEGmmFXEXkN50Cvq7Os88IY2v0dkDqXYWVgA==}
     dev: false
 
-  /@types/node/18.14.6:
-    resolution: {integrity: sha512-93+VvleD3mXwlLI/xASjw0FzKcwzl3OdTCzm1LaRfqgS21gfFtK3zDXM5Op9TeeMsJVOaJ2VRDpT9q4Y3d0AvA==}
+  /@types/node/18.15.5:
+    resolution: {integrity: sha512-Ark2WDjjZO7GmvsyFFf81MXuGTA/d6oP38anyxWOL6EREyBKAxKoFHwBhaZxCfLRLpO8JgVXwqOwSwa7jRcjew==}
     dev: true
 
   /@types/prop-types/15.7.5:
@@ -903,8 +903,8 @@ packages:
       react: 18.2.0
     dev: false
 
-  /@vercel/og/0.3.0:
-    resolution: {integrity: sha512-0L7tAgyLJWv2jdCg7NQtoWOs+ZK+pYeJBev3r1Y8apHjcu7Qj/OfR65JlAPfTMH8b6iUpVtBeHWVUo5KAhaC2A==}
+  /@vercel/og/0.4.1:
+    resolution: {integrity: sha512-N8SXkbmQQRK0iHpqwUe50Fe8JO3sx2ByV6hgPTi16ONiMdqOM9uzE4QMWoY1Oa0uYZuUVA30sEB84mVMn+gT3w==}
     engines: {node: '>=16'}
     dependencies:
       '@resvg/resvg-wasm': 2.4.1
@@ -3721,8 +3721,8 @@ packages:
       tslib: 2.4.0
     dev: true
 
-  /tailwind-scrollbar/2.1.0_tailwindcss@3.2.4:
-    resolution: {integrity: sha512-zpvY5mDs0130YzYjZKBiDaw32rygxk5RyJ4KmeHjGnwkvbjm/PszON1m4Bbt2DkMRIXlXsfNevykAESgURN4KA==}
+  /tailwind-scrollbar/3.0.0_tailwindcss@3.2.4:
+    resolution: {integrity: sha512-OkVRX9Q1T769vk979UZ519jhj/j/zNBHql7zPLI+tlhX+ahksYO4ZryWD29lOETDx9Wj1sw+K1OeW7W3+ECQOA==}
     engines: {node: '>=12.13.0'}
     peerDependencies:
       tailwindcss: 3.x
