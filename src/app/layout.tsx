@@ -16,18 +16,21 @@ const cal = localFont({
   display: "swap",
 });
 
+export const metadata = {
+  title: "🇸🇪 Julius | SWE | OSS",
+  icons: [{ url: "/favicon.ico" }],
+  openGraph: {
+    images: [{ url: "/api/og" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: [{ url: "/api/og" }],
+  },
+};
+
 export default function Layout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" className="dark" data-theme="dark">
-      <head>
-        <title>Julius Personal</title>
-        <meta content="width=device-width, initial-scale=1" name="viewport" />
-        <meta
-          name="description"
-          content="Your go-to place to find out how to find solutions to common problems."
-        />
-        <link rel="icon" href="/favicon.ico" />
-      </head>
       <body
         className={clsx(
           "min-h-screen bg-white font-sans text-zinc-900 antialiased dark:bg-stone-800 dark:text-zinc-50",

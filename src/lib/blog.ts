@@ -1,9 +1,10 @@
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
+import { type Metadata } from "next";
 import { globby } from "globby";
 import { z } from "zod";
 
-import { strToFmtDate } from "./zod-params";
+import { blogParams, strToFmtDate } from "./zod-params";
 
 const meta = z.object({
   title: z.string(),
@@ -45,7 +46,7 @@ export async function getAllArticles() {
 async function readMeta(dir: string, file: string) {
   const raw = await readFile(join(dir, file), "utf8");
 
-  const metadataRegex = /export const metadata = ({[\s\S]+?});/;
+  const metadataRegex = /export const metadata = mdHelper\(({[\s\S]+?})\);/;
   const metadataMatch = raw.match(metadataRegex);
 
   const metadata = metadataMatch?.[1];
@@ -60,3 +61,24 @@ async function readMeta(dir: string, file: string) {
 }
 
 export type Meta = Awaited<ReturnType<typeof readMeta>>;
+
+const getOGLink = (meta: Meta) =>
+  "/api/og-blog?" +
+  blogParams.toSearchString({
+    title: meta.title,
+    description: meta.description,
+    date: meta.date,
+    readingTime: meta.readingTime,
+    slug: meta.slug,
+  });
+
+export const mdHelper = (meta: Meta): Metadata => ({
+  ...meta,
+  openGraph: {
+    images: [{ url: getOGLink(meta) }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: [{ url: getOGLink(meta) }],
+  },
+});

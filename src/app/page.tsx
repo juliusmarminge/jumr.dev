@@ -11,10 +11,6 @@ import { FinalWords } from "~/components/final-words";
 import { Header } from "~/components/header";
 import { Hero } from "~/components/hero";
 
-export const metadata = {
-  title: "🇸🇪 Julius | SWE | OSS",
-};
-
 export default async function Home() {
   const posts = await getAllArticles();
 

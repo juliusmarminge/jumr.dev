@@ -1,4 +1,6 @@
-export const metadata = {
+import { mdHelper } from "~/lib/blog";
+
+export const metadata = mdHelper({
   title: "Migrating a T3 app into a Turborepo",
   description:
     "Detailed walkthrough on how to migrate your T3 App into a Turborepo. We'll also add an Expo React Native Application to the mix.",
@@ -6,7 +8,8 @@ export const metadata = {
   updatedAt: "2022-12-03",
   previewImg: "/images/ct3t.png",
   readingTime: 20,
-};
+  slug: "/t3-turbo",
+});
 
 # Migrating a T3 app into a Turborepo
 
