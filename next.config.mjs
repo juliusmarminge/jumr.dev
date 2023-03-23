@@ -1,9 +1,11 @@
-// @ts-check
-await import('./src/lib/env.mjs');
+import withMdx from '@next/mdx';
+
+import './src/lib/env.mjs';
 
 /** @type {import("next").NextConfig} */
 const config = {
-  experimental: { appDir: true },
+  experimental: { appDir: true, mdxRs: true },
+  pageExtensions: ['tsx', 'mdx'],
   images: {
     remotePatterns: [
       { hostname: 'github.com' },
@@ -18,4 +20,4 @@ const config = {
   ],
 };
 
-export default config;
+export default withMdx()(config);

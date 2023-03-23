@@ -1,13 +1,4 @@
----
-title: Migrating your T3 App into a Turborepo
-description: Detailed walkthrough on how to migrate your T3 App into a Turborepo. We'll also add an Expo React Native Application to the mix.
-date: 2022-08-22
-updatedAt: 2022-12-03
-previewImg: /images/ct3t.png
-readingTime: 20
----
-
-import { Callout } from '~/components/callout';
+# Migrating a T3 app into a Turborepo
 
 For a while now, we've been getting a lot of requests for including a CLI option to scaffold [create-t3-app](https://github.com/t3-oss/create-t3-app) into a monorepo so that you can share code between your web and mobile application.
 We have turn these requests down due to the added complexity it would bring, and the fact that we do not want to prescribe how to run your monorepo. There are several tooling available for monorepos, including [Lerna](https://lerna.js.org) and [NX](https://nx.dev). Then there's the new kid on the block, [turborepo](https://turborepo.org) which we recently migrated the `create-t3-app` repo into so that we could have our upcoming documentation site in the same repo as the CLI scaffolding tool.

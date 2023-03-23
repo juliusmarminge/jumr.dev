@@ -4,10 +4,24 @@
   },
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
-  "eslint.rules.customizations": [{ "rule": "*", "severity": "warn" }],
-  "typescript.tsdk": "node_modules/typescript/lib",
-  "tailwindCSS.classAttributes": ["class", "className", "ngClass", "tw"],
+  "eslint.rules.customizations": [
+    {
+      "rule": "*",
+      "severity": "warn"
+    }
+  ],
+  "typescript.tsdk": "node_modules/.pnpm/typescript@4.9.4/node_modules/typescript/lib",
+  "tailwindCSS.classAttributes": [
+    "class",
+    "className",
+    "ngClass",
+    "tw"
+  ],
   "tailwindCSS.experimental.classRegex": [
-    ["clsx\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"]
-  ]
+    [
+      "clsx\\(([^)]*)\\)",
+      "[\"'`]([^\"'`]*).*?[\"'`]"
+    ]
+  ],
+  "typescript.enablePromptUseWorkspaceTsdk": true
 }

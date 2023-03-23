@@ -1,8 +1,10 @@
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 
-import { Meta } from '~/lib/blog';
+import { type Meta } from '~/lib/blog';
 
 const BlogCard: React.FC<Meta> = (props) => {
   const truncatedDescription = props.description.slice(0, 150) + '...';

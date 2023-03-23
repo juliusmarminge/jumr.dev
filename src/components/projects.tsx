@@ -1,4 +1,6 @@
-import Image, { StaticImageData } from 'next/image';
+'use client';
+
+import Image, { type StaticImageData } from 'next/image';
 import { motion } from 'framer-motion';
 import { BiLinkExternal } from 'react-icons/bi';
 
