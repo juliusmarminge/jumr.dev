@@ -27,7 +27,7 @@ function zodParams<TType>(schema: z.ZodType<TType>) {
 
       return querySchema.safeParse(obj);
     },
-    toSearchString: (obj: typeof schema["_input"]) => {
+    toSearchString: (obj: (typeof schema)["_input"]) => {
       schema.parse(obj);
       return `input=${encodeURIComponent(JSON.stringify(obj))}`;
     },

@@ -1,8 +1,8 @@
-import { type NextPage } from "next";
-import Head from "next/head";
 import Link from "next/link";
 import { FaArrowAltCircleUp } from "react-icons/fa";
 
+// import { Projects } from "~/components/projects";
+import { getAllArticles } from "~/lib/blog";
 import { About } from "~/components/about";
 import { Blog } from "~/components/blog";
 import { CommentSection } from "~/components/blog-comments";
@@ -10,26 +10,12 @@ import { ExperienceSection } from "~/components/experience";
 import { FinalWords } from "~/components/final-words";
 import { Header } from "~/components/header";
 import { Hero } from "~/components/hero";
-// import { Projects } from "~/components/projects";
-import { getAllArticles, Meta } from "~/lib/blog";
 
-export const getStaticProps = async () => {
-  const allPosts = await getAllArticles();
+export default async function Home() {
+  const posts = await getAllArticles();
 
-  return {
-    props: {
-      posts: allPosts,
-    },
-  };
-};
-
-const Home: NextPage<{ posts: Meta[] }> = ({ posts }) => {
   return (
-    <div className="scrollbar-accent z-0 h-screen overflow-y-scroll scroll-smooth text-white overflow-x-hidden">
-      <Head>
-        <title>🇸🇪 Julius | SWE | OSS</title>
-      </Head>
-
+    <div className="z-0 h-screen overflow-y-scroll scroll-smooth text-white overflow-x-hidden scrollbar-none">
       <Header />
 
       <section id="hero">
@@ -70,6 +56,4 @@ const Home: NextPage<{ posts: Meta[] }> = ({ posts }) => {
       </footer>
     </div>
   );
-};
-
-export default Home;
+}

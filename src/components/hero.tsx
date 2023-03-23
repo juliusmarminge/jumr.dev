@@ -1,6 +1,8 @@
-import { motion } from "framer-motion";
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { motion } from "framer-motion";
 
 import ProfileImg from "../../public/profile.png";
 
@@ -48,16 +50,16 @@ export const Hero = () => {
         </h1>
 
         <div className="pt-5">
-          <Link href="#about">
+          <Link href="/#about">
             <button className="hero-btn">About</button>
           </Link>
-          <Link href="#experience">
+          <Link href="/#experience">
             <button className="hero-btn">Experience</button>
           </Link>
           {/* <Link href="#projects">
             <button className="hero-btn">Projects</button>
           </Link> */}
-          <Link href="#blog">
+          <Link href="/#blog">
             <button className="hero-btn">Blog</button>
           </Link>
         </div>

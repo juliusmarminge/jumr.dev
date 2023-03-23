@@ -5,14 +5,14 @@ import { getFont } from "~/lib/og-fonts";
 import { blogParams } from "~/lib/zod-params";
 
 export const config = {
-  runtime: "experimental-edge",
+  runtime: "edge",
 };
 
-export default async (req: Request) => {
+export const GET = async (req: Request) => {
   const url = new URL(req.url);
   const inter = await getFont({
     family: "Inter",
-    weights: [400, 700] as const,
+    weights: [400, 700],
   });
 
   const params = blogParams.decodeRequest(req);

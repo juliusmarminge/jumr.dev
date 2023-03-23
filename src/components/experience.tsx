@@ -1,9 +1,11 @@
+"use client";
+
+import Image from "next/image";
 import clsx from "clsx";
 import { motion } from "framer-motion";
-import Image from "next/image";
 import { FaDatabase } from "react-icons/fa";
 import { GiProcessor } from "react-icons/gi";
-import { IconType } from "react-icons/lib";
+import { type IconType } from "react-icons/lib";
 import {
   SiCplusplus,
   SiNextdotjs,

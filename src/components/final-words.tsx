@@ -1,6 +1,8 @@
-import { motion } from "framer-motion";
-import Link from "next/link";
+"use client";
+
 import React from "react";
+import Link from "next/link";
+import { motion } from "framer-motion";
 
 const FancyLink: React.FC<{ href: string; children: React.ReactNode }> = ({
   href,

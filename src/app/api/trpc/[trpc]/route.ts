@@ -1,6 +1,5 @@
-import { initTRPC, TRPCError } from "@trpc/server";
-import { NextApiRequest, NextApiResponse } from "next";
-// import { createNextApiHandler } from "@trpc/server/adapters/next";
+import { TRPCError, initTRPC } from "@trpc/server";
+import { fetchRequestHandler } from "@trpc/server/adapters/fetch";
 import { z } from "zod";
 
 import { env } from "~/lib/env.mjs";
@@ -21,8 +20,8 @@ const fetchGithubGQL = <TResponse>(
       // console.error(r);
       throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
     }
-    const data = await r.json();
-    if ("data" in data) return data.data as TResponse;
+    const data = (await r.json()) as { data: TResponse };
+    if ("data" in data) return data.data;
     return data as TResponse;
   });
 
@@ -291,13 +290,12 @@ const appRouter = t.router({
 
 export type AppRouter = typeof appRouter;
 
-export default (req: NextApiRequest, res: NextApiResponse) => {
-  res.status(200).json("trpc not activated");
+const handler = (req: Request) =>
+  fetchRequestHandler({
+    router: appRouter,
+    endpoint: "/api/trpc",
+    req: req,
+    createContext: () => ({}),
+  });
 
-  // createNextApiHandler({
-  //   router: appRouter,
-  //   createContext: () => ({}),
-  //   onError: ({ error, path }) =>
-  //     `❌ TRPC Error: ${path ?? "<no-path>"} ${error.message}`,
-  // })(req, res);
-};
+export { handler as GET };

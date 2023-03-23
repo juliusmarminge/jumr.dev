@@ -35,4 +35,21 @@
     @apply absolute top-0 left-full z-10 w-[15ch] rounded-lg bg-stone-600 px-2 py-1;
     content: attr(title);
   }
+
+  pre > code {
+    counter-reset: line;
+    padding: unset !important;
+  }
+
+  pre > code > .line::before {
+    counter-increment: line;
+    content: counter(line);
+
+    /* Other styling */
+    display: inline-block;
+    width: 1rem;
+    margin-right: 1rem;
+    text-align: right;
+    color: var("--color-gray-400");
+  }
 }

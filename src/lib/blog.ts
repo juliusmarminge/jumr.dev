@@ -1,9 +1,10 @@
-import { globby } from "globby";
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
+import { type Metadata } from "next";
+import { globby } from "globby";
 import { z } from "zod";
 
-import { strToFmtDate } from "./zod-params";
+import { blogParams, strToFmtDate } from "./zod-params";
 
 const meta = z.object({
   title: z.string(),
@@ -17,12 +18,11 @@ const meta = z.object({
 
 /** Read all files in the blog directory */
 export async function getAllArticles() {
-  const blogDir = join(process.cwd(), "src/pages/blog");
-  const filenames = await globby("*.mdx", {
+  const blogDir = join(process.cwd(), "src/app/blog");
+  const filenames = await globby("**/*.mdx", {
     cwd: blogDir,
     absolute: false,
   });
-
   const articles = await Promise.all(
     filenames.map((file) => readMeta(blogDir, file)),
   );
@@ -45,17 +45,40 @@ export async function getAllArticles() {
 /** Read the frontmatter of the file */
 async function readMeta(dir: string, file: string) {
   const raw = await readFile(join(dir, file), "utf8");
-  const [fm] = raw.split("---").slice(1, 2);
 
-  const parsed = fm
-    ?.split("\n")
-    .filter(Boolean)
-    .map((l) => l.split(": "));
+  const metadataRegex = /export const metadata = mdHelper\(({[\s\S]+?})\);/;
+  const metadataMatch = raw.match(metadataRegex);
 
-  const $meta = meta.parse(Object.fromEntries(parsed ?? []));
-  const slug = "/blog/" + file.replace(/\.mdx?$/, "");
+  const metadata = metadataMatch?.[1];
+  const jsonified = metadata
+    ?.replace(/(\w+):/g, '"$1":') // wrap keys in quotes
+    .replace(/\n/g, "") // remove newlines
+    .replace(/,}$/, "}"); // remove trailing comma
+  const $meta = meta.parse(JSON.parse(jsonified ?? "{}"));
+  const slug = "/blog/" + file.replace(/\page.mdx?$/, "");
 
-  return Object.assign($meta, { slug });
+  return { ...$meta, slug };
 }
 
 export type Meta = Awaited<ReturnType<typeof readMeta>>;
+
+const getOGLink = (meta: Meta) =>
+  "/api/og-blog?" +
+  blogParams.toSearchString({
+    title: meta.title,
+    description: meta.description,
+    date: meta.date,
+    readingTime: meta.readingTime,
+    slug: meta.slug,
+  });
+
+export const mdHelper = (meta: Meta): Metadata => ({
+  ...meta,
+  openGraph: {
+    images: [{ url: getOGLink(meta) }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: [{ url: getOGLink(meta) }],
+  },
+});

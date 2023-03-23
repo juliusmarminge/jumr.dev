@@ -1,6 +1,8 @@
+"use client";
+
+import Link from "next/link";
 import clsx from "clsx";
 import { motion } from "framer-motion";
-import Link from "next/link";
 import { SiDiscord, SiGithub, SiLinkedin, SiTwitter } from "react-icons/si";
 
 export const Header: React.FC<{ isBlog?: boolean }> = ({ isBlog = false }) => {

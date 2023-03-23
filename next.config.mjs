@@ -1,18 +1,16 @@
-// @ts-check
-await import("./src/lib/env.mjs");
-import nextra from "nextra";
+import withMdx from "@next/mdx";
+import rehypePrettyCode from "rehype-pretty-code";
+import { getHighlighter } from "shiki";
 
-const withNextra = nextra({
-  theme: "nextra-theme-blog",
-  themeConfig: "./theme.config.tsx",
-  readingTime: true,
-  defaultShowCopyCode: true,
-});
+// Validate environment variables
+// Blog post articles are validated automatically as
+// the `getAllArticles` function is called in `app/page.tsx`
+await import("./src/lib/env.mjs");
 
 /** @type {import("next").NextConfig} */
-const config = {
-  reactStrictMode: true,
-  eslint: { ignoreDuringBuilds: true },
+const nextConfig = {
+  experimental: { appDir: true },
+  pageExtensions: ["tsx", "mdx"],
   images: {
     remotePatterns: [
       { hostname: "github.com" },
@@ -22,10 +20,36 @@ const config = {
       { hostname: "og-image.trpc.io" },
     ],
   },
-  // eslint-disable-next-line @typescript-eslint/require-await
   redirects: async () => [
     { source: "/blog", destination: "/#blog", permanent: true },
   ],
 };
 
-export default withNextra(config);
+export default withMdx({
+  options: {
+    rehypePlugins: [
+      [
+        rehypePrettyCode,
+        /** @type {import("rehype-pretty-code").Options} */
+        ({
+          theme: "github-dark",
+          getHighlighter,
+          onVisitLine(node) {
+            // Prevent lines from collapsing in `display: grid` mode, and allow empty
+            // lines to be copy/pasted
+            if (node.children.length === 0) {
+              node.children = [{ type: "text", value: " " }];
+            }
+          },
+          onVisitHighlightedLine(node) {
+            node.properties.className.push("line--highlighted");
+          },
+          onVisitHighlightedWord(node, id) {
+            node.properties.className = ["word"];
+            node.properties["data-word-id"] = id;
+          },
+        }),
+      ],
+    ],
+  },
+})(nextConfig);
