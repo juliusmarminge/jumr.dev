@@ -3,8 +3,6 @@ import Image from "next/image";
 import Link from "next/link";
 import type { MDXComponents } from "mdx/types";
 
-import { Callout } from "~/components/callout";
-
 // This file is required to use MDX in `app` directory.
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
@@ -47,7 +45,6 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     ),
     img: ({ src, alt }) => <Image src={src ?? ""} alt={alt ?? ""} />,
 
-    Callout,
     ...components,
   };
 }

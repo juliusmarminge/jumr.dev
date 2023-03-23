@@ -38,8 +38,8 @@ export const FinalWords = () => {
           .
         </li>
         <li className="text-base">
-          This page was built using Next.js, Tailwind CSS, Nextra and Framer
-          Motion - and is open source at{" "}
+          This page was built using Next.js, React Server Components, Tailwind
+          CSS and Framer Motion - and is open source at{" "}
           <FancyLink href="https://github.com/juliusmarminge/jumr.dev">
             GitHub
           </FancyLink>

@@ -50,6 +50,14 @@
     width: 1rem;
     margin-right: 1rem;
     text-align: right;
-    color: var("--color-gray-400");
+    color: gray;
+  }
+
+  [data-rehype-pretty-code-title] {
+    padding: 0.5rem 1rem 0 1rem;
+    @apply mt-4 rounded-t bg-zinc-100 font-cal text-zinc-900 dark:bg-stone-700 dark:text-zinc-400;
+  }
+  [data-rehype-pretty-code-title] + pre {
+    @apply mt-0 rounded-t-none;
   }
 }

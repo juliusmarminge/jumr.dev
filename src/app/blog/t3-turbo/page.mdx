@@ -1,4 +1,5 @@
 import { mdHelper } from "~/lib/blog";
+import { Callout } from "~/components/Callout";
 
 export const metadata = mdHelper({
   title: "Migrating a T3 app into a Turborepo",
@@ -122,18 +123,12 @@ mv apps/nextjs/src/server/trpc packages/api/src
 
 We'll create a few barrel-files in the `api` package to make importing easier:
 
-```ts title="index.ts"
+```ts showLineNumbers title="index.ts"
 export type { AppRouter } from "./src/router";
 export { appRouter } from "./src/router";
 
 export { createContext } from "./src/context";
 export type { Context } from "./src/context";
-```
-
-```ts title=transformer.ts
-import superjson from "superjson";
-
-export const transformer = superjson;
 ```
 
 There are a few small bits that we need to modify now. First, we'll resolve some imports:
@@ -144,7 +139,7 @@ import { prisma } from "@acme/db";
 
 ```ts title="apps/nextjs/src/utils/trpc.ts"
 import type { AppRouter } from "@acme/api";
-import { transformer } from "@acme/api/transformer";
+import superjson from "superjson";
 
 // <-- use this in `initTRPC`
 ```
@@ -153,13 +148,11 @@ import { transformer } from "@acme/api/transformer";
 import { appRouter, createContext } from "@acme/api";
 ```
 
-Then, we'll add the `@acme/api` package as a dependency for the T3 App, and remove `superjson`. Since Next.js 13, they support transpiling packages natively via an experimental tag which I'll be using. If you're scared by the experimental flag, use `next-transpile-modules` instead. Transpile the `@acme/api` package in your `next.config.mjs` like this:
+Then, we'll add the `@acme/api` package as a dependency for the T3 App. Since Next.js 13, they support transpiling packages natively which I'll be using. Transpile the `@acme/api` package in your `next.config.mjs` like this:
 
 ```ts title="next.config.mjs"
 const config = {
-  experimental: {
-    transpilePackages: ["@acme/api"],
-  },
+  transpilePackages: ["@acme/api"],
 };
 ```
 
@@ -177,7 +170,7 @@ Bootstrap the Expo application by running the following command:
 npx create-expo-app apps/expo --template blank-typescript
 ```
 
-You should be left with a React Native application using Typescript, React 18 with Expo SDK 46. Because we are using it in a monorepo, there are a few things we need to do in order to get it working.
+You should be left with a React Native application using Typescript, React 18 with Expo SDK 48. Because we are using it in a monorepo, there are a few things we need to do in order to get it working.
 
 In the `package.json`, change the main entrypoint, I'll also scope the package name to get it coherant with the rest of the repo as well as adding a `dev` script so that it launches in my preferred way along with the others:
 
@@ -284,8 +277,15 @@ _At this point, your repo should look something like [this](https://github.com/t
 Now, we'd want to call our tRPC API in our Expo application. We'll start by adding the necessary dependencies to the app:
 
 ```bash
-npm install @trpc/client@experimental @trpc/server@experimental @trpc/react@experimental @tanstack/react-query @acme/api -w apps/expo
+npm install @trpc/client @trpc/server @trpc/react @tanstack/react-query -w apps/expo
+npm install -D @acme/api
 ```
+
+<Callout type="info">
+  Note that `@acme/api` is a devDependency, meaning no backend code will leak
+  into the client bundle - whilst retaining the full-stack typesafety and DX of
+  tRPC.
+</Callout>
 
 Setup the `trpc` object in `src/utils/trpc.ts`:
 
@@ -300,8 +300,8 @@ Next, we'll configure the `trpcClient` and `queryClient` in the `_app.tsx`:
 
 ```tsx title="_app.tsx"
 import React from "react";
-import { transformer } from "@acme/api/transformer";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import superjson from "superjson";
 
 import { trpc } from "./utils/trpc";
 
@@ -310,7 +310,7 @@ const url = "http://localhost:3000/api/trpc";
 const App = () => {
   const [queryClient] = React.useState(() => new QueryClient());
   const [trpcClient] = React.useState(() =>
-    trpc.createClient({ url, transformer }),
+    trpc.createClient({ url, transformer: superjson }),
   );
 
   return (
@@ -325,11 +325,11 @@ As a bonus, I'll refactor the screen's content out to `src/screens/Home.tsx`. Yo
 
 ```tsx title="src/_app.tsx"
 import React from "react";
-import { transformer } from "@acme/api/transformer";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { registerRootComponent } from "expo";
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaProvider } from "react-native-safe-area-context";
+import superjson from "superjson";
 
 import { HomeScreen } from "./screens/home";
 import { trpc } from "./utils/trpc";
@@ -339,7 +339,7 @@ const url = "http://localhost:3000/api/trpc";
 const App = () => {
   const [queryClient] = React.useState(() => new QueryClient());
   const [trpcClient] = React.useState(() =>
-    trpc.createClient({ url, transformer }),
+    trpc.createClient({ url, transformer: superjson }),
   );
 
   return (
