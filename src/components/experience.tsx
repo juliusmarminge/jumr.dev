@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import Image from 'next/image';
-import clsx from 'clsx';
-import { motion } from 'framer-motion';
-import { FaDatabase } from 'react-icons/fa';
-import { GiProcessor } from 'react-icons/gi';
-import { type IconType } from 'react-icons/lib';
+import Image from "next/image";
+import clsx from "clsx";
+import { motion } from "framer-motion";
+import { FaDatabase } from "react-icons/fa";
+import { GiProcessor } from "react-icons/gi";
+import { type IconType } from "react-icons/lib";
 import {
   SiCplusplus,
   SiNextdotjs,
@@ -14,7 +14,7 @@ import {
   SiReact,
   SiTailwindcss,
   SiTypescript,
-} from 'react-icons/si';
+} from "react-icons/si";
 
 interface Experience {
   note?: string;
@@ -29,10 +29,10 @@ interface Experience {
 export const ExperienceSection = () => {
   const experiences: Experience[] = [
     {
-      note: 'Education',
-      img: 'https://www.bth.se/wp-content/uploads/2018/09/bthlogo_svart_platt.png',
-      title: 'Blekinge Institute of Technology',
-      subtitle: 'Master of Science in Software Engineering',
+      note: "Education",
+      img: "https://www.bth.se/wp-content/uploads/2018/09/bthlogo_svart_platt.png",
+      title: "Blekinge Institute of Technology",
+      subtitle: "Master of Science in Software Engineering",
       stackIcons: [
         SiPython,
         SiCplusplus,
@@ -40,33 +40,33 @@ export const ExperienceSection = () => {
         GiProcessor,
         FaDatabase,
       ],
-      period: ['2020', 'present'],
+      period: ["2020", "present"],
       bullets: [
         "I'm currently studying at Blekinge Institute of Technology learning all about Software Engineering, from low level programming, compilers, databases, to project management and software architecture.",
       ],
     },
     {
-      note: 'Open Source',
-      img: 'https://avatars.githubusercontent.com/u/108266839?s=200&v=4',
-      title: 'Create T3 App',
-      subtitle: 'Core OSS Maintainer',
+      note: "Open Source",
+      img: "https://avatars.githubusercontent.com/u/108266839?s=200&v=4",
+      title: "Create T3 App",
+      subtitle: "Core OSS Maintainer",
       stackIcons: [SiTypescript, SiReact, SiNextdotjs, SiTailwindcss, SiPrisma],
-      period: ['Jun 22', 'present'],
+      period: ["Jun 22", "present"],
       bullets: [
-        'The best way to start a full-stack, typesafe Next.js app',
-        'Get started on your next idea without worrying about the comlpex project setup',
+        "The best way to start a full-stack, typesafe Next.js app",
+        "Get started on your next idea without worrying about the comlpex project setup",
       ],
     },
     {
-      note: 'Open Source',
-      img: 'https://avatars.githubusercontent.com/u/78011399?s=200&v=4',
-      title: 'tRPC',
-      subtitle: 'Core OSS Contributor',
+      note: "Open Source",
+      img: "https://avatars.githubusercontent.com/u/78011399?s=200&v=4",
+      title: "tRPC",
+      subtitle: "Core OSS Contributor",
       stackIcons: [SiTypescript],
-      period: ['Jul 22', 'present'],
+      period: ["Jul 22", "present"],
       bullets: [
-        'Move Fast and Break Nothing. End-to-end typesafe APIs made easy.',
-        'GraphQL alternative for fullstack TypeScript applications with an excellent developer experience',
+        "Move Fast and Break Nothing. End-to-end typesafe APIs made easy.",
+        "GraphQL alternative for fullstack TypeScript applications with an excellent developer experience",
       ],
     },
   ];
@@ -108,10 +108,10 @@ const ExperienceCard: React.FC<Experience> = (props) => {
       {props.note && (
         <div
           className={clsx(
-            'absolute right-7 top-0 rounded-lg bg-accent-500 p-4',
+            "absolute right-7 top-0 rounded-lg bg-accent-500 p-4",
             {
-              'bg-sky-800': props.note === 'Education',
-              'bg-red-900': props.note === 'Open Source',
+              "bg-sky-800": props.note === "Education",
+              "bg-red-900": props.note === "Open Source",
             },
           )}
         >

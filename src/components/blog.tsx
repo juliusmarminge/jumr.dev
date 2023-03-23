@@ -1,13 +1,13 @@
-'use client';
+"use client";
 
-import Image from 'next/image';
-import Link from 'next/link';
-import { motion } from 'framer-motion';
+import Image from "next/image";
+import Link from "next/link";
+import { motion } from "framer-motion";
 
-import { type Meta } from '~/lib/blog';
+import { type Meta } from "~/lib/blog";
 
 const BlogCard: React.FC<Meta> = (props) => {
-  const truncatedDescription = props.description.slice(0, 150) + '...';
+  const truncatedDescription = props.description.slice(0, 150) + "...";
 
   return (
     <div className="flex cursor-pointer flex-col rounded-lg border p-4">

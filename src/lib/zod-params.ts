@@ -3,7 +3,7 @@
  * @link https://github.com/trpc/trpc/blob/main/www/og-image/utils/zodParams.ts
  **/
 
-import { z } from 'zod';
+import { z } from "zod";
 
 type Primitives = string | number | boolean | null;
 type JsonValue = Primitives | JsonValue[] | { [key: string]: JsonValue };
@@ -12,7 +12,7 @@ const jsonStr = z.string().transform((str, ctx) => {
   try {
     return JSON.parse(str) as JsonValue;
   } catch (error) {
-    ctx.addIssue({ code: 'custom', message: 'Needs to be JSON' });
+    ctx.addIssue({ code: "custom", message: "Needs to be JSON" });
   }
 });
 
@@ -27,7 +27,7 @@ function zodParams<TType>(schema: z.ZodType<TType>) {
 
       return querySchema.safeParse(obj);
     },
-    toSearchString: (obj: (typeof schema)['_input']) => {
+    toSearchString: (obj: (typeof schema)["_input"]) => {
       schema.parse(obj);
       return `input=${encodeURIComponent(JSON.stringify(obj))}`;
     },
@@ -39,10 +39,10 @@ export const strToFmtDate = z
   .transform((d) => new Date(d))
   .pipe(z.date())
   .transform((d) =>
-    Intl.DateTimeFormat('en-US', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
+    Intl.DateTimeFormat("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
     }).format(d),
   );
 

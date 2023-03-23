@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import React from 'react';
-import Link from 'next/link';
-import { motion } from 'framer-motion';
+import React from "react";
+import Link from "next/link";
+import { motion } from "framer-motion";
 
 const FancyLink: React.FC<{ href: string; children: React.ReactNode }> = ({
   href,
@@ -31,7 +31,7 @@ export const FinalWords = () => {
       <ul className="list-disc space-y-4">
         <li className="text-base">
           If you like what you see and would like to sponsor my open source
-          work, I am on{' '}
+          work, I am on{" "}
           <FancyLink href="https://github.com/sponsors/juliusmarminge">
             GitHub Sponsors
           </FancyLink>
@@ -39,7 +39,7 @@ export const FinalWords = () => {
         </li>
         <li className="text-base">
           This page was built using Next.js, Tailwind CSS, Nextra and Framer
-          Motion - and is open source at{' '}
+          Motion - and is open source at{" "}
           <FancyLink href="https://github.com/juliusmarminge/jumr.dev">
             GitHub
           </FancyLink>
@@ -47,7 +47,7 @@ export const FinalWords = () => {
         </li>
         <li className="text-base">
           If you didn&apos;t already know, the best way to start your next
-          fullstack application is with{' '}
+          fullstack application is with{" "}
           <FancyLink href="https://create.t3.gg">Create T3 App</FancyLink>.
         </li>
       </ul>

@@ -1,15 +1,15 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import clsx from 'clsx';
-import { motion } from 'framer-motion';
-import { SiDiscord, SiGithub, SiLinkedin, SiTwitter } from 'react-icons/si';
+import Link from "next/link";
+import clsx from "clsx";
+import { motion } from "framer-motion";
+import { SiDiscord, SiGithub, SiLinkedin, SiTwitter } from "react-icons/si";
 
 export const Header: React.FC<{ isBlog?: boolean }> = ({ isBlog = false }) => {
   return (
     <header
       className={clsx(
-        'top-0 z-20 mx-auto flex max-w-7xl items-start justify-between p-5 pt-8 xl:items-center',
+        "top-0 z-20 mx-auto flex max-w-7xl items-start justify-between p-5 pt-8 xl:items-center",
         { sticky: !isBlog },
       )}
     >

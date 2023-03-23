@@ -5,8 +5,8 @@ import { getHighlighter } from "shiki";
 import "./src/lib/env.mjs";
 
 /** @type {import("next").NextConfig} */
-const config = {
-  experimental: { appDir: true, mdxRs: true },
+const nextConfig = {
+  experimental: { appDir: true },
   pageExtensions: ["tsx", "mdx"],
   images: {
     remotePatterns: [
@@ -29,7 +29,8 @@ export default withMdx({
         rehypePrettyCode,
         /** @type {import("rehype-pretty-code").Options} */
         {
-          getHighlighter: () => getHighlighter(),
+          theme: "github-dark",
+          getHighlighter,
           onVisitLine(node) {
             // Prevent lines from collapsing in `display: grid` mode, and allow empty
             // lines to be copy/pasted
@@ -48,4 +49,4 @@ export default withMdx({
       ],
     ],
   },
-})(config);
+})(nextConfig);

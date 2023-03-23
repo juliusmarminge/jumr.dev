@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import Image from 'next/image';
-import Link from 'next/link';
-import { motion } from 'framer-motion';
+import Image from "next/image";
+import Link from "next/link";
+import { motion } from "framer-motion";
 
-import ProfileImg from '../../public/profile.png';
+import ProfileImg from "../../public/profile.png";
 
 const Circles = () => {
   return (
@@ -13,7 +13,7 @@ const Circles = () => {
       animate={{
         opacity: [0.1, 0.2, 0.4, 0.8, 0.1, 1],
         scale: [1, 2, 2, 3, 1],
-        borderRadius: ['20%', '20%', '50%', '80%', '20%'],
+        borderRadius: ["20%", "20%", "50%", "80%", "20%"],
       }}
       transition={{
         duration: 2.5,

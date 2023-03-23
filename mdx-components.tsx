@@ -1,8 +1,9 @@
-import * as React from 'react';
-import Link from 'next/link';
-import type { MDXComponents } from 'mdx/types';
+import * as React from "react";
+import Image from "next/image";
+import Link from "next/link";
+import type { MDXComponents } from "mdx/types";
 
-import { Callout } from '~/components/callout';
+import { Callout } from "~/components/callout";
 
 // This file is required to use MDX in `app` directory.
 export function useMDXComponents(components: MDXComponents): MDXComponents {
@@ -25,8 +26,8 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       <p className="leading-7 [&:not(:first-child)]:mt-6">{children}</p>
     ),
     a: ({ children, href }) => {
-      const isExternal = href?.startsWith('http');
-      const Component = isExternal ? 'a' : Link;
+      const isExternal = href?.startsWith("http");
+      const Component = isExternal ? "a" : Link;
       return (
         <Component href={href as string} className="text-accent-500 underline">
           {children}
@@ -44,6 +45,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
         {children}
       </pre>
     ),
+    img: ({ src, alt }) => <Image src={src ?? ""} alt={alt ?? ""} />,
 
     Callout,
     ...components,

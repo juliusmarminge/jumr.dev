@@ -11,17 +11,9 @@
     }
   ],
   "typescript.tsdk": "node_modules/.pnpm/typescript@4.9.4/node_modules/typescript/lib",
-  "tailwindCSS.classAttributes": [
-    "class",
-    "className",
-    "ngClass",
-    "tw"
-  ],
+  "tailwindCSS.classAttributes": ["class", "className", "ngClass", "tw"],
   "tailwindCSS.experimental.classRegex": [
-    [
-      "clsx\\(([^)]*)\\)",
-      "[\"'`]([^\"'`]*).*?[\"'`]"
-    ]
+    ["clsx\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"]
   ],
   "typescript.enablePromptUseWorkspaceTsdk": true
 }
