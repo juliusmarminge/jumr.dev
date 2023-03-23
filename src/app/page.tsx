@@ -15,7 +15,7 @@ export default async function Home() {
   const posts = await getAllArticles();
 
   return (
-    <div className="z-0 h-screen overflow-y-scroll scroll-smooth text-white overflow-x-hidden scrollbar-none">
+    <div className="z-0 h-screen overflow-x-hidden overflow-y-scroll scroll-smooth text-white scrollbar-none">
       <Header />
 
       <section id="hero">

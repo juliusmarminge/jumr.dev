@@ -1,6 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@calcom/embed-react': ^1.0.10
   '@ianvs/prettier-plugin-sort-imports': ^3.7.1
   '@mdx-js/loader': ^2.3.0
   '@next/mdx': 13.2.5-canary.14
@@ -39,6 +40,7 @@ specifiers:
   zod: ^3.20.2
 
 dependencies:
+  '@calcom/embed-react': 1.0.10_biqbaboplfbrettd7655fr4n2y
   '@mdx-js/loader': 2.3.0
   '@next/mdx': 13.2.5-canary.14_@mdx-js+loader@2.3.0
   '@trpc/client': 10.18.0_@trpc+server@10.18.0
@@ -297,6 +299,28 @@ packages:
       '@babel/helper-validator-identifier': 7.19.1
       to-fast-properties: 2.0.0
     dev: true
+
+  /@calcom/embed-core/1.1.3:
+    resolution: {integrity: sha512-+yd6gCztYK9BIA0ch835nXi6O3SsWLBspBIP/gQDY1Jv0P4gEluoKD0yj2Dp03pffwSSskFuLCqM0Srwqdo0ug==}
+    dev: false
+
+  /@calcom/embed-react/1.0.10_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-gpcbHOyCS+AbYwf7x0Q1kqx6rcwuryrMrTn/LxKpTJxNeNVBwPJh0qQZjtaoLQhBDWy3LXgCCsf8FegZ+XXb6w==}
+    peerDependencies:
+      react: ^18.2.0
+      react-dom: ^18.2.0
+    dependencies:
+      '@calcom/embed-core': 1.1.3
+      '@calcom/embed-snippet': 1.0.5
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+    dev: false
+
+  /@calcom/embed-snippet/1.0.5:
+    resolution: {integrity: sha512-bPO6Yqomd/Zz8Ij2wk9el/JFzdosk7/nsNDfZDwjpLxGqVBF46dgtwoL+rpTnY2EK0uBNIkOp6oXg4sZSFEeQQ==}
+    dependencies:
+      '@calcom/embed-core': 1.1.3
+    dev: false
 
   /@emotion/is-prop-valid/0.8.8:
     resolution: {integrity: sha512-u5WtneEAr5IDG2Wv65yhunPSMLIpuKsbuOktRojfrEiEvRyC85LgPMZI63cr7NUqT8ZIGdSVg8ZKGxIug4lXcA==}

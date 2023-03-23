@@ -10,6 +10,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@calcom/embed-react": "^1.0.10",
     "@mdx-js/loader": "^2.3.0",
     "@next/mdx": "13.2.5-canary.14",
     "@trpc/client": "^10.18.0",

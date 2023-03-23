@@ -4,6 +4,8 @@ import { Inter } from "next/font/google";
 import localFont from "next/font/local";
 import clsx from "clsx";
 
+import { CalEmbed } from "./cal-embed";
+
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-sans",
@@ -38,7 +40,10 @@ export default function Layout({ children }: { children: ReactNode }) {
           inter.variable,
         )}
       >
-        <main className="container mx-auto flex-1 px-4">{children}</main>
+        <main className="container mx-auto flex-1 px-4">
+          {children}
+          <CalEmbed />
+        </main>
       </body>
     </html>
   );

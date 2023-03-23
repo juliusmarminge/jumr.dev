@@ -133,7 +133,7 @@ export const Projects = () => {
 
       <div className="absolute  top-1/3 left-0 h-[500px] w-full -skew-y-12 bg-accent-500/10" />
 
-      <div className="relative z-20 flex w-full snap-x snap-mandatory overflow-x-scroll overflow-y-hidden scrollbar-thin scrollbar-track-gray-400/20 scrollbar-thumb-accent-500/80">
+      <div className="relative z-20 flex w-full snap-x snap-mandatory overflow-y-hidden overflow-x-scroll scrollbar-thin scrollbar-track-gray-400/20 scrollbar-thumb-accent-500/80">
         {projects.map((project, idx) => (
           <ProjectCard key={`project-card-${idx}`} {...project} />
         ))}
