@@ -20,6 +20,7 @@ const cal = localFont({
 
 export const metadata = {
   title: "🇸🇪 Julius | SWE | OSS",
+  description: "Software Developer & OSS Enthusiast",
   icons: [{ url: "/seo/favicon.ico" }],
   openGraph: {
     images: [{ url: "/api/og" }],
