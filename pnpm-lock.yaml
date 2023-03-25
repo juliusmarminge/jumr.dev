@@ -9,7 +9,7 @@ specifiers:
   '@trpc/server': ^10.18.0
   '@types/eslint': ^8.21.3
   '@types/mdx': ^2.0.3
-  '@types/node': 18.15.7
+  '@types/node': 18.15.8
   '@types/prettier': ^2.7.2
   '@types/react': 18.0.29
   '@types/react-dom': 18.0.11
@@ -63,7 +63,7 @@ devDependencies:
   '@ianvs/prettier-plugin-sort-imports': 3.7.1_prettier@2.8.6
   '@types/eslint': 8.21.3
   '@types/mdx': 2.0.3
-  '@types/node': 18.15.7
+  '@types/node': 18.15.8
   '@types/prettier': 2.7.2
   '@types/react': 18.0.29
   '@types/react-dom': 18.0.11
@@ -714,8 +714,8 @@ packages:
     resolution: {integrity: sha512-iiUgKzV9AuaEkZqkOLDIvlQiL6ltuZd9tGcW3gwpnX8JbuiuhFlEGmmFXEXkN50Cvq7Os88IY2v0dkDqXYWVgA==}
     dev: false
 
-  /@types/node/18.15.7:
-    resolution: {integrity: sha512-LFmUbFunqmBn26wJZgZPYZPrDR1RwGOu2v79Mgcka1ndO6V0/cwjivPTc4yoK6n9kmw4/ls1r8cLrvh2iMibFA==}
+  /@types/node/18.15.8:
+    resolution: {integrity: sha512-kzGNJZ57XEH7RdckxZ7wfRjB9hgZABF+NLgR1B2zogUvV0gmK0/60VYA4yb4oKZckPiiJlmmfpdqTfCN0VRX+Q==}
     dev: true
 
   /@types/prettier/2.7.2:
