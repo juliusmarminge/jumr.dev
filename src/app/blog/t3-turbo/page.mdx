@@ -150,7 +150,7 @@ import { appRouter, createContext } from "@acme/api";
 
 Then, we'll add the `@acme/api` package as a dependency for the T3 App. Since Next.js 13, they support transpiling packages natively which I'll be using. Transpile the `@acme/api` package in your `next.config.mjs` like this:
 
-```ts title="next.config.mjs"
+```js title="next.config.mjs"
 const config = {
   transpilePackages: ["@acme/api"],
 };
@@ -289,7 +289,7 @@ npm install -D @acme/api
 
 Setup the `trpc` object in `src/utils/trpc.ts`:
 
-```ts
+```ts title="apps/expo/src/utils/trpc.ts"
 import type { AppRouter } from "@acme/api";
 import { createTRPCReact } from "@trpc/react-query";
 
@@ -407,7 +407,7 @@ You can most likely skip this step, in that case you can skip to the [final word
 
 I'll make a blog-ish example here. Since this is highly personal, I'll just go over this briefly. I'll first modify my prisma model to include some basic data for a post:
 
-```js title="schema.prisma"
+```prisma title="schema.prisma"
 model Post {
     id      String @id @default(cuid())
     title   String

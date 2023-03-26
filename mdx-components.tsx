@@ -3,6 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import type { MDXComponents } from "mdx/types";
 
+import { Codeblock } from "~/components/code-block";
+
 // This file is required to use MDX in `app` directory.
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
@@ -38,11 +40,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
         {children}
       </code>
     ),
-    pre: ({ children }) => (
-      <pre className="relative my-4 rounded bg-stone-200 py-4 px-6 font-mono text-sm font-semibold text-zinc-900 dark:bg-stone-700 dark:text-zinc-300">
-        {children}
-      </pre>
-    ),
+    pre: Codeblock,
     img: ({ src, alt }) => <Image src={src ?? ""} alt={alt ?? ""} />,
 
     ...components,
