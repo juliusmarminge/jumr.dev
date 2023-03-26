@@ -6,13 +6,17 @@ import { FaHome } from "react-icons/fa";
 import { SiDiscord, SiGithub, SiLinkedin, SiTwitter } from "react-icons/si";
 import { SlEnvolope } from "react-icons/sl";
 
-export const Header = () => {
+export const Header = (props: { animate?: boolean }) => {
+  const { animate = true } = props;
+
   return (
     <header className="sticky top-0 z-50 mx-auto flex max-w-7xl items-start justify-between bg-stone-800 p-5 pt-8 xl:items-center">
       <motion.div
-        initial={{ opacity: 0, x: -500 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 1.5 }}
+        {...(animate && {
+          initial: { opacity: 0, x: -500 },
+          animate: { opacity: 1, x: 0 },
+          transition: { duration: 1.5 },
+        })}
         className="flex items-center"
       >
         <Link href="/#hero">
@@ -49,9 +53,11 @@ export const Header = () => {
       </motion.div>
 
       <motion.div
-        initial={{ opacity: 0, x: 500 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 1.5 }}
+        {...(animate && {
+          initial: { opacity: 0, x: 500 },
+          animate: { opacity: 1, x: 0 },
+          transition: { duration: 1.5 },
+        })}
         className="flex items-center"
       >
         <Link
