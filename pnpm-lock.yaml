@@ -6,8 +6,6 @@ specifiers:
   '@mdx-js/loader': ^2.3.0
   '@next/mdx': 13.2.5-canary.18
   '@tailwindcss/line-clamp': ^0.4.2
-  '@trpc/client': ^10.18.0
-  '@trpc/server': ^10.18.0
   '@types/eslint': ^8.21.3
   '@types/mdx': ^2.0.3
   '@types/node': 18.15.10
@@ -45,8 +43,6 @@ dependencies:
   '@mdx-js/loader': 2.3.0
   '@next/mdx': 13.2.5-canary.18_@mdx-js+loader@2.3.0
   '@tailwindcss/line-clamp': 0.4.2_tailwindcss@3.2.7
-  '@trpc/client': 10.18.0_@trpc+server@10.18.0
-  '@trpc/server': 10.18.0
   '@vercel/analytics': 0.1.11_react@18.2.0
   '@vercel/og': 0.4.1
   clsx: 1.2.1
@@ -655,18 +651,6 @@ packages:
       tailwindcss: '>=2.0.0 || >=3.0.0 || >=3.0.0-alpha.1'
     dependencies:
       tailwindcss: 3.2.7_postcss@8.4.21
-    dev: false
-
-  /@trpc/client/10.18.0_@trpc+server@10.18.0:
-    resolution: {integrity: sha512-2d+6r2C/xygTjDWX9jT66defgHzbQP0Z8vrvyT3XtPjqU6JNlRNuS2ZtB8xDPdOQUUVnndzZ43BMr+Zu49K0OQ==}
-    peerDependencies:
-      '@trpc/server': 10.18.0
-    dependencies:
-      '@trpc/server': 10.18.0
-    dev: false
-
-  /@trpc/server/10.18.0:
-    resolution: {integrity: sha512-nVMqdDIF9YLOeC3g6RdAvdCPqkHFjpshSqZGThZ+fyjiWSUXj2ZKCduhJFnY77TjtgODojeaaghmzcnjxb+Onw==}
     dev: false
 
   /@types/acorn/4.0.6:
