@@ -5,7 +5,6 @@ import { FaArrowAltCircleUp } from "react-icons/fa";
 import { getAllArticles } from "~/lib/blog";
 import { About } from "~/components/about";
 import { Blog } from "~/components/blog";
-import { CommentSection } from "~/components/blog-comments";
 import { ExperienceSection } from "~/components/experience";
 import { FinalWords } from "~/components/final-words";
 import { Header } from "~/components/header";
@@ -15,7 +14,7 @@ export default async function Home() {
   const posts = await getAllArticles();
 
   return (
-    <div className="z-0 h-screen overflow-x-hidden overflow-y-scroll scroll-smooth text-white scrollbar-none">
+    <div className="z-0 overflow-x-hidden text-white">
       <Header />
 
       <section id="hero">
@@ -41,19 +40,6 @@ export default async function Home() {
       <section id="final-words">
         <FinalWords />
       </section>
-
-      <CommentSection />
-
-      <footer className="sticky bottom-5 z-[1000] w-full">
-        <div className="flex items-center justify-center">
-          <Link href="#hero">
-            <FaArrowAltCircleUp
-              title="Go to the top"
-              className="h-10 w-10 cursor-pointer fill-gray-400 transition-colors duration-200 hover:fill-gray-300"
-            />
-          </Link>
-        </div>
-      </footer>
     </div>
   );
 }

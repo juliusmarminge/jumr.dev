@@ -17,7 +17,7 @@ interface ProjectProps {
   githubLink: string;
 }
 
-const ProjectCard: React.FC<ProjectProps> = (props) => {
+const ProjectCard = (props: ProjectProps) => {
   return (
     <div className="flex h-[85vh] w-full flex-shrink-0 snap-start flex-col items-center justify-start space-y-5 p-20 md:p-40">
       <motion.div

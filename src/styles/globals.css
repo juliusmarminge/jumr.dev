@@ -2,32 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-  body {
-    @apply scrollbar-accent bg-[rgb(36,36,36)];
-  }
-}
-
 @layer components {
-  .header-icon {
-    @apply h-10 w-10 cursor-pointer fill-gray-400 p-2 text-2xl transition-colors hover:fill-gray-300;
-  }
-  .hero-btn {
-    @apply rounded-full border border-[#242424] px-6 py-2 text-sm uppercase tracking-widest text-gray-500 transition-all hover:border-accent-500/40 hover:text-accent-500/40;
-  }
-
-  .section-container {
-    @apply relative mx-auto flex h-screen max-w-7xl flex-col items-center justify-evenly px-10 text-center md:flex-row md:text-left;
-  }
-
-  .section-title {
-    @apply absolute top-24 text-2xl uppercase tracking-[20px] text-gray-500;
-  }
-
-  .scrollbar-accent {
-    @apply scrollbar scrollbar-track-gray-400/20 scrollbar-thumb-accent-500/80;
-  }
-
   .btn-disabled-tooltip {
     @apply relative inline-block;
   }

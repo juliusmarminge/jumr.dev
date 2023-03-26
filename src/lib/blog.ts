@@ -29,7 +29,7 @@ export async function getAllArticles() {
 
   // Articles from other sources
   articles.push({
-    title: "Writing a tiny tRPC client",
+    title: "Writing a tiny tRPC client ↗",
     date: "JANUARY 17, 2023",
     description:
       "Ever wondered how tRPC works? Maybe you want to start contributing to the project but you're frightened by the internals? The aim of this post is to familiarize you with the internals of tRPC by writing a minimal client that covers the big parts of how tRPC works.",

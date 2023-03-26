@@ -2,18 +2,16 @@
 
 import React from "react";
 import Link from "next/link";
+import Cal from "@calcom/embed-react";
 import { motion } from "framer-motion";
 
-const FancyLink: React.FC<{ href: string; children: React.ReactNode }> = ({
-  href,
-  children,
-}) => {
+const FancyLink = (props: { href: string; children: React.ReactNode }) => {
   return (
     <Link
-      href={href}
+      href={props.href}
       className="underline decoration-accent-500 decoration-2 underline-offset-4"
     >
-      {children}
+      {props.children}
     </Link>
   );
 };
@@ -24,11 +22,12 @@ export const FinalWords = () => {
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       transition={{ duration: 1.5 }}
-      className="relative mx-auto flex h-screen max-w-full flex-col items-center justify-evenly overflow-hidden px-10 text-left md:flex-row"
+      className="relative mx-auto flex min-h-[80vh] max-w-full flex-col items-center gap-12 overflow-hidden px-4 text-left md:px-10"
     >
-      <h3 className="section-title">Final Words</h3>
-
-      <ul className="list-disc space-y-4">
+      <h3 className="font-cal text-2xl uppercase tracking-[15px] text-gray-500 md:tracking-[20px]">
+        Final Words
+      </h3>
+      <ul className="list-disc space-y-4 px-4">
         <li className="text-base">
           If you like what you see and would like to sponsor my open source
           work, I am on{" "}
@@ -51,6 +50,12 @@ export const FinalWords = () => {
           <FancyLink href="https://create.t3.gg">Create T3 App</FancyLink>.
         </li>
       </ul>
+      <div className="w-full space-y-2 text-gray-400" id="calcom">
+        <h4 className="text-center font-cal text-xl">
+          Wanna chat? Book my Cal!
+        </h4>
+        <Cal calLink="juliusm" className="w-full" />
+      </div>
     </motion.div>
   );
 };

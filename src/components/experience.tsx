@@ -49,7 +49,7 @@ export const ExperienceSection = () => {
       note: "Open Source",
       img: "https://avatars.githubusercontent.com/u/108266839?s=200&v=4",
       title: "Create T3 App",
-      subtitle: "Core OSS Maintainer",
+      subtitle: "OSS Core Team",
       stackIcons: [SiTypescript, SiReact, SiNextdotjs, SiTailwindcss, SiPrisma],
       period: ["Jun 22", "present"],
       bullets: [
@@ -61,7 +61,7 @@ export const ExperienceSection = () => {
       note: "Open Source",
       img: "https://avatars.githubusercontent.com/u/78011399?s=200&v=4",
       title: "tRPC",
-      subtitle: "Core OSS Contributor",
+      subtitle: "OSS Core Team",
       stackIcons: [SiTypescript],
       period: ["Jul 22", "present"],
       bullets: [
@@ -75,10 +75,12 @@ export const ExperienceSection = () => {
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       transition={{ duration: 1.5 }}
-      className="relative mx-auto flex h-screen max-w-full flex-col items-center justify-evenly overflow-hidden px-10 text-left md:flex-row"
+      className="relative mx-auto flex min-h-[80vh] max-w-full flex-col items-center gap-12 overflow-hidden px-4 text-left md:px-10"
     >
-      <h3 className="section-title">Experience</h3>
-      <div className="flex w-full snap-x snap-mandatory space-x-5 overflow-x-scroll p-10 scrollbar-thin scrollbar-track-gray-400/20 scrollbar-thumb-accent-500/80">
+      <h3 className="font-cal text-2xl uppercase tracking-[15px] text-gray-500 md:tracking-[20px]">
+        Experience
+      </h3>
+      <div className="flex w-full snap-x snap-mandatory space-x-5 overflow-x-scroll scrollbar-thin scrollbar-track-gray-400/20 scrollbar-thumb-accent-500/80 md:p-10">
         {experiences.map((experience) => (
           <ExperienceCard key={experience.title} {...experience} />
         ))}
@@ -87,9 +89,9 @@ export const ExperienceSection = () => {
   );
 };
 
-const ExperienceCard: React.FC<Experience> = (props) => {
+const ExperienceCard = (props: Experience) => {
   return (
-    <article className="relative flex w-[500px] flex-shrink-0 snap-center flex-col items-center space-y-7 overflow-hidden rounded-lg bg-[#292929] p-10 opacity-40 transition-opacity duration-200 hover:opacity-100 md:w-[600px] xl:w-[900px]">
+    <article className="relative flex w-full flex-shrink-0 snap-center flex-col items-center space-y-7 overflow-hidden rounded-lg bg-[#292929] p-10 opacity-40 transition-opacity duration-200 hover:opacity-100 md:w-[600px] xl:w-[900px]">
       <motion.div
         initial={{ opacity: 0, y: -100 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -108,11 +110,9 @@ const ExperienceCard: React.FC<Experience> = (props) => {
       {props.note && (
         <div
           className={clsx(
-            "absolute right-7 top-0 rounded-lg bg-accent-500 p-4",
-            {
-              "bg-sky-800": props.note === "Education",
-              "bg-red-900": props.note === "Open Source",
-            },
+            "absolute right-7 top-0 rounded-lg bg-accent-500 p-2 md:p-4",
+            props.note === "Education" && "bg-sky-800",
+            props.note === "Open Source" && "bg-red-900",
           )}
         >
           {props.note}
@@ -120,19 +120,19 @@ const ExperienceCard: React.FC<Experience> = (props) => {
       )}
 
       <div className="px-0 md:px-10">
-        <h4 className="text-4xl font-medium">{props.title}</h4>
-        <p className="mt-1 text-2xl font-bold">{props.subtitle}</p>
+        <h4 className="text-2xl font-medium md:text-4xl">{props.title}</h4>
+        <p className="mt-1 text-lg font-bold md:text-2xl">{props.subtitle}</p>
         <div className="my-2 flex space-x-2">
           {props.stackIcons?.map((Icon, index) => (
             <Icon key={index} className="h-10 w-10" />
           ))}
         </div>
 
-        <p className="py-5 uppercase text-gray-300">
+        <p className="py-5 text-sm uppercase text-gray-300 md:text-base">
           Start: {props.period[0]} | End: {props.period[1]}
         </p>
 
-        <ul className="ml-5 list-disc space-y-4 text-lg">
+        <ul className="ml-5 list-disc space-y-4 text-base md:text-lg">
           {props.bullets.map((bullet) => (
             <li key={bullet}>{bullet}</li>
           ))}

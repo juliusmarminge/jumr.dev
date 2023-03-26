@@ -45,23 +45,18 @@ export const Hero = () => {
         <h2 className="pb-2 text-sm uppercase tracking-[15px] text-gray-500">
           Software Engineer
         </h2>
-        <h1 className="px-10 text-5xl font-semibold lg:text-6xl">
+        <h1 className="px-10 text-3xl font-semibold md:text-4xl lg:text-6xl">
           Julius Marminge
         </h1>
 
         <div className="pt-5">
-          <Link href="/#about">
-            <button className="hero-btn">About</button>
-          </Link>
-          <Link href="/#experience">
-            <button className="hero-btn">Experience</button>
-          </Link>
-          {/* <Link href="#projects">
-            <button className="hero-btn">Projects</button>
-          </Link> */}
-          <Link href="/#blog">
-            <button className="hero-btn">Blog</button>
-          </Link>
+          {["about", "experience", "blog"].map((section) => (
+            <Link href={`#${section}`} key={section}>
+              <button className="rounded-full border border-[#242424] px-6 py-2 text-sm uppercase tracking-widest text-gray-500 transition-all hover:border-accent-500/40 hover:text-accent-500/40">
+                {section}
+              </button>
+            </Link>
+          ))}
         </div>
       </div>
     </div>
