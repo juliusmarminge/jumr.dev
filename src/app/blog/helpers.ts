@@ -4,7 +4,7 @@ import { type Metadata } from "next";
 import { globby } from "globby";
 import { z } from "zod";
 
-import { blogParams, strToFmtDate } from "./zod-params";
+import { blogParams, strToFmtDate } from "../../lib/zod-params";
 
 const meta = z.object({
   title: z.string(),

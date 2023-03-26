@@ -1,5 +1,6 @@
 // import { Projects } from "~/components/projects";
-import { getAllArticles } from "~/lib/blog";
+import { getAllArticles } from "~/app/blog/helpers";
+
 import { About } from "~/components/about";
 import { Blog } from "~/components/blog";
 import { ExperienceSection } from "~/components/experience";
