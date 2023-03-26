@@ -1,6 +1,4 @@
-// import { Projects } from "~/components/projects";
 import { getAllArticles } from "~/app/blog/helpers";
-
 import { About } from "~/components/about";
 import { Blog } from "~/components/blog";
 import { ExperienceSection } from "~/components/experience";
@@ -30,10 +28,6 @@ export default async function Home() {
       <section id="experience">
         <ExperienceSection />
       </section>
-
-      {/* <section id="projects">
-        <Projects />
-      </section> */}
 
       <section id="final-words">
         <FinalWords />

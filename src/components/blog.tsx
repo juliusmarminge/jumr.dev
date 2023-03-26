@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
+
 import { type Meta } from "~/app/blog/helpers";
 
 const BlogCard = (props: Meta) => {
