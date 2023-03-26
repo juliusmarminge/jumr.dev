@@ -42,7 +42,7 @@ export const Hero = () => {
         className="relative mx-auto h-36 w-36 rounded-full"
       />
       <div className="z-20">
-        <h2 className="pb-2 text-sm uppercase tracking-[15px] text-gray-500">
+        <h2 className="pb-2 text-sm uppercase tracking-[15px] text-gray-400">
           Software Engineer
         </h2>
         <h1 className="px-10 text-3xl font-semibold md:text-4xl lg:text-6xl">
@@ -52,7 +52,7 @@ export const Hero = () => {
         <div className="pt-5">
           {["about", "experience", "blog"].map((section) => (
             <Link href={`#${section}`} key={section}>
-              <button className="rounded-full border border-[#242424] px-6 py-2 text-sm uppercase tracking-widest text-gray-500 transition-all hover:border-accent-500/40 hover:text-accent-500/40">
+              <button className="rounded-full border border-[#242424] px-6 py-2 text-sm uppercase tracking-widest text-gray-400 transition-all hover:border-accent-500/40 hover:text-accent-500/40">
                 {section}
               </button>
             </Link>

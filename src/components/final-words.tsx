@@ -24,7 +24,7 @@ export const FinalWords = () => {
       transition={{ duration: 1.5 }}
       className="relative mx-auto flex min-h-[80vh] max-w-full flex-col items-center gap-12 overflow-hidden px-4 text-left md:px-10"
     >
-      <h3 className="font-cal text-2xl uppercase tracking-[15px] text-gray-500 md:tracking-[20px]">
+      <h3 className="font-cal text-2xl uppercase tracking-[15px] text-gray-400 md:tracking-[20px]">
         Final Words
       </h3>
       <ul className="list-disc space-y-4 px-4">
@@ -51,7 +51,7 @@ export const FinalWords = () => {
         </li>
       </ul>
       <div className="w-full space-y-2 text-gray-400" id="calcom">
-        <h4 className="text-center font-cal text-xl">
+        <h4 className="text-center font-cal text-2xl tracking-wide">
           Wanna chat? Book my Cal!
         </h4>
         <Cal calLink="juliusm" className="w-full" />

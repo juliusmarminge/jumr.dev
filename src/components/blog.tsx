@@ -33,7 +33,7 @@ export const Blog = (props: { posts: Meta[] }) => {
       transition={{ duration: 1.5 }}
       className="relative mx-auto flex min-h-[80vh] max-w-full flex-col items-center gap-12 overflow-hidden px-4 text-left md:px-10"
     >
-      <h3 className="font-cal text-2xl uppercase tracking-[15px] text-gray-500 md:tracking-[20px]">
+      <h3 className="font-cal text-2xl uppercase tracking-[15px] text-gray-400 md:tracking-[20px]">
         Latest posts
       </h3>
 

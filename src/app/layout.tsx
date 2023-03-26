@@ -34,7 +34,7 @@ export default function Layout({ children }: { children: ReactNode }) {
     <html lang="en" className="dark" data-theme="dark">
       <body
         className={clsx(
-          "scroll-smooth bg-white font-sans text-zinc-900 antialiased scrollbar-none dark:bg-stone-800 dark:text-zinc-50",
+          "scroll-smooth bg-stone-800 font-sans text-zinc-50 antialiased scrollbar-none",
           cal.variable,
           inter.variable,
         )}

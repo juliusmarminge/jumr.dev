@@ -11,7 +11,7 @@ export const About = () => {
       transition={{ duration: 1.5 }}
       className="relative mx-auto flex min-h-[80vh] max-w-full flex-col items-center gap-12 overflow-hidden px-4 text-left md:px-10"
     >
-      <h2 className="font-cal text-2xl uppercase tracking-[15px] text-gray-500 md:tracking-[20px]">
+      <h2 className="font-cal text-2xl uppercase tracking-[15px] text-gray-400 md:tracking-[20px]">
         About
       </h2>
 

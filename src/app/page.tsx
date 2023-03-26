@@ -1,6 +1,3 @@
-import Link from "next/link";
-import { FaArrowAltCircleUp } from "react-icons/fa";
-
 // import { Projects } from "~/components/projects";
 import { getAllArticles } from "~/lib/blog";
 import { About } from "~/components/about";
@@ -14,7 +11,7 @@ export default async function Home() {
   const posts = await getAllArticles();
 
   return (
-    <div className="z-0 overflow-x-hidden text-white">
+    <>
       <Header />
 
       <section id="hero">
@@ -40,6 +37,6 @@ export default async function Home() {
       <section id="final-words">
         <FinalWords />
       </section>
-    </div>
+    </>
   );
 }
