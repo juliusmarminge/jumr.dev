@@ -1,61 +1,69 @@
 "use client";
 
 import Link from "next/link";
-import clsx from "clsx";
 import { motion } from "framer-motion";
+import { FaHome } from "react-icons/fa";
 import { SiDiscord, SiGithub, SiLinkedin, SiTwitter } from "react-icons/si";
+import { SlEnvolope } from "react-icons/sl";
 
-export const Header = (props: { isBlog?: boolean }) => {
+export const Header = () => {
   return (
-    <header
-      className={clsx(
-        "top-0 z-20 mx-auto flex max-w-7xl items-start justify-between p-5 pt-8 xl:items-center",
-        { sticky: !props.isBlog },
-      )}
-    >
+    <header className="sticky top-0 z-50 mx-auto flex max-w-7xl items-start justify-between bg-stone-800 p-5 pt-8 xl:items-center">
       <motion.div
-        initial={props.isBlog ? {} : { opacity: 0, x: -500 }}
+        initial={{ opacity: 0, x: -500 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 1.5 }}
         className="flex items-center"
       >
-        <Link href="https://github.com/juliusmarminge">
+        <Link href="/#hero">
+          <FaHome
+            className="h-10 w-10 cursor-pointer fill-gray-400 p-2 text-2xl transition-colors hover:fill-gray-300"
+            title="Go home"
+          />
+        </Link>
+
+        <a href="https://github.com/juliusmarminge">
           <SiGithub
             className="h-10 w-10 cursor-pointer fill-gray-400 p-2 text-2xl transition-colors hover:fill-gray-300"
             title="Github"
           />
-        </Link>
-        <Link href="https://twitter.com/jullerino">
+        </a>
+        <a href="https://twitter.com/jullerino">
           <SiTwitter
             className="h-10 w-10 cursor-pointer fill-gray-400 p-2 text-2xl transition-colors hover:fill-gray-300"
             title="Twitter"
           />
-        </Link>
-        <Link href="https://www.linkedin.com/in/julius-marminge-b9a12a241/">
+        </a>
+        <a href="https://www.linkedin.com/in/julius-marminge-b9a12a241/">
           <SiLinkedin
             className="h-10 w-10 cursor-pointer fill-gray-400 p-2 text-2xl transition-colors hover:fill-gray-300"
             title="LinkedIn"
           />
-        </Link>
-        <Link href="https://discord.com/users/136072283444871168">
+        </a>
+        <a href="https://discord.com/users/136072283444871168">
           <SiDiscord
             className="h-10 w-10 cursor-pointer fill-gray-400 p-2 text-2xl transition-colors hover:fill-gray-300"
             title="Discord"
           />
-        </Link>
+        </a>
       </motion.div>
 
-      {/* <motion.div
+      <motion.div
         initial={{ opacity: 0, x: 500 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 1.5 }}
-        className="flex cursor-pointer items-center"
+        className="flex items-center"
       >
-        <SlEnvolope className="header-icon" />
-        <span className="hidden text-sm uppercase text-gray-400 md:inline-flex">
-          Contact
-        </span>
-      </motion.div> */}
+        <Link
+          href="/#final-words"
+          className="group flex cursor-pointer items-center"
+        >
+          <SlEnvolope className="h-10 w-10 cursor-pointer fill-gray-400 p-2 text-2xl transition-colors group-hover:fill-gray-300" />
+          <span className="hidden font-cal text-sm uppercase text-gray-400 group-hover:text-gray-300 md:inline-flex">
+            Contact
+          </span>
+        </Link>
+      </motion.div>
     </header>
   );
 };

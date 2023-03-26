@@ -9,7 +9,7 @@ export const About = () => {
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       transition={{ duration: 1.5 }}
-      className="relative mx-auto flex min-h-[80vh] max-w-full flex-col items-center gap-12 overflow-hidden px-4 text-left md:px-10"
+      className="relative mx-auto flex min-h-screen max-w-full flex-col items-center gap-12 overflow-hidden py-24 px-4 text-left md:px-10"
     >
       <h2 className="font-cal text-2xl uppercase tracking-[15px] text-gray-400 md:tracking-[20px]">
         About
@@ -40,10 +40,12 @@ export const About = () => {
           </p>
           <p className="text-base">
             Wanna chat?{" "}
-            <a href="#final-words" className="text-accent-500">
-              Book my Cal.com
+            <a
+              href="#final-words"
+              className="underline decoration-accent-500 decoration-2 underline-offset-4"
+            >
+              Book my Cal.com!
             </a>
-            !
           </p>
         </div>
       </div>

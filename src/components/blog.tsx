@@ -15,7 +15,7 @@ const BlogCard = (props: Meta) => {
         <Image
           src={props.previewImg}
           alt={props.title}
-          className="mx-auto hidden aspect-[3/1] object-cover py-4 md:block md:h-48 xl:h-52"
+          className="mx-auto object-cover py-4 md:h-48 xl:h-52"
           height={400}
           width={800}
         />
@@ -31,7 +31,7 @@ export const Blog = (props: { posts: Meta[] }) => {
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       transition={{ duration: 1.5 }}
-      className="relative mx-auto flex min-h-[80vh] max-w-full flex-col items-center gap-12 overflow-hidden px-4 text-left md:px-10"
+      className="relative mx-auto flex min-h-screen max-w-7xl flex-col items-center gap-12 overflow-hidden py-24 px-4 text-left md:px-10"
     >
       <h3 className="font-cal text-2xl uppercase tracking-[15px] text-gray-400 md:tracking-[20px]">
         Latest posts
