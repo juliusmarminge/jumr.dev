@@ -4,19 +4,14 @@ import { type Metadata } from "next";
 import { globby } from "globby";
 import { z } from "zod";
 
-import { blogParams, strToFmtDate } from "../../lib/zod-params";
+import { blogParams, strToFmtDate } from "~/lib/zod-params";
 
-const meta = z.object({
-  title: z.string(),
-  description: z.string(),
-  date: strToFmtDate,
-  updatedAt: strToFmtDate.optional(),
-  previewImg: z.string(),
-  tags: z.array(z.string()).optional(),
-  readingTime: z.coerce.number(),
-});
+export type Meta = Awaited<ReturnType<typeof readMeta>>;
 
-/** Read all files in the blog directory */
+/**
+ * Read all files in the blog directory
+ * Also adds some additional articles from other sources
+ */
 export async function getAllArticles() {
   const blogDir = join(process.cwd(), "src/app/blog");
   const filenames = await globby("**/*.mdx", {
@@ -42,6 +37,36 @@ export async function getAllArticles() {
   return articles.sort((a, b) => b.date.localeCompare(a.date));
 }
 
+/**
+ * Helper for blogpost metadata
+ */
+export function mdHelper(meta: Meta): Metadata {
+  return {
+    ...meta,
+    openGraph: {
+      images: [{ url: getOGLink(meta) }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      images: [{ url: getOGLink(meta) }],
+    },
+  };
+}
+
+/*******************************
+ * INTERNALS
+ *******************************/
+
+const meta = z.object({
+  title: z.string(),
+  description: z.string(),
+  date: strToFmtDate,
+  updatedAt: strToFmtDate.optional(),
+  previewImg: z.string(),
+  tags: z.array(z.string()).optional(),
+  readingTime: z.coerce.number(),
+});
+
 /** Read the frontmatter of the file */
 async function readMeta(dir: string, file: string) {
   const raw = await readFile(join(dir, file), "utf8");
@@ -60,8 +85,6 @@ async function readMeta(dir: string, file: string) {
   return { ...$meta, slug };
 }
 
-export type Meta = Awaited<ReturnType<typeof readMeta>>;
-
 const getOGLink = (meta: Meta) =>
   "/api/og-blog?" +
   blogParams.toSearchString({
@@ -71,14 +94,3 @@ const getOGLink = (meta: Meta) =>
     readingTime: meta.readingTime,
     slug: meta.slug,
   });
-
-export const mdHelper = (meta: Meta): Metadata => ({
-  ...meta,
-  openGraph: {
-    images: [{ url: getOGLink(meta) }],
-  },
-  twitter: {
-    card: "summary_large_image",
-    images: [{ url: getOGLink(meta) }],
-  },
-});
