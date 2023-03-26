@@ -59,7 +59,7 @@ export function Codeblock(
       </div>
       <pre
         ref={ref}
-        className="relative my-4 overflow-x-scroll rounded-lg bg-stone-200 p-4 font-mono text-sm font-semibold text-zinc-900 dark:bg-stone-700 dark:text-zinc-300"
+        className="relative my-4 overflow-x-scroll rounded-lg border border-t-0 border-zinc-400 bg-stone-200 p-4 font-mono text-sm font-semibold text-zinc-900 dark:bg-stone-700 dark:text-zinc-300"
       >
         {props.children}
       </pre>
