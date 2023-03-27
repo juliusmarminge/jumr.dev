@@ -4,7 +4,7 @@
 
 This project is built using:
 
-- [Next.js](https://nextjs.org/) App Router
+- [Next.js](https://beta.nextjs.org/) App Router
 - [Tailwind CSS](https://tailwindcss.com/)
 - [Framer Motion](https://www.framer.com/motion/)
 
