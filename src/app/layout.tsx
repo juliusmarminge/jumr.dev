@@ -23,11 +23,11 @@ export const metadata = {
   description: "Software Developer & OSS Enthusiast",
   icons: [{ url: "/seo/favicon.ico" }],
   openGraph: {
-    images: [{ url: "/api/og" }],
+    images: [{ url: "/og-image" }],
   },
   twitter: {
     card: "summary_large_image",
-    images: [{ url: "/api/og" }],
+    images: [{ url: "/og-image" }],
   },
 };
 

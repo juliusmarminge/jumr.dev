@@ -4,7 +4,7 @@ import { type Metadata } from "next";
 import { globby } from "globby";
 import { z } from "zod";
 
-import { blogParams, strToFmtDate } from "~/lib/zod-params";
+import { ogParams, strToFmtDate } from "~/app/og-image/zod-params";
 
 export type Meta = Awaited<ReturnType<typeof readMeta>>;
 
@@ -86,8 +86,8 @@ async function readMeta(dir: string, file: string) {
 }
 
 const getOGLink = (meta: Meta) =>
-  "/api/og-blog?" +
-  blogParams.toSearchString({
+  "/og-image?" +
+  ogParams.toSearchString({
     title: meta.title,
     description: meta.description,
     date: meta.date,

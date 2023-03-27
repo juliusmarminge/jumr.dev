@@ -46,7 +46,7 @@ export const strToFmtDate = z
     }).format(d),
   );
 
-export const blogParams = zodParams(
+export const ogParams = zodParams(
   z.object({
     title: z.string(),
     description: z.string(),
