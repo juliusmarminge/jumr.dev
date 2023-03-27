@@ -3,7 +3,7 @@ import { getAllArticles } from "./blog/helpers";
 const BASE_URL = "https://jumr.dev";
 
 export default async function sitemap() {
-  const blogPosts = (await getAllArticles()).map((post) => ({
+  const blogPosts = (await getAllArticles(false)).map((post) => ({
     url: `${BASE_URL}/blog/${post.slug}`,
     lastModified: post.updatedAt ?? post.date,
   }));
