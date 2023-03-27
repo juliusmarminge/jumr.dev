@@ -4,7 +4,7 @@ import { Inter } from "next/font/google";
 import localFont from "next/font/local";
 import clsx from "clsx";
 
-import { AnalyticsWrapper } from "./analytics";
+import { Analytics } from "./use-client";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -45,7 +45,7 @@ export default function Layout({ children }: { children: ReactNode }) {
           {children}
         </main>
       </body>
-      <AnalyticsWrapper />
+      <Analytics />
     </html>
   );
 }

@@ -30,7 +30,10 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       const isExternal = href?.startsWith("http");
       const Component = isExternal ? "a" : Link;
       return (
-        <Component href={href as string} className="text-accent-500 underline">
+        <Component
+          href={href as string}
+          className="underline decoration-accent-500 decoration-2 underline-offset-4"
+        >
           {children}
         </Component>
       );

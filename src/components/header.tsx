@@ -1,17 +1,16 @@
-"use client";
-
 import Link from "next/link";
-import { motion } from "framer-motion";
 import { FaHome } from "react-icons/fa";
 import { SiDiscord, SiGithub, SiLinkedin, SiTwitter } from "react-icons/si";
 import { SlEnvolope } from "react-icons/sl";
+
+import { MotionDiv } from "~/app/use-client";
 
 export const Header = (props: { animate?: boolean }) => {
   const { animate = true } = props;
 
   return (
     <header className="sticky top-0 z-50 mx-auto flex max-w-7xl items-start justify-between bg-stone-800 p-5 pt-8 xl:items-center">
-      <motion.div
+      <MotionDiv
         {...(animate && {
           initial: { opacity: 0, x: -500 },
           animate: { opacity: 1, x: 0 },
@@ -50,9 +49,9 @@ export const Header = (props: { animate?: boolean }) => {
             title="Discord"
           />
         </a>
-      </motion.div>
+      </MotionDiv>
 
-      <motion.div
+      <MotionDiv
         {...(animate && {
           initial: { opacity: 0, x: 500 },
           animate: { opacity: 1, x: 0 },
@@ -69,7 +68,7 @@ export const Header = (props: { animate?: boolean }) => {
             Contact
           </span>
         </Link>
-      </motion.div>
+      </MotionDiv>
     </header>
   );
 };
