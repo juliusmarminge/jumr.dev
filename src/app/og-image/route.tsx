@@ -28,8 +28,6 @@ export const GET = async (req: Request) => {
     ],
   };
 
-  console.log(Object.fromEntries(url.searchParams));
-
   if (!Object.keys(Object.fromEntries(url.searchParams)).length)
     return new ImageResponse(
       (

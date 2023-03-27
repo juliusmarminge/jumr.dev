@@ -2,9 +2,8 @@ import "../styles/globals.css";
 import { type ReactNode } from "react";
 import { Inter } from "next/font/google";
 import localFont from "next/font/local";
+import { Analytics } from "@vercel/analytics/react";
 import clsx from "clsx";
-
-import { Analytics } from "./use-client";
 
 const inter = Inter({
   subsets: ["latin"],
