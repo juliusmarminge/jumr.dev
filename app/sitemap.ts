@@ -1,4 +1,4 @@
-import { getAllArticles } from "./blog/helpers";
+import { getAllArticles } from "~/app/blog/helpers";
 
 const BASE_URL = "https://jumr.dev";
 

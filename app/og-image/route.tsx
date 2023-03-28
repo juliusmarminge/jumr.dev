@@ -1,8 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
 import { ImageResponse } from "@vercel/og";
 import { type ImageResponseOptions } from "@vercel/og/dist/types";
-import { getFont } from "app/og-image/get-fonts";
-import { ogParams } from "app/og-image/zod-params";
+
+import { getFont } from "~/app/og-image/get-fonts";
+import { ogParams } from "~/app/og-image/zod-params";
 
 export const config = {
   runtime: "edge",

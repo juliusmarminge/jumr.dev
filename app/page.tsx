@@ -1,8 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
-import { getAllArticles } from "app/blog/helpers";
-import { Cal, MotionDiv } from "app/use-client";
 
+import { getAllArticles } from "~/app/blog/helpers";
+import { Cal, MotionDiv } from "~/app/use-client";
 import { BlogCard } from "~/components/blog-card";
 import { ExperienceCard, experiences } from "~/components/experiences";
 import { Header } from "~/components/header";

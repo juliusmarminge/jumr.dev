@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { MotionDiv } from "app/use-client";
 import clsx from "clsx";
 import { FaDatabase } from "react-icons/fa";
 import { GiProcessor } from "react-icons/gi";
@@ -13,6 +12,8 @@ import {
   SiTailwindcss,
   SiTypescript,
 } from "react-icons/si";
+
+import { MotionDiv } from "~/app/use-client";
 
 export interface Experience {
   note?: string;

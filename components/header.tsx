@@ -1,8 +1,9 @@
 import Link from "next/link";
-import { MotionDiv } from "app/use-client";
 import { FaHome } from "react-icons/fa";
 import { SiDiscord, SiGithub, SiLinkedin, SiTwitter } from "react-icons/si";
 import { SlEnvolope } from "react-icons/sl";
+
+import { MotionDiv } from "~/app/use-client";
 
 export const Header = (props: { animate?: boolean }) => {
   const { animate = true } = props;
