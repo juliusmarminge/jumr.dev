@@ -1,6 +1,5 @@
 import Image from "next/image";
-
-import { type Meta } from "~/app/blog/helpers";
+import { type Meta } from "app/blog/helpers";
 
 export const BlogCard = (props: Meta) => {
   return (

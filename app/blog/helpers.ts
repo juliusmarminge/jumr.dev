@@ -1,10 +1,9 @@
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { type Metadata } from "next";
+import { ogParams, strToFmtDate } from "app/og-image/zod-params";
 import { globby } from "globby";
 import { z } from "zod";
-
-import { ogParams, strToFmtDate } from "~/app/og-image/zod-params";
 
 export type Meta = Awaited<ReturnType<typeof readMeta>>;
 
