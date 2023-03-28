@@ -13,7 +13,7 @@ export type Meta = Awaited<ReturnType<typeof readMeta>>;
  * Also adds some additional articles from other sources
  */
 export async function getAllArticles(includeExternal = true) {
-  const blogDir = join(process.cwd(), "src/app/blog");
+  const blogDir = join(process.cwd(), "app/blog");
   const filenames = await globby("**/*.mdx", {
     cwd: blogDir,
     absolute: false,
