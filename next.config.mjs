@@ -5,7 +5,7 @@ import { getHighlighter } from "shiki";
 /** @type {import("next").NextConfig} */
 const nextConfig = {
   experimental: { appDir: true },
-  pageExtensions: ["tsx", "mdx"],
+  pageExtensions: ["ts", "tsx", "mdx"],
   images: {
     remotePatterns: [
       { hostname: "github.com" },
