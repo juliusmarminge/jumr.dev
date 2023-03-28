@@ -6,7 +6,7 @@ import { Cal, MotionDiv } from "~/app/use-client";
 import { BlogCard } from "~/components/blog-card";
 import { ExperienceCard, experiences } from "~/components/experiences";
 import { Header } from "~/components/header";
-import ProfileImg from "../../public/images/profile.png";
+import ProfileImg from "../public/images/profile.png";
 
 export default async function Home() {
   const posts = await getAllArticles();
