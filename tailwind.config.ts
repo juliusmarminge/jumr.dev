@@ -1,8 +1,7 @@
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const { fontFamily } = require("tailwindcss/defaultTheme");
+import type { Config } from "tailwindcss";
+import { fontFamily } from "tailwindcss/defaultTheme";
 
-/** @type {import('tailwindcss').Config} */
-module.exports = {
+export default {
   content: [
     "./app/**/*.{tsx,mdx}",
     "./mdx-components.tsx",
@@ -29,5 +28,5 @@ module.exports = {
       },
     },
   },
-  plugins: [require("tailwind-scrollbar"), require("@tailwindcss/line-clamp")],
-};
+  plugins: [require("tailwind-scrollbar")],
+} satisfies Config;
