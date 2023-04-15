@@ -28,6 +28,11 @@ export const metadata = {
     card: "summary_large_image",
     images: [{ url: "/og-image" }],
   },
+  metadataBase: new URL(
+    process.env.VERCEL_URL
+      ? `https://${process.env.VERCEL_URL}`
+      : "http://localhost:3000",
+  ),
 };
 
 export default function Layout({ children }: { children: ReactNode }) {
