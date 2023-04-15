@@ -35,7 +35,10 @@ export const metadata = {
   ),
 };
 
-export default function Layout({ children }: { children: ReactNode }) {
+export default function Layout(props: {
+  children: ReactNode;
+  modal: React.ReactNode;
+}) {
   return (
     <html lang="en" className="dark" data-theme="dark">
       <body
@@ -46,7 +49,8 @@ export default function Layout({ children }: { children: ReactNode }) {
         )}
       >
         <main className="container mx-auto flex-1 px-1 md:px-4">
-          {children}
+          {props.children}
+          {props.modal}
         </main>
       </body>
       <Analytics />

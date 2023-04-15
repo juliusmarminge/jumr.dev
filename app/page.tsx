@@ -51,7 +51,7 @@ export default async function Home() {
             <h1 className="px-10 text-3xl font-semibold md:text-4xl lg:text-6xl">
               Julius Marminge
             </h1>
-            <Link href="/blog/test">Go to test</Link>
+            <Link href="/test/1">Go to test</Link>
 
             <div className="pt-5">
               {["about", "experience", "blog"].map((section) => (
