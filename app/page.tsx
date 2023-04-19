@@ -70,7 +70,7 @@ export default async function Home() {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 1.5 }}
-          className="relative mx-auto flex min-h-screen max-w-full flex-col items-center gap-12 overflow-hidden py-24 px-4 text-left md:px-10"
+          className="relative mx-auto flex min-h-screen max-w-full flex-col items-center gap-12 overflow-hidden px-4 py-24 text-left md:px-10"
         >
           <h2 className="font-cal text-2xl uppercase tracking-[15px] text-gray-400 md:tracking-[20px]">
             About
@@ -118,13 +118,13 @@ export default async function Home() {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 1.5 }}
-          className="relative mx-auto flex min-h-screen max-w-7xl flex-col items-center gap-12 overflow-hidden py-24 px-4 text-left md:px-10"
+          className="relative mx-auto flex min-h-screen max-w-7xl flex-col items-center gap-12 overflow-hidden px-4 py-24 text-left md:px-10"
         >
           <h3 className="font-cal text-2xl uppercase tracking-[15px] text-gray-400 md:tracking-[20px]">
             Latest posts
           </h3>
 
-          <div className="absolute top-1/3 left-0 h-[500px] w-full -skew-y-12 bg-accent-500/10" />
+          <div className="absolute left-0 top-1/3 h-[500px] w-full -skew-y-12 bg-accent-500/10" />
 
           <div className="flex flex-col gap-8">
             <div className="z-20 grid grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-3">
@@ -143,7 +143,7 @@ export default async function Home() {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 1.5 }}
-          className="relative mx-auto flex min-h-screen max-w-full flex-col items-center gap-12 overflow-hidden py-24 px-4 text-left md:px-10"
+          className="relative mx-auto flex min-h-screen max-w-full flex-col items-center gap-12 overflow-hidden px-4 py-24 text-left md:px-10"
         >
           <h3 className="font-cal text-2xl uppercase tracking-[15px] text-gray-400 md:tracking-[20px]">
             Experience
@@ -161,7 +161,7 @@ export default async function Home() {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 1.5 }}
-          className="relative mx-auto flex min-h-screen max-w-full flex-col items-center gap-12 overflow-hidden py-24 px-4 text-left md:px-10"
+          className="relative mx-auto flex min-h-screen max-w-full flex-col items-center gap-12 overflow-hidden px-4 py-24 text-left md:px-10"
         >
           <h3 className="font-cal text-2xl uppercase tracking-[15px] text-gray-400 md:tracking-[20px]">
             Final Words

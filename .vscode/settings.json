@@ -6,9 +6,10 @@
   "editor.formatOnSave": true,
   "mdx.experimentalLanguageServer": true,
   "tailwindCSS.classAttributes": ["class", "className", "ngClass", "tw"],
+  "tailwindCSS.experimental.configFile": "./tailwind.config.ts",
   "tailwindCSS.experimental.classRegex": [
     ["clsx\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"]
   ],
   "typescript.enablePromptUseWorkspaceTsdk": true,
-  "typescript.tsdk": "node_modules/.pnpm/typescript@5.0.2/node_modules/typescript/lib"
+  "typescript.tsdk": "node_modules/.pnpm/typescript@5.0.4/node_modules/typescript/lib"
 }

@@ -28,9 +28,17 @@ export const metadata = {
     card: "summary_large_image",
     images: [{ url: "/og-image" }],
   },
+  metadataBase: new URL(
+    process.env.VERCEL_URL
+      ? `https://${process.env.VERCEL_URL}`
+      : "http://localhost:3000",
+  ),
 };
 
-export default function Layout({ children }: { children: ReactNode }) {
+export default function Layout(props: {
+  children: ReactNode;
+  modal: React.ReactNode;
+}) {
   return (
     <html lang="en" className="dark" data-theme="dark">
       <body
@@ -41,7 +49,8 @@ export default function Layout({ children }: { children: ReactNode }) {
         )}
       >
         <main className="container mx-auto flex-1 px-1 md:px-4">
-          {children}
+          {props.children}
+          {props.modal}
         </main>
       </body>
       <Analytics />

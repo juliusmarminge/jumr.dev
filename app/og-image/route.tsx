@@ -1,6 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { ImageResponse } from "@vercel/og";
-import { type ImageResponseOptions } from "@vercel/og/dist/types";
+import { ImageResponse, type ImageResponseOptions } from "next/server";
 
 import { getFont } from "~/app/og-image/get-fonts";
 import { ogParams } from "~/app/og-image/zod-params";
