@@ -4,15 +4,15 @@ import { getHighlighter } from "shiki";
 
 /** @type {import("next").NextConfig} */
 const nextConfig = {
-  experimental: { appDir: true },
   pageExtensions: ["ts", "tsx", "mdx"],
+  experimental: { serverActions: true },
   images: {
     remotePatterns: [
-      { hostname: "github.com" },
-      { hostname: "www.bth.se" },
-      { hostname: "user-images.githubusercontent.com" },
-      { hostname: "avatars.githubusercontent.com" },
-      { hostname: "og-image.trpc.io" },
+      { protocol: "https", hostname: "github.com" },
+      { protocol: "https", hostname: "www.bth.se" },
+      { protocol: "https", hostname: "user-images.githubusercontent.com" },
+      { protocol: "https", hostname: "avatars.githubusercontent.com" },
+      { protocol: "https", hostname: "og-image.trpc.io" },
     ],
   },
   redirects: async () => [

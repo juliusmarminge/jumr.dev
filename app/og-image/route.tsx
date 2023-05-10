@@ -5,9 +5,7 @@ import { type ImageResponseOptions } from "@vercel/og/dist/types";
 import { getFont } from "~/app/og-image/get-fonts";
 import { ogParams } from "~/app/og-image/zod-params";
 
-export const config = {
-  runtime: "edge",
-};
+export const runtime = "edge";
 
 export const GET = async (req: Request) => {
   const inter = await getFont({
