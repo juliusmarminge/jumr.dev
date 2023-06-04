@@ -18,7 +18,7 @@ const cal = localFont({
 });
 
 export const metadata = {
-  title: "🇸🇪 Julius | SWE | OSS",
+  title: "Julius | Marminge Software",
   description: "Software Developer & OSS Enthusiast",
   icons: [{ url: "/favicon.ico" }],
   openGraph: {
