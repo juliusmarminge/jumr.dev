@@ -52,7 +52,7 @@ export default async function Home() {
               Julius Marminge
             </h1>
 
-            <div className="pt-5">
+            <div className="pt-5 space-x-2">
               {["about", "experience", "blog"].map((section) => (
                 <Link href={`#${section}`} key={section}>
                   <button className="rounded-full border border-[#242424] px-6 py-2 text-sm uppercase tracking-widest text-gray-400 transition-all hover:border-accent-500/40 hover:text-accent-500/40">
