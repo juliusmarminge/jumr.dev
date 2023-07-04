@@ -205,7 +205,7 @@ export default async function Home() {
             <h4 className="text-center font-cal text-2xl tracking-wide">
               Wanna chat? Book my Cal!
             </h4>
-            <Cal calLink="juliusm" className="w-full" />
+            <Cal calLink="julius" className="w-full" />
           </div>
         </MotionDiv>
       </section>
