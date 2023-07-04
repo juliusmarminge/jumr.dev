@@ -28,3 +28,7 @@ Run development server:
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+## Questions?
+
+<a href="https://cal.com/juliusm/quick-chat?utm_source=banner&utm_campaign=oss"><img alt="Book us with Cal.com" src="https://cal.com/book-with-cal-dark.svg" /></a>
